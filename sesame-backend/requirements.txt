@@ -2,4 +2,4 @@ loguru==0.6.0
 PyJWT==2.3.0
 SQLAlchemy==1.4.31
 tornado==6.1
-mysqlclient=2.1.0
+mysqlclient==2.1.0

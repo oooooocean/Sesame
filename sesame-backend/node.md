@@ -32,3 +32,14 @@ mysql/bin
 # 更改账户密码
 mysql> alert user user() identified by "自定义的密码"
 ```
+
+## 3. requirements 保存依赖包
+
+```shell
+# 生成 requirements
+pip freeze > ./requirements.txt
+
+# 安装
+# 安装前激活 venv
+pip install -r ./requirements.txt
+```
