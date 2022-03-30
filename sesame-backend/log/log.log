@@ -1,0 +1,51 @@
+2022-03-30 16:32:41.188 | ERROR    | conf.logger:log_request_error:18 - uid: 1, requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/album/1', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b'{\n    "id": 1\n}'
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/Labs/Sao/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.album.album_views.AlbumHandler object at 0x7ff325b1d760>
+             │       │    └ ['1']
+             │       └ <views.album.album_views.AlbumHandler object at 0x7ff325b1d760>
+             └ <bound method AlbumHandler.get of <views.album.album_views.AlbumHandler object at 0x7ff325b1d760>>
+
+  File "/Users/qiangchen/Desktop/Labs/Sao/views/album/album_views.py", line 16, in get
+    assert album, 'album 不存在: %r' % album_id
+           │                        └ '1'
+           └ None
+
+AssertionError: album 不存在: '1'
+2022-03-30 16:34:02.717 | ERROR    | conf.logger:log_request_error:18 - uid: 1, requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/album/1', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b'{\n    "id": 1\n}'
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/Labs/Sao/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.album.album_views.AlbumHandler object at 0x7fbe49200730>
+             │       │    └ ['1']
+             │       └ <views.album.album_views.AlbumHandler object at 0x7fbe49200730>
+             └ <bound method AlbumHandler.get of <views.album.album_views.AlbumHandler object at 0x7fbe49200730>>
+
+  File "/Users/qiangchen/Desktop/Labs/Sao/views/album/album_views.py", line 16, in get
+    assert album, 'album 不存在: %r' % album_id
+           │                        └ '1'
+           └ None
+
+AssertionError: album 不存在: '1'
+2022-03-30 16:36:57.361 | ERROR    | conf.logger:log_request_error:18 - uid: 1, requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/album/2', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b'{\n    "id": 1\n}'
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/Labs/Sao/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.album.album_views.AlbumHandler object at 0x7fe08bb1c730>
+             │       │    └ ['2']
+             │       └ <views.album.album_views.AlbumHandler object at 0x7fe08bb1c730>
+             └ <bound method AlbumHandler.get of <views.album.album_views.AlbumHandler object at 0x7fe08bb1c730>>
+
+  File "/Users/qiangchen/Desktop/Labs/Sao/views/album/album_views.py", line 16, in get
+    assert album, 'album 不存在: %r' % album_id
+           │                        └ '2'
+           └ None
+
+AssertionError: album 不存在: '2'

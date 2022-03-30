@@ -1,0 +1,2 @@
+2022-03-30 16:34:02.782 | WARNING  | conf.logger:log_request:30 - status: %r, method: %r, uri: %r, ip: %r, author: %r, query: %r, body: %r, time: %2.fms
+2022-03-30T16:36:57.388696+0800 WARNING status: 400, method: 'GET', uri: '/v1/album/2', ip: '127.0.0.1', author: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjEsImV4cCI6MTY0ODY5Mzc1Mn0.11Fw4PURLFC79ERP3-VlH-VNh9QLp1i5tvHrsSZZXNs', query: '', body: '{\n    "id": 1\n}', time: 108ms
