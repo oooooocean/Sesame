@@ -29,9 +29,9 @@ def validate_password(password: str) -> tuple:
     return True, None
 
 
-def validate_str(input: str, label: str, max_len: int, min_len: int = 1) -> tuple:
+def validate_str(input: str, label: str, max_len: int, min_len: int = 1, nullable=False) -> tuple:
     if not input:
-        return False, '%r不能为空' % label
+        return False, '%r不能为空' % label if not nullable else True, None
 
     pattern = '\\w{%d,%d}' % (min_len, max_len)
     if not re.match(pattern, input):
@@ -46,6 +46,15 @@ def validate_album_name(name: str) -> tuple:
     :return:
     """
     return validate_str(name, '相册', 10)
+
+
+def validate_album_description(description: str) -> tuple:
+    """
+    验证相册名称
+    :param description:
+    :return:
+    """
+    return validate_str(description, '相册描述', 25, nullable=True)
 
 
 def validate_user_nickname(name: str) -> tuple:

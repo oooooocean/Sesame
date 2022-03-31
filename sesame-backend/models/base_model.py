@@ -10,10 +10,21 @@ class ModelMixin:
     query: Query = sessions.query_property()
 
     def json_exclude_columns(self) -> list:
+        """
+        转 json 时需要排除的字段
+        :return:
+        """
         return ['create_time', 'deleted']
 
     @classmethod
     def paginate(cls, offset=None, limit=PAGE_DEFAULT_LIMIT, *criterion) -> tuple:
+        """
+        分页查询
+        :param offset:
+        :param limit:
+        :param criterion:
+        :return:
+        """
         count = cls.query.filter(*criterion).count()
         if offset:
             results = cls.query.filter(*criterion).offset(offset).limit(limit).all()

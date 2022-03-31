@@ -11,6 +11,7 @@ class Application(web.Application):
             (r'/v1/user/', include('views.users.user_urls')),
             (r'/v1/album/', include('views.album.album_urls')),
             (r'/v1/common/', include('views.common.common_urls')),
+            (r'/v1/pic/', include('views.pic.pic_urls')),
         ])
         settings = dict(
             debug=True,

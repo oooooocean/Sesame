@@ -1,16 +1,16 @@
-# sesame_frontend
+功能:
+* [ ] code登录页
+* [ ] 密码登录页
+* [ ] 设置个人信息密码页
+* [ ] 相册列表页
+* [ ] 新建相册页
+* [ ] 图片列表/编辑页
+* [ ] 图片浏览页
+* [ ] 抽屉个人信息和设置
+* [ ] 意见反馈---网页
+* [ ] 微信登录
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+设计:
+* [ ] 相册使用卡片设计
+* [ ] 切换相册展示为 List Tile
+* [ ] 

@@ -16,6 +16,8 @@ class Album(conf.db.BaseDB, ModelMixin):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(255), nullable=False)
+    description = Column(String(255), nullable=True)
+    cover = Column(String(255), nullable=True)
     create_time = Column(Integer, default=int(time()), nullable=False)
     deleted = Column(Boolean, default=False, nullable=False)
 
@@ -33,6 +35,8 @@ class Photo(conf.db.BaseDB, ModelMixin):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(255), nullable=False)
+    description = Column(String(255), nullable=True)
+    favor = Column(Boolean, default=False, nullable=False)
     create_time = Column(Integer, default=int(time()), nullable=False)
     deleted = Column(Boolean, default=False, nullable=False)
 

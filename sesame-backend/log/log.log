@@ -253,3 +253,402 @@ Traceback (most recent call last):
 
 NameError: name 'categorys' is not defined
 2022-03-31 10:24:53.528 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/common/feedback', ip: '127.0.0.1', author: None, query: '', body: '', time: 19ms
+2022-03-31 15:25:53.530 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/common/feedback', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1704, in _execute
+    result = await result
+                   └ '/Users/qiangchen/Desktop/sesame/sesame-backend'
+
+TypeError: object str can't be used in 'await' expression
+2022-03-31 15:25:53.549 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/common/feedback', ip: '127.0.0.1', author: None, query: '', body: '', time: 27ms
+2022-03-31 15:26:45.700 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/common/feedback', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1704, in _execute
+    result = await result
+                   └ '/Users/qiangchen/Desktop/sesame/sesame-backend'
+
+TypeError: object str can't be used in 'await' expression
+2022-03-31 15:26:45.703 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/common/feedback', ip: '127.0.0.1', author: None, query: '', body: '', time:  4ms
+2022-03-31 15:26:46.941 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/common/feedback', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1704, in _execute
+    result = await result
+                   └ '/Users/qiangchen/Desktop/sesame/sesame-backend'
+
+TypeError: object str can't be used in 'await' expression
+2022-03-31 15:26:46.944 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/common/feedback', ip: '127.0.0.1', author: None, query: '', body: '', time:  4ms
+2022-03-31 15:27:17.073 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/common/feedback', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1704, in _execute
+    result = await result
+                   └ '/Users/qiangchen/Desktop/sesame/sesame-backend'
+
+TypeError: object str can't be used in 'await' expression
+2022-03-31 15:27:17.083 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/common/feedback', ip: '127.0.0.1', author: None, query: '', body: '', time: 13ms
+2022-03-31 15:59:34.057 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/pic/psq-consult-bg.png', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.pic.pic_views.PicHandler object at 0x7f82ae4ae340>
+             │       │    └ ['psq-consult-bg.png']
+             │       └ <views.pic.pic_views.PicHandler object at 0x7f82ae4ae340>
+             └ <bound method PicHandler.get of <views.pic.pic_views.PicHandler object at 0x7f82ae4ae340>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/pic/pic_views.py", line 16, in get
+    with open(image_path, 'r') as f:
+              └ '/Users/qiangchen/Desktop/sesame/sesame-backend/static/psq-consult-bg.png'
+
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/qiangchen/Desktop/sesame/sesame-backend/static/psq-consult-bg.png'
+2022-03-31 15:59:34.072 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/pic/psq-consult-bg.png', ip: '127.0.0.1', author: None, query: '', body: '', time: 19ms
+2022-03-31 16:00:14.273 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/pic/psq-consult-bg.png', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.pic.pic_views.PicHandler object at 0x7fa3f2b6e400>
+             │       │    └ ['psq-consult-bg.png']
+             │       └ <views.pic.pic_views.PicHandler object at 0x7fa3f2b6e400>
+             └ <bound method PicHandler.get of <views.pic.pic_views.PicHandler object at 0x7fa3f2b6e400>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/pic/pic_views.py", line 16, in get
+    with open(image_path, 'r') as f:
+              └ "/Users/qiangchen/Desktop/sesame/sesame-backend/static/upload/'psq-consult-bg.png'"
+
+FileNotFoundError: [Errno 2] No such file or directory: "/Users/qiangchen/Desktop/sesame/sesame-backend/static/upload/'psq-consult-bg.png'"
+2022-03-31 16:00:14.287 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/pic/psq-consult-bg.png', ip: '127.0.0.1', author: None, query: '', body: '', time: 19ms
+2022-03-31 16:01:17.993 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/pic/psq-consult-bg.png', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.pic.pic_views.PicHandler object at 0x7fcc4ea5e3d0>
+             │       │    └ ['psq-consult-bg.png']
+             │       └ <views.pic.pic_views.PicHandler object at 0x7fcc4ea5e3d0>
+             └ <bound method PicHandler.get of <views.pic.pic_views.PicHandler object at 0x7fcc4ea5e3d0>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/pic/pic_views.py", line 17, in get
+    with open(image_path, 'r') as f:
+              └ "/Users/qiangchen/Desktop/sesame/sesame-backend/static/upload/'psq-consult-bg.png'"
+
+FileNotFoundError: [Errno 2] No such file or directory: "/Users/qiangchen/Desktop/sesame/sesame-backend/static/upload/'psq-consult-bg.png'"
+2022-03-31 16:01:18.007 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/pic/psq-consult-bg.png', ip: '127.0.0.1', author: None, query: '', body: '', time: 18ms
+2022-03-31 16:01:19.518 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/pic/psq-consult-bg.png', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.pic.pic_views.PicHandler object at 0x7fcc4ea5e8e0>
+             │       │    └ ['psq-consult-bg.png']
+             │       └ <views.pic.pic_views.PicHandler object at 0x7fcc4ea5e8e0>
+             └ <bound method PicHandler.get of <views.pic.pic_views.PicHandler object at 0x7fcc4ea5e8e0>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/pic/pic_views.py", line 17, in get
+    with open(image_path, 'r') as f:
+              └ "/Users/qiangchen/Desktop/sesame/sesame-backend/static/upload/'psq-consult-bg.png'"
+
+FileNotFoundError: [Errno 2] No such file or directory: "/Users/qiangchen/Desktop/sesame/sesame-backend/static/upload/'psq-consult-bg.png'"
+2022-03-31 16:01:19.522 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/pic/psq-consult-bg.png', ip: '127.0.0.1', author: None, query: '', body: '', time:  5ms
+2022-03-31 16:01:53.510 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/pic/psq-consult-bg.png', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.pic.pic_views.PicHandler object at 0x7ff1b4a71400>
+             │       │    └ ['psq-consult-bg.png']
+             │       └ <views.pic.pic_views.PicHandler object at 0x7ff1b4a71400>
+             └ <bound method PicHandler.get of <views.pic.pic_views.PicHandler object at 0x7ff1b4a71400>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/pic/pic_views.py", line 18, in get
+    with open(image_path, 'r') as f:
+              └ "/Users/qiangchen/Desktop/sesame/sesame-backend/static/upload/'psq-consult-bg.png'"
+
+FileNotFoundError: [Errno 2] No such file or directory: "/Users/qiangchen/Desktop/sesame/sesame-backend/static/upload/'psq-consult-bg.png'"
+2022-03-31 16:01:53.521 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/pic/psq-consult-bg.png', ip: '127.0.0.1', author: None, query: '', body: '', time: 14ms
+2022-03-31 16:03:06.274 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/pic/psq-consult-bg.png', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.pic.pic_views.PicHandler object at 0x7f9a56a63400>
+             │       │    └ ['psq-consult-bg.png']
+             │       └ <views.pic.pic_views.PicHandler object at 0x7f9a56a63400>
+             └ <bound method PicHandler.get of <views.pic.pic_views.PicHandler object at 0x7f9a56a63400>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/pic/pic_views.py", line 18, in get
+    with open(image_path, 'r') as f:
+              └ "/Users/qiangchen/Desktop/sesame/sesame-backend/static/upload/'psq-consult-bg.png'"
+
+FileNotFoundError: [Errno 2] No such file or directory: "/Users/qiangchen/Desktop/sesame/sesame-backend/static/upload/'psq-consult-bg.png'"
+2022-03-31 16:03:06.288 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/pic/psq-consult-bg.png', ip: '127.0.0.1', author: None, query: '', body: '', time: 17ms
+2022-03-31 16:03:07.846 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/pic/psq-consult-bg.png', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.pic.pic_views.PicHandler object at 0x7f9a56a63910>
+             │       │    └ ['psq-consult-bg.png']
+             │       └ <views.pic.pic_views.PicHandler object at 0x7f9a56a63910>
+             └ <bound method PicHandler.get of <views.pic.pic_views.PicHandler object at 0x7f9a56a63910>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/pic/pic_views.py", line 18, in get
+    with open(image_path, 'r') as f:
+              └ "/Users/qiangchen/Desktop/sesame/sesame-backend/static/upload/'psq-consult-bg.png'"
+
+FileNotFoundError: [Errno 2] No such file or directory: "/Users/qiangchen/Desktop/sesame/sesame-backend/static/upload/'psq-consult-bg.png'"
+2022-03-31 16:03:07.851 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/pic/psq-consult-bg.png', ip: '127.0.0.1', author: None, query: '', body: '', time:  5ms
+2022-03-31 16:03:43.556 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/pic/psq-consult-bg.png', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.pic.pic_views.PicHandler object at 0x7f804536e400>
+             │       │    └ ['psq-consult-bg.png']
+             │       └ <views.pic.pic_views.PicHandler object at 0x7f804536e400>
+             └ <bound method PicHandler.get of <views.pic.pic_views.PicHandler object at 0x7f804536e400>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/pic/pic_views.py", line 18, in get
+    with open(image_path, 'r') as f:
+              └ "/Users/qiangchen/Desktop/sesame/sesame-backend/static/upload/'psq-consult-bg.png'"
+
+FileNotFoundError: [Errno 2] No such file or directory: "/Users/qiangchen/Desktop/sesame/sesame-backend/static/upload/'psq-consult-bg.png'"
+2022-03-31 16:03:43.568 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/pic/psq-consult-bg.png', ip: '127.0.0.1', author: None, query: '', body: '', time: 16ms
+2022-03-31 16:04:05.762 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/pic/psq-consult-bg.png', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.pic.pic_views.PicHandler object at 0x7fe614c6e400>
+             │       │    └ ['psq-consult-bg.png']
+             │       └ <views.pic.pic_views.PicHandler object at 0x7fe614c6e400>
+             └ <bound method PicHandler.get of <views.pic.pic_views.PicHandler object at 0x7fe614c6e400>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/pic/pic_views.py", line 18, in get
+    with open(image_path, 'r') as f:
+              └ "/Users/qiangchen/Desktop/sesame/sesame-backend/static/upload/'psq-consult-bg.png'"
+
+FileNotFoundError: [Errno 2] No such file or directory: "/Users/qiangchen/Desktop/sesame/sesame-backend/static/upload/'psq-consult-bg.png'"
+2022-03-31 16:04:05.773 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/pic/psq-consult-bg.png', ip: '127.0.0.1', author: None, query: '', body: '', time: 14ms
+2022-03-31 16:04:27.173 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/pic/psq-consult-bg.png', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.pic.pic_views.PicHandler object at 0x7fb520b71400>
+             │       │    └ ['psq-consult-bg.png']
+             │       └ <views.pic.pic_views.PicHandler object at 0x7fb520b71400>
+             └ <bound method PicHandler.get of <views.pic.pic_views.PicHandler object at 0x7fb520b71400>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/pic/pic_views.py", line 18, in get
+    with open(image_path, 'r') as f:
+              └ "/Users/qiangchen/Desktop/sesame/sesame-backend/static/upload/'psq-consult-bg.png'"
+
+FileNotFoundError: [Errno 2] No such file or directory: "/Users/qiangchen/Desktop/sesame/sesame-backend/static/upload/'psq-consult-bg.png'"
+2022-03-31 16:04:27.183 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/pic/psq-consult-bg.png', ip: '127.0.0.1', author: None, query: '', body: '', time: 13ms
+2022-03-31 16:04:28.130 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/pic/psq-consult-bg.png', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.pic.pic_views.PicHandler object at 0x7fb520b71910>
+             │       │    └ ['psq-consult-bg.png']
+             │       └ <views.pic.pic_views.PicHandler object at 0x7fb520b71910>
+             └ <bound method PicHandler.get of <views.pic.pic_views.PicHandler object at 0x7fb520b71910>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/pic/pic_views.py", line 18, in get
+    with open(image_path, 'r') as f:
+              └ "/Users/qiangchen/Desktop/sesame/sesame-backend/static/upload/'psq-consult-bg.png'"
+
+FileNotFoundError: [Errno 2] No such file or directory: "/Users/qiangchen/Desktop/sesame/sesame-backend/static/upload/'psq-consult-bg.png'"
+2022-03-31 16:04:28.134 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/pic/psq-consult-bg.png', ip: '127.0.0.1', author: None, query: '', body: '', time:  4ms
+2022-03-31 16:04:49.060 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/pic/psq-consult-bg.png', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.pic.pic_views.PicHandler object at 0x7f9705a71400>
+             │       │    └ ['psq-consult-bg.png']
+             │       └ <views.pic.pic_views.PicHandler object at 0x7f9705a71400>
+             └ <bound method PicHandler.get of <views.pic.pic_views.PicHandler object at 0x7f9705a71400>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/pic/pic_views.py", line 19, in get
+    self.finish(f.read())
+    │    │      │ └ <method 'read' of '_io.TextIOWrapper' objects>
+    │    │      └ <_io.TextIOWrapper name='/Users/qiangchen/Desktop/sesame/sesame-backend/static/upload/psq-consult-bg.png' mode='r' encoding='...
+    │    └ <function RequestHandler.finish at 0x7f970458cb80>
+    └ <views.pic.pic_views.PicHandler object at 0x7f9705a71400>
+
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/codecs.py", line 322, in decode
+    (result, consumed) = self._buffer_decode(data, self.errors, final)
+                         │    │              │     │    │       └ True
+                         │    │              │     │    └ 'strict'
+                         │    │              │     └ <encodings.utf_8.IncrementalDecoder object at 0x7f9705a71460>
+                         │    │              └ b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x04\x0b\x00\x00\x01,\x08\x06\x00\x00\x00\xa5\xab:\x9e\x00\x00\x00\x01sRGB\x00\x...
+                         │    └ <built-in function utf_8_decode>
+                         └ <encodings.utf_8.IncrementalDecoder object at 0x7f9705a71460>
+
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0x89 in position 0: invalid start byte
+2022-03-31 16:04:49.074 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/pic/psq-consult-bg.png', ip: '127.0.0.1', author: None, query: '', body: '', time: 19ms
+2022-03-31 16:16:33.112 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/pic/psq-consult-bg.png?width=100&height=50', version='HTTP/1.1', remote_ip='127.0.0.1'), query: 'width=100&height=50', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.pic.pic_views.PicHandler object at 0x7fe05eb6e820>
+             │       │    └ ['psq-consult-bg.png']
+             │       └ <views.pic.pic_views.PicHandler object at 0x7fe05eb6e820>
+             └ <bound method PicHandler.get of <views.pic.pic_views.PicHandler object at 0x7fe05eb6e820>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/pic/pic_views.py", line 33, in get
+    print("缩略图: %s %s" % width, height)
+                         │      └ '50'
+                         └ '100'
+
+TypeError: not enough arguments for format string
+2022-03-31 16:16:33.122 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/pic/psq-consult-bg.png?width=100&height=50', ip: '127.0.0.1', author: None, query: 'width=100&height=50', body: '', time: 72ms
+2022-03-31 16:16:58.565 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/pic/psq-consult-bg.png?width=100&height=50', version='HTTP/1.1', remote_ip='127.0.0.1'), query: 'width=100&height=50', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.pic.pic_views.PicHandler object at 0x7f87b1a71400>
+             │       │    └ ['psq-consult-bg.png']
+             │       └ <views.pic.pic_views.PicHandler object at 0x7f87b1a71400>
+             └ <bound method PicHandler.get of <views.pic.pic_views.PicHandler object at 0x7f87b1a71400>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/pic/pic_views.py", line 34, in get
+    copy.thumbnail(size)
+    │    │         └ ('100', '50')
+    │    └ <function Image.thumbnail at 0x7f87b1a3af70>
+    └ <PIL.Image.Image image mode=RGBA size=1035x300 at 0x7F87B1A71460>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/PIL/Image.py", line 2353, in thumbnail
+    x, y = map(math.floor, size)
+               │    │      └ ('100', '50')
+               │    └ <built-in function floor>
+               └ <module 'math' from '/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/lib-dynload/math.cpython-39-darwin.so'>
+
+TypeError: must be real number, not str
+2022-03-31 16:16:58.574 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/pic/psq-consult-bg.png?width=100&height=50', ip: '127.0.0.1', author: None, query: 'width=100&height=50', body: '', time: 61ms
+2022-03-31 16:18:15.416 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/pic/psq-consult-bg.png?width=500&height=200', version='HTTP/1.1', remote_ip='127.0.0.1'), query: 'width=500&height=200', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.pic.pic_views.PicHandler object at 0x7fcdf2381400>
+             │       │    └ ['psq-consult-bg.png']
+             │       └ <views.pic.pic_views.PicHandler object at 0x7fcdf2381400>
+             └ <bound method PicHandler.get of <views.pic.pic_views.PicHandler object at 0x7fcdf2381400>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/pic/pic_views.py", line 33, in get
+    print("缩略图: %r" % size)
+                      └ (500, 200)
+
+TypeError: not all arguments converted during string formatting
+2022-03-31 16:18:15.425 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/pic/psq-consult-bg.png?width=500&height=200', ip: '127.0.0.1', author: None, query: 'width=500&height=200', body: '', time: 48ms
+2022-03-31 16:31:57.250 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/pic/psq-consult-bg.png?width=500&height=200', version='HTTP/1.1', remote_ip='127.0.0.1'), query: 'width=500&height=200', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/PIL/Image.py", line 2192, in save
+    format = EXTENSION[ext]
+             │         └ ''
+             └ {'.bmp': 'BMP', '.dib': 'DIB', '.gif': 'GIF', '.tif': 'TIFF', '.tiff': 'TIFF', '.jfif': 'JPEG', '.jpe': 'JPEG', '.jpg': 'JPEG...
+
+KeyError: ''
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.pic.pic_views.PicHandler object at 0x7f8c322633a0>
+             │       │    └ ['psq-consult-bg.png']
+             │       └ <views.pic.pic_views.PicHandler object at 0x7f8c322633a0>
+             └ <bound method PicHandler.get of <views.pic.pic_views.PicHandler object at 0x7f8c322633a0>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/pic/pic_views.py", line 34, in get
+    copy.save(tempIO)
+    │    │    └ <_io.BytesIO object at 0x7f8c322fcea0>
+    │    └ <function Image.save at 0x7f8c3222bc10>
+    └ <PIL.Image.Image image mode=RGBA size=500x145 at 0x7F8C32263400>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/PIL/Image.py", line 2194, in save
+    raise ValueError(f"unknown file extension: {ext}") from e
+
+ValueError: unknown file extension: 
+2022-03-31 16:31:57.261 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/pic/psq-consult-bg.png?width=500&height=200', ip: '127.0.0.1', author: None, query: 'width=500&height=200', body: '', time: 113ms
+2022-03-31 16:34:18.408 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/pic/psq-consult-bg.png?width=500&height=200', version='HTTP/1.1', remote_ip='127.0.0.1'), query: 'width=500&height=200', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.pic.pic_views.PicHandler object at 0x7f872ab803d0>
+             │       │    └ ['psq-consult-bg.png']
+             │       └ <views.pic.pic_views.PicHandler object at 0x7f872ab803d0>
+             └ <bound method PicHandler.get of <views.pic.pic_views.PicHandler object at 0x7f872ab803d0>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/pic/pic_views.py", line 34, in get
+    copy.save(tempIO, format=path.splitext(image_name)[1])
+    │    │    │              │    │        └ 'upload/psq-consult-bg.png'
+    │    │    │              │    └ <function splitext at 0x7f8724f8cca0>
+    │    │    │              └ <module 'posixpath' from '/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/posixpath.py'>
+    │    │    └ <_io.BytesIO object at 0x7f87289611d0>
+    │    └ <function Image.save at 0x7f872ab48c10>
+    └ <PIL.Image.Image image mode=RGBA size=500x145 at 0x7F872AB80430>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/PIL/Image.py", line 2201, in save
+    save_handler = SAVE[format.upper()]
+                   │    │      └ <method 'upper' of 'str' objects>
+                   │    └ '.png'
+                   └ {'BMP': <function _save at 0x7f872abb4700>, 'DIB': <function _dib_save at 0x7f872abb44c0>, 'GIF': <function _save at 0x7f872a...
+
+KeyError: '.PNG'
+2022-03-31 16:34:18.419 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/pic/psq-consult-bg.png?width=500&height=200', ip: '127.0.0.1', author: None, query: 'width=500&height=200', body: '', time: 95ms
+2022-03-31 16:38:54.446 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/pic/psq-consult-bg.png?width=500&height=200', version='HTTP/1.1', remote_ip='127.0.0.1'), query: 'width=500&height=200', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.pic.pic_views.PicHandler object at 0x7f9cbba71400>
+             │       │    └ ['psq-consult-bg.png']
+             │       └ <views.pic.pic_views.PicHandler object at 0x7f9cbba71400>
+             └ <bound method PicHandler.get of <views.pic.pic_views.PicHandler object at 0x7f9cbba71400>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/pic/pic_views.py", line 39, in get
+    copy.save(tempIO, format=[1])
+    │    │    └ <_io.BytesIO object at 0x7f9cbbc48f40>
+    │    └ <function Image.save at 0x7f9cbba39ca0>
+    └ <PIL.Image.Image image mode=RGBA size=500x145 at 0x7F9CBBA71460>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/PIL/Image.py", line 2196, in save
+    if format.upper() not in SAVE:
+       │                     └ {'BMP': <function _save at 0x7f9cbbaa5790>, 'DIB': <function _dib_save at 0x7f9cbbaa5550>, 'GIF': <function _save at 0x7f9cbb...
+       └ [1]
+
+AttributeError: 'list' object has no attribute 'upper'
+2022-03-31 16:38:54.457 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/pic/psq-consult-bg.png?width=500&height=200', ip: '127.0.0.1', author: None, query: 'width=500&height=200', body: '', time: 64ms

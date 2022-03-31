@@ -34,6 +34,12 @@ class BaseHandler(RequestHandler):
     def success(self, data=None):
         self.finish(json.dumps({'msg': ERROR_CODE_0.msg, 'code': ERROR_CODE_0.code, 'data': data}))
 
+    def simpleSuccess(self):
+        self.finish(json.dumps({'msg': ERROR_CODE_0.msg, 'code': ERROR_CODE_0.code, 'data': True}))
+
+    def simpleFail(self):
+        self.finish(json.dumps({'msg': ERROR_CODE_0.msg, 'code': ERROR_CODE_0.code, 'data': True}))
+
     def write_error(self, status_code: int, **kwargs) -> None:
         exc_info = kwargs.get('exc_info', None)
 
