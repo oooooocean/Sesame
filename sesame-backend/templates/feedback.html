@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>意见反馈</title>
+    <link href={{ static_url("css/bootstrap.min.css") }} rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <form action="">
+            <h6>请选择反馈类别</h6>
+            {% for category in categorys %}
+            <input class="form-check-input" type="radio" name="flexRadioDefault" value={{ category.value }} id={{ category.name }}>
+            <label class="form-check-label" for={{ category.name }}>
+            {{ category.__str__() }}
+            </label>
+            {% end %}
+            <textarea class="form-control" placeholder="请输入反馈内容" name="message"></textarea>
+            <input class="form-control" type="file" id="image">
+            <button class="btn btn-outline-secondary" type="button">提交</button>
+        </form>
+    </div>
+    <script src={{ static_url("js/bootstrap.bundle.min.js") }}></script>
+</body>
+</html>

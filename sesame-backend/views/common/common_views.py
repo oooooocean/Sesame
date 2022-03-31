@@ -4,6 +4,7 @@ from common.exception import (
     ERROR_CODE_0,
     ERROR_CODE_1001
 )
+from models.feedback import FeedbackCategory
 
 
 class UploadHandler(BaseHandler):
@@ -15,3 +16,8 @@ class UploadHandler(BaseHandler):
         else:
             image_url_list = save_images(image_metas)
             self.http_response(ERROR_CODE_0, image_url_list)
+
+
+class FeedbackHandler(BaseHandler):
+    def get(self):
+        self.render('feedback.html', categorys=FeedbackCategory)

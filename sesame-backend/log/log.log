@@ -49,3 +49,207 @@ Traceback (most recent call last):
            └ None
 
 AssertionError: album 不存在: '2'
+2022-03-31 10:05:42.490 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/common/feedback', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.common.common_views.UploadHandler object at 0x7f9f293014c0>
+             │       │    └ []
+             │       └ <views.common.common_views.UploadHandler object at 0x7f9f293014c0>
+             └ <bound method RequestHandler._unimplemented_method of <views.common.common_views.UploadHandler object at 0x7f9f293014c0>>
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 264, in _unimplemented_method
+    raise HTTPError(405)
+          └ <class 'tornado.web.HTTPError'>
+
+tornado.web.HTTPError: HTTP 405: Method Not Allowed
+2022-03-31 10:05:58.042 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/common/feedback', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.common.common_views.UploadHandler object at 0x7f9f29301b80>
+             │       │    └ []
+             │       └ <views.common.common_views.UploadHandler object at 0x7f9f29301b80>
+             └ <bound method RequestHandler._unimplemented_method of <views.common.common_views.UploadHandler object at 0x7f9f29301b80>>
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 264, in _unimplemented_method
+    raise HTTPError(405)
+          └ <class 'tornado.web.HTTPError'>
+
+tornado.web.HTTPError: HTTP 405: Method Not Allowed
+2022-03-31 10:06:21.036 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/common/feedback', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.common.common_views.FeedbackHandler object at 0x7ff0b2b088b0>
+             │       │    └ []
+             │       └ <views.common.common_views.FeedbackHandler object at 0x7ff0b2b088b0>
+             └ <bound method FeedbackHandler.get of <views.common.common_views.FeedbackHandler object at 0x7ff0b2b088b0>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/common/common_views.py", line 22, in get
+    self.render('feedback.html')
+    │    └ <function RequestHandler.render at 0x7ff0b0d8c700>
+    └ <views.common.common_views.FeedbackHandler object at 0x7ff0b2b088b0>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 863, in render
+    html = self.render_string(template_name, **kwargs)
+           │    │             │                └ {}
+           │    │             └ 'feedback.html'
+           │    └ <function RequestHandler.render_string at 0x7ff0b0d8c9d0>
+           └ <views.common.common_views.FeedbackHandler object at 0x7ff0b2b088b0>
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1009, in render_string
+    t = loader.load(template_name)
+        │      │    └ 'feedback.html'
+        │      └ <function BaseLoader.load at 0x7ff0b0d5ddc0>
+        └ <tornado.template.Loader object at 0x7ff0b2b08a30>
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/template.py", line 446, in load
+    self.templates[name] = self._create_template(name)
+    │    │         │       │    │                └ 'feedback.html'
+    │    │         │       │    └ <function Loader._create_template at 0x7ff0b0d71040>
+    │    │         │       └ <tornado.template.Loader object at 0x7ff0b2b08a30>
+    │    │         └ 'feedback.html'
+    │    └ {}
+    └ <tornado.template.Loader object at 0x7ff0b2b08a30>
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/template.py", line 478, in _create_template
+    template = Template(f.read(), name=name, loader=self)
+               │        │ │            │            └ <tornado.template.Loader object at 0x7ff0b2b08a30>
+               │        │ │            └ 'feedback.html'
+               │        │ └ <method 'read' of '_io.BufferedReader' objects>
+               │        └ <_io.BufferedReader name='/Users/qiangchen/Desktop/sesame/sesame-backend/templates/feedback.html'>
+               └ <class 'tornado.template.Template'>
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/template.py", line 318, in __init__
+    self.file = _File(self, _parse(reader, self))
+    │           │     │     │      │       └ <tornado.template.Template object at 0x7ff0b2b08dc0>
+    │           │     │     │      └ <tornado.template._TemplateReader object at 0x7ff0b2b08ee0>
+    │           │     │     └ <function _parse at 0x7ff0b0d77d30>
+    │           │     └ <tornado.template.Template object at 0x7ff0b2b08dc0>
+    │           └ <class 'tornado.template._File'>
+    └ <tornado.template.Template object at 0x7ff0b2b08dc0>
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/template.py", line 1048, in _parse
+    reader.raise_parse_error("unknown operator: %r" % operator)
+    │      │                                          └ 'static_url("css/bootstrap.min.css")'
+    │      └ <function _TemplateReader.raise_parse_error at 0x7ff0b0d77ca0>
+    └ <tornado.template._TemplateReader object at 0x7ff0b2b08ee0>
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/template.py", line 839, in raise_parse_error
+    raise ParseError(msg, self.name, self.line)
+          │          │    │    │     │    └ 6
+          │          │    │    │     └ <tornado.template._TemplateReader object at 0x7ff0b2b08ee0>
+          │          │    │    └ 'feedback.html'
+          │          │    └ <tornado.template._TemplateReader object at 0x7ff0b2b08ee0>
+          │          └ 'unknown operator: \'static_url("css/bootstrap.min.css")\''
+          └ <class 'tornado.template.ParseError'>
+
+tornado.template.ParseError: unknown operator: 'static_url("css/bootstrap.min.css")' at feedback.html:6
+2022-03-31 10:06:21.056 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/common/feedback', ip: '127.0.0.1', author: None, query: '', body: '', time: 26ms
+2022-03-31 10:24:41.592 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/common/feedback', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.common.common_views.FeedbackHandler object at 0x7f81fbb18a00>
+             │       │    └ []
+             │       └ <views.common.common_views.FeedbackHandler object at 0x7f81fbb18a00>
+             └ <bound method FeedbackHandler.get of <views.common.common_views.FeedbackHandler object at 0x7f81fbb18a00>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/common/common_views.py", line 22, in get
+    self.render('feedback.html')
+    │    └ <function RequestHandler.render at 0x7f81f9d8c700>
+    └ <views.common.common_views.FeedbackHandler object at 0x7f81fbb18a00>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 863, in render
+    html = self.render_string(template_name, **kwargs)
+           │    │             │                └ {}
+           │    │             └ 'feedback.html'
+           │    └ <function RequestHandler.render_string at 0x7f81f9d8c9d0>
+           └ <views.common.common_views.FeedbackHandler object at 0x7f81fbb18a00>
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1009, in render_string
+    t = loader.load(template_name)
+        │      │    └ 'feedback.html'
+        │      └ <function BaseLoader.load at 0x7f81f9d5ddc0>
+        └ <tornado.template.Loader object at 0x7f81fbb18a60>
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/template.py", line 446, in load
+    self.templates[name] = self._create_template(name)
+    │    │         │       │    │                └ 'feedback.html'
+    │    │         │       │    └ <function Loader._create_template at 0x7f81f9d71040>
+    │    │         │       └ <tornado.template.Loader object at 0x7f81fbb18a60>
+    │    │         └ 'feedback.html'
+    │    └ {}
+    └ <tornado.template.Loader object at 0x7f81fbb18a60>
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/template.py", line 478, in _create_template
+    template = Template(f.read(), name=name, loader=self)
+               │        │ │            │            └ <tornado.template.Loader object at 0x7f81fbb18a60>
+               │        │ │            └ 'feedback.html'
+               │        │ └ <method 'read' of '_io.BufferedReader' objects>
+               │        └ <_io.BufferedReader name='/Users/qiangchen/Desktop/sesame/sesame-backend/templates/feedback.html'>
+               └ <class 'tornado.template.Template'>
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/template.py", line 318, in __init__
+    self.file = _File(self, _parse(reader, self))
+    │           │     │     │      │       └ <tornado.template.Template object at 0x7f81fbb18df0>
+    │           │     │     │      └ <tornado.template._TemplateReader object at 0x7f81fbb18f10>
+    │           │     │     └ <function _parse at 0x7f81f9d77d30>
+    │           │     └ <tornado.template.Template object at 0x7f81fbb18df0>
+    │           └ <class 'tornado.template._File'>
+    └ <tornado.template.Template object at 0x7f81fbb18df0>
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/template.py", line 1018, in _parse
+    block_body = _parse(reader, template, operator, operator)
+                 │      │       │         │         └ 'for'
+                 │      │       │         └ 'for'
+                 │      │       └ <tornado.template.Template object at 0x7f81fbb18df0>
+                 │      └ <tornado.template._TemplateReader object at 0x7f81fbb18f10>
+                 └ <function _parse at 0x7f81f9d77d30>
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/template.py", line 863, in _parse
+    reader.raise_parse_error(
+    │      └ <function _TemplateReader.raise_parse_error at 0x7f81f9d77ca0>
+    └ <tornado.template._TemplateReader object at 0x7f81fbb18f10>
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/template.py", line 839, in raise_parse_error
+    raise ParseError(msg, self.name, self.line)
+          │          │    │    │     │    └ 19
+          │          │    │    │     └ <tornado.template._TemplateReader object at 0x7f81fbb18f10>
+          │          │    │    └ 'feedback.html'
+          │          │    └ <tornado.template._TemplateReader object at 0x7f81fbb18f10>
+          │          └ 'Missing {% end %} block for for'
+          └ <class 'tornado.template.ParseError'>
+
+tornado.template.ParseError: Missing {% end %} block for for at feedback.html:19
+2022-03-31 10:24:41.613 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/common/feedback', ip: '127.0.0.1', author: None, query: '', body: '', time: 31ms
+2022-03-31 10:24:53.520 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/common/feedback', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.common.common_views.FeedbackHandler object at 0x7f81fbb3e430>
+             │       │    └ []
+             │       └ <views.common.common_views.FeedbackHandler object at 0x7f81fbb3e430>
+             └ <bound method FeedbackHandler.get of <views.common.common_views.FeedbackHandler object at 0x7f81fbb3e430>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/common/common_views.py", line 22, in get
+    self.render('feedback.html')
+    │    └ <function RequestHandler.render at 0x7f81f9d8c700>
+    └ <views.common.common_views.FeedbackHandler object at 0x7f81fbb3e430>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 863, in render
+    html = self.render_string(template_name, **kwargs)
+           │    │             │                └ {}
+           │    │             └ 'feedback.html'
+           │    └ <function RequestHandler.render_string at 0x7f81f9d8c9d0>
+           └ <views.common.common_views.FeedbackHandler object at 0x7f81fbb3e430>
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1012, in render_string
+    return t.generate(**namespace)
+           │ │          └ {'handler': <views.common.common_views.FeedbackHandler object at 0x7f81fbb3e430>, 'request': HTTPServerRequest(protocol='http...
+           │ └ <function Template.generate at 0x7f81f9d5da60>
+           └ <tornado.template.Template object at 0x7f81fbb18940>
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/template.py", line 362, in generate
+    return execute()
+           └ <function _tt_execute at 0x7f81fbbef4c0>
+
+  File "feedback_html.generated.py", line 11, in _tt_execute
+    for category in categorys:  # feedback.html:11
+
+NameError: name 'categorys' is not defined
+2022-03-31 10:24:53.528 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/common/feedback', ip: '127.0.0.1', author: None, query: '', body: '', time: 19ms
