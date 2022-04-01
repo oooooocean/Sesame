@@ -43,4 +43,4 @@ class UserInfo(BaseDB, ModelMixin):
     user = relationship('User', back_populates="info")
 
     def json_exclude_columns(self):
-        return ModelMixin.json_exclude_columns(self) + ['user_id']
+        return ModelMixin.json_exclude_columns(self) + ['id', 'user_id']

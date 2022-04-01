@@ -14,34 +14,60 @@ class UserHandler(AuthBaseHandler):
     def prepare(self):
         uid = self.path_args[0]
         self.user = sessions.get(User, uid)
-        if self.user and not self.user.deleted: raise ClientError('用户不存在, uid: %r' % uid)
+        if not self.user or self.user.deleted: raise ClientError('用户不存在, uid: %r' % uid)
         super(AuthBaseHandler, self).prepare()
 
     def get(self, _):
         """
-        获取用户的基本信息
-        :return:
+        @api {get} /user/:user_id Get User Info
+        @apiVersion 0.0.1
+        @apiGroup User
+        @apiDescription User's info
+
+        @apiParam {String} user_id User's id
+
+        @apiSuccessExample {json} response:
+            {
+                id: int,
+                phone: string,
+                info: {
+                    nickname: string,
+                    gender: int, // 1 male 2 female
+                    avatar: string
+                }
+            }
         """
+
         json = self.user.to_json()
         json['info'] = self.user.info.to_json()
         return self.http_response(ERROR_CODE_0, json)
 
     def post(self, _):
         """
-        修改用户信息
-        :return:
+        @api {post} /user/:user_id Update User Info
+        @apiVersion 0.0.1
+        @apiGroup User
+        @apiDescription Update User's info
+
+        @apiParam {String} user_id User's id
+        @apiBody {String} nickname User's nickname
+        @apiBody {String} gender User's gender, 1 male 2 female
+        @apiBody {File} image User's avatar
+
+        @apiSuccess {Object} data User's info
         """
+
         user_info: UserInfo = self.user.info or UserInfo()
 
         nickname = self.get_body_argument('nickname', None)
         if nickname:
             is_valid, msg = validate_user_nickname(nickname)
-            assert is_valid, msg
+            if not is_valid: raise ClientError(msg)
             user_info.nickname = nickname
 
         gender = self.get_body_argument('gender', None)
         if gender:
-            assert gender == 1 or gender == 2, '性别错误, 只能是1或2'
+            if gender not in [1, 2]: raise ClientError('性别错误, 只能是1或2')
             user_info.gender = gender
 
         image_mates = self.request.files.get('image', None)
@@ -50,7 +76,7 @@ class UserHandler(AuthBaseHandler):
 
         self.user.info = user_info
         self.user.save()
-
+        print(self.user.info.nickname)
         json = self.user.to_json()
         json['info'] = self.user.info.to_json()
         self.http_response(ERROR_CODE_0, json)

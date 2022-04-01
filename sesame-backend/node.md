@@ -68,3 +68,5 @@ export DYLD_LIBRARY_PATH=/usr/local/mysql/lib/
 import pymysql
 pymysql.install_as_MySQLdb()
 ```
+
+# 技术点

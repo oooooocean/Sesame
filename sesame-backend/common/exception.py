@@ -29,7 +29,7 @@ ERROR_CODE_1004 = SaoException('非法用户', 1004)
 ERROR_CODE_1005 = SaoException('数据重复', 1005)
 ERROR_CODE_1006 = SaoException('资源不存在', 1006)
 ERROR_CODE_1007 = SaoException('客户端入参错误', 1007)
-ERROR_CODE_1008 = SaoException('服务端错误', 1007)
+ERROR_CODE_1008 = SaoException('服务端错误', 1008)
 
 
 def ClientError(msg: str) -> SaoException:

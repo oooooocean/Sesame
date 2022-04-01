@@ -20,11 +20,11 @@ def validate_password(password: str) -> tuple:
         return False, '密码不能为空'
     if len(password) < 8:
         return False, '密码长度至少8位'
-    if not re.match(r'[0-9]+', password):
+    if not re.search(r'[\d]+', password):
         return False, '密码错误: 必须包含数字'
-    if not re.match(r'[a-zA-z]]', password):
+    if not re.search(r'[a-zA-z]+', password):
         return False, '密码错误: 必须包含英文字母'
-    if not re.match(r'^[a-zA-z0-9_]$', password):
+    if not re.search(r'^[a-zA-Z0-9_]+$', password):
         return False, '密码错误: 仅能使用英文字母, 数字和下划线'
     return True, None
 

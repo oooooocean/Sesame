@@ -5,14 +5,28 @@ from service.utils import check_code
 from loguru import logger
 from common.exception import ERROR_CODE_1001
 from service.password import validate_password
-from service.validator import validate_phone
+from service.validator import validate_phone, validate_password as validate_password_format
 from common.exception import ClientError
 
 
 class LoginHandler(BaseHandler):
     def post(self):
         """
-        登录
+        @api {post} /login Login in
+        @apiVersion 0.0.1
+        @apiName Login
+        @apiGroup Login
+        @apiDescription Login in with password or sms code
+
+        @apiBody {String} phone User's phone
+        @apiBody {String} [password] User's password
+        @apiBody {String} [code] SMS verification code
+
+        @apiSuccessExample {json} response:
+            {
+                user: user_json,
+                token: token
+            }
         """
         phone = self.json_args.get('phone', None)
         password = self.json_args.get('password', None)
@@ -34,7 +48,7 @@ class LoginHandler(BaseHandler):
         :param password:
         :return:
         """
-        is_valid, msg = validate_password(password)
+        is_valid, msg = validate_password_format(password)
         if not is_valid: raise ClientError(msg)
         user = User.query.filter_by(phone=phone).first()
         if not user: raise ClientError('用户不存在')

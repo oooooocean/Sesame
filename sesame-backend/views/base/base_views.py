@@ -16,9 +16,7 @@ from conf.logger import log_request_error
 class BaseHandler(RequestHandler):
 
     def prepare(self):
-        if self.request.method == "POST":
-            assert self.request.headers.get('Content-Type', '').startswith('application/json'), \
-                'Content-Type 设置错误'
+        if self.request.method == "POST" and self.request.headers.get('Content-Type', '').startswith('application/json'):
             self.json_args = json_decode(self.request.body)
 
     def http_response(self, error: SaoException, data=None):

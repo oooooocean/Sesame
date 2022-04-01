@@ -1,0 +1,14 @@
+{
+  "name": "芝麻开门",
+  "version": "0.0.1",
+  "description": "一个相册演示项目",
+  "title": "芝麻开门API文档",
+  "url" : "127.0.0.1:8000/v1",
+  "header": {
+    "title": "文档说明",
+    "filename": "./apidoc/docheader.md"
+  },
+  "footer": {
+    "title": "而世之奇伟,瑰怪,非常之观,常在于险远,而人之所罕至焉,故非有志者不能至也."
+  }
+}

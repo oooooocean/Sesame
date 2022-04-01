@@ -652,3 +652,754 @@ Traceback (most recent call last):
 
 AttributeError: 'list' object has no attribute 'upper'
 2022-03-31 16:38:54.457 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/pic/psq-consult-bg.png?width=500&height=200', ip: '127.0.0.1', author: None, query: 'width=500&height=200', body: '', time: 64ms
+2022-04-01 13:23:43.879 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='POST', uri='/v1/login/', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b'{\n    "phone": "18856931381",\n    "code": "123456"\n}'
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.login.login_views.LoginHandler object at 0x7fdc32cb4670>
+             │       │    └ []
+             │       └ <views.login.login_views.LoginHandler object at 0x7fdc32cb4670>
+             └ <bound method LoginHandler.post of <views.login.login_views.LoginHandler object at 0x7fdc32cb4670>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 40, in post
+    self._login_with_code(phone, code)
+    │    │                │      └ '123456'
+    │    │                └ '18856931381'
+    │    └ <function LoginHandler._login_with_code at 0x7fdc32ae2700>
+    └ <views.login.login_views.LoginHandler object at 0x7fdc32cb4670>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 68, in _login_with_code
+    self._login_success(user)
+    │    │              └ <models.user_model.User object at 0x7fdc32d48070>
+    │    └ <function LoginHandler._login_success at 0x7fdc32ae2790>
+    └ <views.login.login_views.LoginHandler object at 0x7fdc32cb4670>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 77, in _login_success
+    token = common.jwt_utils.JWTUtils.create(user.id)
+            │      │         │        │      │    └ <sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x7fdc32a97770>
+            │      │         │        │      └ <models.user_model.User object at 0x7fdc32d48070>
+            │      │         │        └ <classmethod object at 0x7fdc32abc520>
+            │      │         └ <class 'common.jwt_utils.JWTUtils'>
+            │      └ <module 'common.jwt_utils' from '/Users/qiangchen/Desktop/sesame/sesame-backend/common/jwt_utils.py'>
+            └ <module 'common' (namespace)>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/common/jwt_utils.py", line 15, in create
+    encoded = jwt.encode(payload, JWTUtils.SECRET, algorithm='HS256')
+              │          │        │        └ 'SAO-Sao_sao'
+              │          │        └ <class 'common.jwt_utils.JWTUtils'>
+              │          └ {'uid': 1, 'exp': 1648877023}
+              └ <module 'jwt' from '/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/jwt/__init__.py'>
+
+AttributeError: module 'jwt' has no attribute 'encode'
+2022-04-01 13:23:43.891 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'POST', uri: '/v1/login/', ip: '127.0.0.1', author: None, query: '', body: '{\n    "phone": "18856931381",\n    "code": "123456"\n}', time: 142ms
+2022-04-01 13:39:34.939 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='POST', uri='/v1/login/', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b'{\n    "phone": "18856931381",\n    "code": "bei1202jing"\n}'
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.login.login_views.LoginHandler object at 0x7f9cded05040>
+             │       │    └ []
+             │       └ <views.login.login_views.LoginHandler object at 0x7f9cded05040>
+             └ <bound method LoginHandler.post of <views.login.login_views.LoginHandler object at 0x7f9cded05040>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 40, in post
+    self._login_with_code(phone, code)
+    │    │                │      └ 'bei1202jing'
+    │    │                └ '18856931381'
+    │    └ <function LoginHandler._login_with_code at 0x7f9cdec44c10>
+    └ <views.login.login_views.LoginHandler object at 0x7f9cded05040>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 66, in _login_with_code
+    if not check_code(code): raise ClientError('验证码错误')
+           │          │            └ <function ClientError at 0x7f9cdec41e50>
+           │          └ 'bei1202jing'
+           └ <function check_code at 0x7f9cdeb71160>
+
+common.exception.SaoException: ('验证码错误', 1007)
+2022-04-01 13:39:34.963 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'POST', uri: '/v1/login/', ip: '127.0.0.1', author: None, query: '', body: '{\n    "phone": "18856931381",\n    "code": "bei1202jing"\n}', time: 44ms
+2022-04-01 13:39:42.941 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='POST', uri='/v1/login/', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b'{\n    "phone": "18856931381",\n    "password": "bei1202jing"\n}'
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.login.login_views.LoginHandler object at 0x7f9cded05070>
+             │       │    └ []
+             │       └ <views.login.login_views.LoginHandler object at 0x7f9cded05070>
+             └ <bound method LoginHandler.post of <views.login.login_views.LoginHandler object at 0x7f9cded05070>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 38, in post
+    self._login_with_password(phone, password)  # 密码登录
+    │    │                    │      └ 'bei1202jing'
+    │    │                    └ '18856931381'
+    │    └ <function LoginHandler._login_with_password at 0x7f9cdec44b80>
+    └ <views.login.login_views.LoginHandler object at 0x7f9cded05070>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 51, in _login_with_password
+    is_valid, msg = validate_password(password)
+                    │                 └ 'bei1202jing'
+                    └ <function validate_password at 0x7f9cdec445e0>
+
+TypeError: validate_password() missing 1 required positional argument: 'password'
+2022-04-01 13:39:42.960 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'POST', uri: '/v1/login/', ip: '127.0.0.1', author: None, query: '', body: '{\n    "phone": "18856931381",\n    "password": "bei1202jing"\n}', time: 19ms
+2022-04-01 13:40:56.720 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='POST', uri='/v1/login/', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b'{\n    "phone": "18856931381",\n    "password": "bei1202jing"\n}'
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.login.login_views.LoginHandler object at 0x7ff93c507070>
+             │       │    └ []
+             │       └ <views.login.login_views.LoginHandler object at 0x7ff93c507070>
+             └ <bound method LoginHandler.post of <views.login.login_views.LoginHandler object at 0x7ff93c507070>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 38, in post
+    self._login_with_password(phone, password)  # 密码登录
+    │    │                    │      └ 'bei1202jing'
+    │    │                    └ '18856931381'
+    │    └ <function LoginHandler._login_with_password at 0x7ff93c43bb80>
+    └ <views.login.login_views.LoginHandler object at 0x7ff93c507070>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 52, in _login_with_password
+    if not is_valid: raise ClientError(msg)
+           │               │           └ '密码错误: 必须包含数字'
+           │               └ <function ClientError at 0x7ff93c447e50>
+           └ False
+
+common.exception.SaoException: ('密码错误: 必须包含数字', 1007)
+2022-04-01 13:40:56.748 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'POST', uri: '/v1/login/', ip: '127.0.0.1', author: None, query: '', body: '{\n    "phone": "18856931381",\n    "password": "bei1202jing"\n}', time: 45ms
+2022-04-01 13:42:02.001 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='POST', uri='/v1/login/', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b'{\n    "phone": "18856931381",\n    "password": "bei1202jing"\n}'
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.login.login_views.LoginHandler object at 0x7fe91cbd3cd0>
+             │       │    └ []
+             │       └ <views.login.login_views.LoginHandler object at 0x7fe91cbd3cd0>
+             └ <bound method LoginHandler.post of <views.login.login_views.LoginHandler object at 0x7fe91cbd3cd0>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 38, in post
+    self._login_with_password(phone, password)  # 密码登录
+    │    │                    │      └ 'bei1202jing'
+    │    │                    └ '18856931381'
+    │    └ <function LoginHandler._login_with_password at 0x7fe91cb2ab80>
+    └ <views.login.login_views.LoginHandler object at 0x7fe91cbd3cd0>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 52, in _login_with_password
+    if not is_valid: raise ClientError(msg)
+           │               │           └ '密码错误: 必须包含数字'
+           │               └ <function ClientError at 0x7fe91cb30e50>
+           └ False
+
+common.exception.SaoException: ('密码错误: 必须包含数字', 1007)
+2022-04-01 13:42:02.043 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'POST', uri: '/v1/login/', ip: '127.0.0.1', author: None, query: '', body: '{\n    "phone": "18856931381",\n    "password": "bei1202jing"\n}', time: 59ms
+2022-04-01 13:43:01.892 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='POST', uri='/v1/login/', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b'{\n    "phone": "18856931381",\n    "password": "bei1202jing"\n}'
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.login.login_views.LoginHandler object at 0x7fabef644070>
+             │       │    └ []
+             │       └ <views.login.login_views.LoginHandler object at 0x7fabef644070>
+             └ <bound method LoginHandler.post of <views.login.login_views.LoginHandler object at 0x7fabef644070>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 38, in post
+    self._login_with_password(phone, password)  # 密码登录
+    │    │                    │      └ 'bei1202jing'
+    │    │                    └ '18856931381'
+    │    └ <function LoginHandler._login_with_password at 0x7fabef57bb80>
+    └ <views.login.login_views.LoginHandler object at 0x7fabef644070>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 52, in _login_with_password
+    if not is_valid: raise ClientError(msg)
+           │               │           └ '密码错误: 必须包含数字'
+           │               └ <function ClientError at 0x7fabef580e50>
+           └ False
+
+common.exception.SaoException: ('密码错误: 必须包含数字', 1007)
+2022-04-01 13:43:01.936 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'POST', uri: '/v1/login/', ip: '127.0.0.1', author: None, query: '', body: '{\n    "phone": "18856931381",\n    "password": "bei1202jing"\n}', time: 66ms
+2022-04-01 13:43:23.616 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='POST', uri='/v1/login/', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b'{\n    "phone": "18856931381",\n    "password": "bei1202jing"\n}'
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.login.login_views.LoginHandler object at 0x7ffd3c644070>
+             │       │    └ []
+             │       └ <views.login.login_views.LoginHandler object at 0x7ffd3c644070>
+             └ <bound method LoginHandler.post of <views.login.login_views.LoginHandler object at 0x7ffd3c644070>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 38, in post
+    self._login_with_password(phone, password)  # 密码登录
+    │    │                    │      └ 'bei1202jing'
+    │    │                    └ '18856931381'
+    │    └ <function LoginHandler._login_with_password at 0x7ffd3c43fb80>
+    └ <views.login.login_views.LoginHandler object at 0x7ffd3c644070>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 52, in _login_with_password
+    if not is_valid: raise ClientError(msg)
+           │               │           └ '密码错误: 必须包含数字'
+           │               └ <function ClientError at 0x7ffd3c444e50>
+           └ False
+
+common.exception.SaoException: ('密码错误: 必须包含数字', 1007)
+2022-04-01 13:43:23.637 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'POST', uri: '/v1/login/', ip: '127.0.0.1', author: None, query: '', body: '{\n    "phone": "18856931381",\n    "password": "bei1202jing"\n}', time: 37ms
+2022-04-01 13:48:35.649 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='POST', uri='/v1/login/', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b'{\n    "phone": "18856931381",\n    "password": "bei1202jing"\n}'
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.login.login_views.LoginHandler object at 0x7ffced502070>
+             │       │    └ []
+             │       └ <views.login.login_views.LoginHandler object at 0x7ffced502070>
+             └ <bound method LoginHandler.post of <views.login.login_views.LoginHandler object at 0x7ffced502070>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 38, in post
+    self._login_with_password(phone, password)  # 密码登录
+    │    │                    │      └ 'bei1202jing'
+    │    │                    └ '18856931381'
+    │    └ <function LoginHandler._login_with_password at 0x7ffced439b80>
+    └ <views.login.login_views.LoginHandler object at 0x7ffced502070>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 52, in _login_with_password
+    if not is_valid: raise ClientError(msg)
+           │               │           └ '密码错误: 必须包含数字'
+           │               └ <function ClientError at 0x7ffced43ee50>
+           └ False
+
+common.exception.SaoException: ('密码错误: 必须包含数字', 1007)
+2022-04-01 13:48:35.673 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'POST', uri: '/v1/login/', ip: '127.0.0.1', author: None, query: '', body: '{\n    "phone": "18856931381",\n    "password": "bei1202jing"\n}', time: 40ms
+2022-04-01 13:48:57.112 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='POST', uri='/v1/login/', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b'{\n    "phone": "18856931381",\n    "password": "bei1202jing"\n}'
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.login.login_views.LoginHandler object at 0x7ffced5020a0>
+             │       │    └ []
+             │       └ <views.login.login_views.LoginHandler object at 0x7ffced5020a0>
+             └ <bound method LoginHandler.post of <views.login.login_views.LoginHandler object at 0x7ffced5020a0>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 38, in post
+    self._login_with_password(phone, password)  # 密码登录
+    │    │                    │      └ 'bei1202jing'
+    │    │                    └ '18856931381'
+    │    └ <function LoginHandler._login_with_password at 0x7ffced439b80>
+    └ <views.login.login_views.LoginHandler object at 0x7ffced5020a0>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 52, in _login_with_password
+    if not is_valid: raise ClientError(msg)
+           │               │           └ '密码错误: 必须包含数字'
+           │               └ <function ClientError at 0x7ffced43ee50>
+           └ False
+
+common.exception.SaoException: ('密码错误: 必须包含数字', 1007)
+2022-04-01 13:48:57.126 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'POST', uri: '/v1/login/', ip: '127.0.0.1', author: None, query: '', body: '{\n    "phone": "18856931381",\n    "password": "bei1202jing"\n}', time: 15ms
+2022-04-01 13:49:16.012 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='POST', uri='/v1/login/', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b'{\n    "phone": "18856931381",\n    "password": "bei1202jing"\n}'
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.login.login_views.LoginHandler object at 0x7f99c6d04040>
+             │       │    └ []
+             │       └ <views.login.login_views.LoginHandler object at 0x7f99c6d04040>
+             └ <bound method LoginHandler.post of <views.login.login_views.LoginHandler object at 0x7f99c6d04040>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 38, in post
+    self._login_with_password(phone, password)  # 密码登录
+    │    │                    │      └ 'bei1202jing'
+    │    │                    └ '18856931381'
+    │    └ <function LoginHandler._login_with_password at 0x7f99c6c3bb80>
+    └ <views.login.login_views.LoginHandler object at 0x7f99c6d04040>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 52, in _login_with_password
+    if not is_valid: raise ClientError(msg)
+           │               │           └ '密码错误: 必须包含数字'
+           │               └ <function ClientError at 0x7f99c6c40e50>
+           └ False
+
+common.exception.SaoException: ('密码错误: 必须包含数字', 1007)
+2022-04-01 13:49:16.054 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'POST', uri: '/v1/login/', ip: '127.0.0.1', author: None, query: '', body: '{\n    "phone": "18856931381",\n    "password": "bei1202jing"\n}', time: 64ms
+2022-04-01 13:52:05.867 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='POST', uri='/v1/login/', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b'{\n    "phone": "18856931381",\n    "password": "bei1202jing"\n}'
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.login.login_views.LoginHandler object at 0x7fc26cbe1cd0>
+             │       │    └ []
+             │       └ <views.login.login_views.LoginHandler object at 0x7fc26cbe1cd0>
+             └ <bound method LoginHandler.post of <views.login.login_views.LoginHandler object at 0x7fc26cbe1cd0>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 38, in post
+    self._login_with_password(phone, password)  # 密码登录
+    │    │                    │      └ 'bei1202jing'
+    │    │                    └ '18856931381'
+    │    └ <function LoginHandler._login_with_password at 0x7fc26cb38b80>
+    └ <views.login.login_views.LoginHandler object at 0x7fc26cbe1cd0>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 52, in _login_with_password
+    if not is_valid: raise ClientError(msg)
+           │               │           └ '密码错误: 仅能使用英文字母, 数字和下划线'
+           │               └ <function ClientError at 0x7fc26cb3ee50>
+           └ False
+
+common.exception.SaoException: ('密码错误: 仅能使用英文字母, 数字和下划线', 1007)
+2022-04-01 13:52:05.892 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'POST', uri: '/v1/login/', ip: '127.0.0.1', author: None, query: '', body: '{\n    "phone": "18856931381",\n    "password": "bei1202jing"\n}', time: 39ms
+2022-04-01 13:52:22.786 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='POST', uri='/v1/login/', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b'{\n    "phone": "18856931381",\n    "password": "bei1202jing"\n}'
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.login.login_views.LoginHandler object at 0x7ffbd7d05040>
+             │       │    └ []
+             │       └ <views.login.login_views.LoginHandler object at 0x7ffbd7d05040>
+             └ <bound method LoginHandler.post of <views.login.login_views.LoginHandler object at 0x7ffbd7d05040>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 38, in post
+    self._login_with_password(phone, password)  # 密码登录
+    │    │                    │      └ 'bei1202jing'
+    │    │                    └ '18856931381'
+    │    └ <function LoginHandler._login_with_password at 0x7ffbd7c42b80>
+    └ <views.login.login_views.LoginHandler object at 0x7ffbd7d05040>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 52, in _login_with_password
+    if not is_valid: raise ClientError(msg)
+           │               │           └ '密码错误: 仅能使用英文字母, 数字和下划线'
+           │               └ <function ClientError at 0x7ffbd7c41e50>
+           └ False
+
+common.exception.SaoException: ('密码错误: 仅能使用英文字母, 数字和下划线', 1007)
+2022-04-01 13:52:22.834 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'POST', uri: '/v1/login/', ip: '127.0.0.1', author: None, query: '', body: '{\n    "phone": "18856931381",\n    "password": "bei1202jing"\n}', time: 65ms
+2022-04-01 13:52:48.563 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='POST', uri='/v1/login/', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b'{\n    "phone": "18856931381",\n    "password": "bei1202jing"\n}'
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.login.login_views.LoginHandler object at 0x7faf813e1ee0>
+             │       │    └ []
+             │       └ <views.login.login_views.LoginHandler object at 0x7faf813e1ee0>
+             └ <bound method LoginHandler.post of <views.login.login_views.LoginHandler object at 0x7faf813e1ee0>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 38, in post
+    self._login_with_password(phone, password)  # 密码登录
+    │    │                    │      └ 'bei1202jing'
+    │    │                    └ '18856931381'
+    │    └ <function LoginHandler._login_with_password at 0x7faf8133fb80>
+    └ <views.login.login_views.LoginHandler object at 0x7faf813e1ee0>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 52, in _login_with_password
+    if not is_valid: raise ClientError(msg)
+           │               │           └ '密码错误: 仅能使用英文字母, 数字和下划线'
+           │               └ <function ClientError at 0x7faf8133ee50>
+           └ False
+
+common.exception.SaoException: ('密码错误: 仅能使用英文字母, 数字和下划线', 1007)
+2022-04-01 13:52:48.624 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'POST', uri: '/v1/login/', ip: '127.0.0.1', author: None, query: '', body: '{\n    "phone": "18856931381",\n    "password": "bei1202jing"\n}', time: 71ms
+2022-04-01 13:52:55.771 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='POST', uri='/v1/login/', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b'{\n    "phone": "18856931381",\n    "password": "bei1202jing"\n}'
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.login.login_views.LoginHandler object at 0x7f96273fe040>
+             │       │    └ []
+             │       └ <views.login.login_views.LoginHandler object at 0x7f96273fe040>
+             └ <bound method LoginHandler.post of <views.login.login_views.LoginHandler object at 0x7f96273fe040>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 38, in post
+    self._login_with_password(phone, password)  # 密码登录
+    │    │                    │      └ 'bei1202jing'
+    │    │                    └ '18856931381'
+    │    └ <function LoginHandler._login_with_password at 0x7f9627338b80>
+    └ <views.login.login_views.LoginHandler object at 0x7f96273fe040>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 52, in _login_with_password
+    if not is_valid: raise ClientError(msg)
+           │               │           └ '密码错误: 仅能使用英文字母, 数字和下划线'
+           │               └ <function ClientError at 0x7f962733ee50>
+           └ False
+
+common.exception.SaoException: ('密码错误: 仅能使用英文字母, 数字和下划线', 1007)
+2022-04-01 13:52:55.794 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'POST', uri: '/v1/login/', ip: '127.0.0.1', author: None, query: '', body: '{\n    "phone": "18856931381",\n    "password": "bei1202jing"\n}', time: 37ms
+2022-04-01 13:52:58.768 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='POST', uri='/v1/login/', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b'{\n    "phone": "18856931381",\n    "password": "bei1202jing"\n}'
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.login.login_views.LoginHandler object at 0x7f96273fe070>
+             │       │    └ []
+             │       └ <views.login.login_views.LoginHandler object at 0x7f96273fe070>
+             └ <bound method LoginHandler.post of <views.login.login_views.LoginHandler object at 0x7f96273fe070>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 38, in post
+    self._login_with_password(phone, password)  # 密码登录
+    │    │                    │      └ 'bei1202jing'
+    │    │                    └ '18856931381'
+    │    └ <function LoginHandler._login_with_password at 0x7f9627338b80>
+    └ <views.login.login_views.LoginHandler object at 0x7f96273fe070>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 52, in _login_with_password
+    if not is_valid: raise ClientError(msg)
+           │               │           └ '密码错误: 仅能使用英文字母, 数字和下划线'
+           │               └ <function ClientError at 0x7f962733ee50>
+           └ False
+
+common.exception.SaoException: ('密码错误: 仅能使用英文字母, 数字和下划线', 1007)
+2022-04-01 13:52:58.787 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'POST', uri: '/v1/login/', ip: '127.0.0.1', author: None, query: '', body: '{\n    "phone": "18856931381",\n    "password": "bei1202jing"\n}', time: 20ms
+2022-04-01 13:53:12.225 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='POST', uri='/v1/login/', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b'{\n    "phone": "18856931381",\n    "password": "bei1202jing"\n}'
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.login.login_views.LoginHandler object at 0x7ffe28cf9070>
+             │       │    └ []
+             │       └ <views.login.login_views.LoginHandler object at 0x7ffe28cf9070>
+             └ <bound method LoginHandler.post of <views.login.login_views.LoginHandler object at 0x7ffe28cf9070>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 38, in post
+    self._login_with_password(phone, password)  # 密码登录
+    │    │                    │      └ 'bei1202jing'
+    │    │                    └ '18856931381'
+    │    └ <function LoginHandler._login_with_password at 0x7ffe28c2fb80>
+    └ <views.login.login_views.LoginHandler object at 0x7ffe28cf9070>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 56, in _login_with_password
+    if not validate_password(user.password, password): raise ClientError('密码错误')
+           │                 │    │         │                └ <function ClientError at 0x7ffe28c35e50>
+           │                 │    │         └ 'bei1202jing'
+           │                 │    └ <sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x7ffe28b8cae0>
+           │                 └ <models.user_model.User object at 0x7ffe28d72fa0>
+           └ <function validate_password at 0x7ffe28c2f5e0>
+
+common.exception.SaoException: ('密码错误', 1007)
+2022-04-01 13:53:12.239 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'POST', uri: '/v1/login/', ip: '127.0.0.1', author: None, query: '', body: '{\n    "phone": "18856931381",\n    "password": "bei1202jing"\n}', time: 93ms
+2022-04-01 13:53:41.319 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='POST', uri='/v1/login/', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b'{\n    "phone": "18856931381",\n    "password": "chenzhinma"\n}'
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.login.login_views.LoginHandler object at 0x7ffe28cf9190>
+             │       │    └ []
+             │       └ <views.login.login_views.LoginHandler object at 0x7ffe28cf9190>
+             └ <bound method LoginHandler.post of <views.login.login_views.LoginHandler object at 0x7ffe28cf9190>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 38, in post
+    self._login_with_password(phone, password)  # 密码登录
+    │    │                    │      └ 'chenzhinma'
+    │    │                    └ '18856931381'
+    │    └ <function LoginHandler._login_with_password at 0x7ffe28c2fb80>
+    └ <views.login.login_views.LoginHandler object at 0x7ffe28cf9190>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 52, in _login_with_password
+    if not is_valid: raise ClientError(msg)
+           │               │           └ '密码错误: 必须包含数字'
+           │               └ <function ClientError at 0x7ffe28c35e50>
+           └ False
+
+common.exception.SaoException: ('密码错误: 必须包含数字', 1007)
+2022-04-01 13:53:41.335 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'POST', uri: '/v1/login/', ip: '127.0.0.1', author: None, query: '', body: '{\n    "phone": "18856931381",\n    "password": "chenzhinma"\n}', time: 17ms
+2022-04-01 16:00:33.871 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/user/1', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b'{\n    "nickname": "\xe9\x99\x88\xe8\x8a\x9d\xe9\xba\xbb"\n}'
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1681, in _execute
+    result = self.prepare()
+             │    └ <function UserHandler.prepare at 0x7f8a1cc3bee0>
+             └ <views.users.user_views.UserHandler object at 0x7f8a1cd03040>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/users/user_views.py", line 17, in prepare
+    if self.user and not self.user.deleted: raise ClientError('用户不存在, uid: %r' % uid)
+       │    │            │    │    │              │                              └ '1'
+       │    │            │    │    │              └ <function ClientError at 0x7f8a1cc40e50>
+       │    │            │    │    └ <sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x7f8a1ca95c70>
+       │    │            │    └ <models.user_model.User object at 0x7f8a1cd7ed00>
+       │    │            └ <views.users.user_views.UserHandler object at 0x7f8a1cd03040>
+       │    └ <models.user_model.User object at 0x7f8a1cd7ed00>
+       └ <views.users.user_views.UserHandler object at 0x7f8a1cd03040>
+
+common.exception.SaoException: ("用户不存在, uid: '1'", 1007)
+2022-04-01 16:00:33.889 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/user/1', ip: '127.0.0.1', author: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjEsImV4cCI6MTY0ODg3ODg0NH0.mbEedLMYH2S1uk63LIdUcqIW5Rj5gdgeiVYB8lcG1qg', query: '', body: '{\n    "nickname": "陈芝麻"\n}', time: 247ms
+2022-04-01 16:21:23.410 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='POST', uri='/v1/user/1', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b'----------------------------421993960879986741439976\r\nContent-Disposition: form-data; name="nickname"\r\n\r\n\xe9\x99\x88\xe8\x8a\x9d\xe9\xba\xbb\r\n----------------------------421993960879986741439976--\r\n'
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1681, in _execute
+    result = self.prepare()
+             │    └ <function UserHandler.prepare at 0x7fe667d7aee0>
+             └ <views.users.user_views.UserHandler object at 0x7fe667e23f40>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/users/user_views.py", line 18, in prepare
+    super(AuthBaseHandler, self).prepare()
+          │                └ <views.users.user_views.UserHandler object at 0x7fe667e23f40>
+          └ <class 'views.base.base_views.AuthBaseHandler'>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/base/base_views.py", line 20, in prepare
+    assert self.request.headers.get('Content-Type', '').startswith('application/json'), \
+           │    │       │       └ <function Mapping.get at 0x7fe66418b8b0>
+           │    │       └ <tornado.httputil.HTTPHeaders object at 0x7fe667e12730>
+           │    └ HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='POST', uri='/v1/user/1', version='HTTP/1.1', remote_ip='127...
+           └ <views.users.user_views.UserHandler object at 0x7fe667e23f40>
+
+AssertionError: Content-Type 设置错误
+2022-04-01 16:21:23.449 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'POST', uri: '/v1/user/1', ip: '127.0.0.1', author: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjEsImV4cCI6MTY0ODg3ODg0NH0.mbEedLMYH2S1uk63LIdUcqIW5Rj5gdgeiVYB8lcG1qg', query: '', body: '----------------------------421993960879986741439976\r\nContent-Disposition: form-data; name="nickname"\r\n\r\n陈芝麻\r\n----------------------------421993960879986741439976--\r\n', time: 47ms
+2022-04-01 17:54:14.580 | ERROR    | conf.logger:log_request_error:18 - uid: 1, requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/album/1/photo?page=0&user_id=2', version='HTTP/1.1', remote_ip='127.0.0.1'), query: 'page=0&user_id=2', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.album.photo_views.PhotoHandler object at 0x7fddf8ce3fa0>
+             │       │    └ ['1', None]
+             │       └ <views.album.photo_views.PhotoHandler object at 0x7fddf8ce3fa0>
+             └ <bound method PhotoHandler.get of <views.album.photo_views.PhotoHandler object at 0x7fddf8ce3fa0>>
+
+TypeError: get() takes 2 positional arguments but 3 were given
+2022-04-01 17:54:14.615 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/album/1/photo?page=0&user_id=2', ip: '127.0.0.1', author: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjEsImV4cCI6MTY0ODg3ODg0NH0.mbEedLMYH2S1uk63LIdUcqIW5Rj5gdgeiVYB8lcG1qg', query: 'page=0&user_id=2', body: '', time: 90ms
+2022-04-01 17:54:42.071 | ERROR    | conf.logger:log_request_error:18 - uid: 1, requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/album/1/photo?page=0&user_id=2', version='HTTP/1.1', remote_ip='127.0.0.1'), query: 'page=0&user_id=2', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/attributes.py", line 327, in __getattr__
+    return getattr(self.comparator, key)
+                   │    │           └ 'user_id'
+                   │    └ <sqlalchemy.orm.relationships.RelationshipProperty.Comparator object at 0x7ff0b8b957c0>
+                   └ <sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x7ff0b8b95810>
+
+AttributeError: 'Comparator' object has no attribute 'user_id'
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.album.photo_views.PhotoHandler object at 0x7ff0b8d07040>
+             │       │    └ ['1', None]
+             │       └ <views.album.photo_views.PhotoHandler object at 0x7ff0b8d07040>
+             └ <bound method PhotoHandler.get of <views.album.photo_views.PhotoHandler object at 0x7ff0b8d07040>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/album/photo_views.py", line 31, in get
+    count, photos = paginate(self, Photo, Photo.album_id == album_id, Photo.album.user_id == user_id)
+                    │        │     │      │     │           │         │     │                └ '2'
+                    │        │     │      │     │           │         │     └ <sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x7ff0b8b95810>
+                    │        │     │      │     │           │         └ <class 'models.album_model.Photo'>
+                    │        │     │      │     │           └ '1'
+                    │        │     │      │     └ <sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x7ff0b8b95c20>
+                    │        │     │      └ <class 'models.album_model.Photo'>
+                    │        │     └ <class 'models.album_model.Photo'>
+                    │        └ <views.album.photo_views.PhotoHandler object at 0x7ff0b8d07040>
+                    └ <function paginate at 0x7ff0b8c48790>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/attributes.py", line 329, in __getattr__
+    util.raise_(
+    │    └ <function raise_ at 0x7ff0b77403a0>
+    └ <module 'sqlalchemy.util' from '/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/sqlalchemy/ut...
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
+    raise exception
+
+AttributeError: Neither 'InstrumentedAttribute' object nor 'Comparator' object associated with Photo.album has an attribute 'user_id'
+2022-04-01 17:54:42.095 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/album/1/photo?page=0&user_id=2', ip: '127.0.0.1', author: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjEsImV4cCI6MTY0ODg3ODg0NH0.mbEedLMYH2S1uk63LIdUcqIW5Rj5gdgeiVYB8lcG1qg', query: 'page=0&user_id=2', body: '', time: 73ms
+2022-04-01 17:54:55.596 | ERROR    | conf.logger:log_request_error:18 - uid: 1, requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/album/1/photo?page=0&user_id=2', version='HTTP/1.1', remote_ip='127.0.0.1'), query: 'page=0&user_id=2', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/attributes.py", line 327, in __getattr__
+    return getattr(self.comparator, key)
+                   │    │           └ 'user_id'
+                   │    └ <sqlalchemy.orm.relationships.RelationshipProperty.Comparator object at 0x7fa860a7c860>
+                   └ <sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x7fa860a7c8b0>
+
+AttributeError: 'Comparator' object has no attribute 'user_id'
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.album.photo_views.PhotoHandler object at 0x7fa860bf3040>
+             │       │    └ ['1', None]
+             │       └ <views.album.photo_views.PhotoHandler object at 0x7fa860bf3040>
+             └ <bound method PhotoHandler.get of <views.album.photo_views.PhotoHandler object at 0x7fa860bf3040>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/album/photo_views.py", line 31, in get
+    count, photos = paginate(self, Photo, Photo.album_id == album_id, Photo.album.user_id == user_id)
+                    │        │     │      │     │           │         │     │                └ '2'
+                    │        │     │      │     │           │         │     └ <sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x7fa860a7c8b0>
+                    │        │     │      │     │           │         └ <class 'models.album_model.Photo'>
+                    │        │     │      │     │           └ '1'
+                    │        │     │      │     └ <sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x7fa860a7ccc0>
+                    │        │     │      └ <class 'models.album_model.Photo'>
+                    │        │     └ <class 'models.album_model.Photo'>
+                    │        └ <views.album.photo_views.PhotoHandler object at 0x7fa860bf3040>
+                    └ <function paginate at 0x7fa860b34790>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/attributes.py", line 329, in __getattr__
+    util.raise_(
+    │    └ <function raise_ at 0x7fa85ff403a0>
+    └ <module 'sqlalchemy.util' from '/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/sqlalchemy/ut...
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
+    raise exception
+
+AttributeError: Neither 'InstrumentedAttribute' object nor 'Comparator' object associated with Photo.album has an attribute 'user_id'
+2022-04-01 17:54:55.622 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/album/1/photo?page=0&user_id=2', ip: '127.0.0.1', author: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjEsImV4cCI6MTY0ODg3ODg0NH0.mbEedLMYH2S1uk63LIdUcqIW5Rj5gdgeiVYB8lcG1qg', query: 'page=0&user_id=2', body: '', time: 65ms
+2022-04-01 18:01:10.109 | ERROR    | conf.logger:log_request_error:18 - uid: 1, requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/album/1/photo?page=0&user_id=2', version='HTTP/1.1', remote_ip='127.0.0.1'), query: 'page=0&user_id=2', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.album.photo_views.PhotoHandler object at 0x7f813be02040>
+             │       │    └ ['1', None]
+             │       └ <views.album.photo_views.PhotoHandler object at 0x7f813be02040>
+             └ <bound method PhotoHandler.get of <views.album.photo_views.PhotoHandler object at 0x7f813be02040>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/album/photo_views.py", line 32, in get
+    if not album: raise ClientError('相册不存在')
+           │            └ <function ClientError at 0x7f813bd40e50>
+           └ None
+
+common.exception.SaoException: ('相册不存在', 1007)
+2022-04-01 18:01:10.122 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/album/1/photo?page=0&user_id=2', ip: '127.0.0.1', author: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjEsImV4cCI6MTY0ODg3ODg0NH0.mbEedLMYH2S1uk63LIdUcqIW5Rj5gdgeiVYB8lcG1qg', query: 'page=0&user_id=2', body: '', time: 64ms
+2022-04-01 18:15:54.074 | ERROR    | conf.logger:log_request_error:18 - uid: 1, requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/album/1/photo/1?user_id=1&', version='HTTP/1.1', remote_ip='127.0.0.1'), query: 'user_id=1&', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.album.photo_views.PhotoHandler object at 0x7f9789508040>
+             │       │    └ ['1', '1']
+             │       └ <views.album.photo_views.PhotoHandler object at 0x7f9789508040>
+             └ <bound method PhotoHandler.get of <views.album.photo_views.PhotoHandler object at 0x7f9789508040>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/album/photo_views.py", line 40, in get
+    self.success(photo.to_json())
+    │    │       └ <sqlalchemy.orm.query.Query object at 0x7f978958dc40>
+    │    └ <function BaseHandler.success at 0x7f978943b1f0>
+    └ <views.album.photo_views.PhotoHandler object at 0x7f9789508040>
+
+AttributeError: 'Query' object has no attribute 'to_json'
+2022-04-01 18:15:54.094 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/album/1/photo/1?user_id=1&', ip: '127.0.0.1', author: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjEsImV4cCI6MTY0ODg3ODg0NH0.mbEedLMYH2S1uk63LIdUcqIW5Rj5gdgeiVYB8lcG1qg', query: 'user_id=1&', body: '', time: 101ms
+2022-04-01 18:17:16.902 | ERROR    | conf.logger:log_request_error:18 - uid: 1, requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/album/1/photo/1?user_id=1&', version='HTTP/1.1', remote_ip='127.0.0.1'), query: 'user_id=1&', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.album.photo_views.PhotoHandler object at 0x7fd669d08040>
+             │       │    └ ['1', '1']
+             │       └ <views.album.photo_views.PhotoHandler object at 0x7fd669d08040>
+             └ <bound method PhotoHandler.get of <views.album.photo_views.PhotoHandler object at 0x7fd669d08040>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/album/photo_views.py", line 40, in get
+    if not photo: raise ClientError('图片不存在')
+           │            └ <function ClientError at 0x7fd669c41e50>
+           └ None
+
+common.exception.SaoException: ('图片不存在', 1007)
+2022-04-01 18:17:16.918 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/album/1/photo/1?user_id=1&', ip: '127.0.0.1', author: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjEsImV4cCI6MTY0ODg3ODg0NH0.mbEedLMYH2S1uk63LIdUcqIW5Rj5gdgeiVYB8lcG1qg', query: 'user_id=1&', body: '', time: 83ms
+2022-04-01 18:17:42.645 | ERROR    | conf.logger:log_request_error:18 - uid: 1, requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/album/1/photo/1?photo_id=2&user_id=1', version='HTTP/1.1', remote_ip='127.0.0.1'), query: 'photo_id=2&user_id=1', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.album.photo_views.PhotoHandler object at 0x7fd669ce5eb0>
+             │       │    └ ['1', '1']
+             │       └ <views.album.photo_views.PhotoHandler object at 0x7fd669ce5eb0>
+             └ <bound method PhotoHandler.get of <views.album.photo_views.PhotoHandler object at 0x7fd669ce5eb0>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/album/photo_views.py", line 40, in get
+    if not photo: raise ClientError('图片不存在')
+           │            └ <function ClientError at 0x7fd669c41e50>
+           └ None
+
+common.exception.SaoException: ('图片不存在', 1007)
+2022-04-01 18:17:42.658 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/album/1/photo/1?photo_id=2&user_id=1', ip: '127.0.0.1', author: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjEsImV4cCI6MTY0ODg3ODg0NH0.mbEedLMYH2S1uk63LIdUcqIW5Rj5gdgeiVYB8lcG1qg', query: 'photo_id=2&user_id=1', body: '', time: 18ms
+2022-04-01 18:18:03.038 | ERROR    | conf.logger:log_request_error:18 - uid: 1, requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/album/1/photo/1?user_id=1', version='HTTP/1.1', remote_ip='127.0.0.1'), query: 'user_id=1', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.album.photo_views.PhotoHandler object at 0x7fd669d080d0>
+             │       │    └ ['1', '1']
+             │       └ <views.album.photo_views.PhotoHandler object at 0x7fd669d080d0>
+             └ <bound method PhotoHandler.get of <views.album.photo_views.PhotoHandler object at 0x7fd669d080d0>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/album/photo_views.py", line 40, in get
+    if not photo: raise ClientError('图片不存在')
+           │            └ <function ClientError at 0x7fd669c41e50>
+           └ None
+
+common.exception.SaoException: ('图片不存在', 1007)
+2022-04-01 18:18:03.051 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/album/1/photo/1?user_id=1', ip: '127.0.0.1', author: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjEsImV4cCI6MTY0ODg3ODg0NH0.mbEedLMYH2S1uk63LIdUcqIW5Rj5gdgeiVYB8lcG1qg', query: 'user_id=1', body: '', time: 18ms
+2022-04-01 18:19:29.559 | ERROR    | conf.logger:log_request_error:18 - uid: 1, requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/album/1/photo/1?user_id=1', version='HTTP/1.1', remote_ip='127.0.0.1'), query: 'user_id=1', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.album.photo_views.PhotoHandler object at 0x7fd669d8d520>
+             │       │    └ ['1', '1']
+             │       └ <views.album.photo_views.PhotoHandler object at 0x7fd669d8d520>
+             └ <bound method PhotoHandler.get of <views.album.photo_views.PhotoHandler object at 0x7fd669d8d520>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/album/photo_views.py", line 40, in get
+    if not photo: raise ClientError('图片不存在')
+           │            └ <function ClientError at 0x7fd669c41e50>
+           └ None
+
+common.exception.SaoException: ('图片不存在', 1007)
+2022-04-01 18:19:29.564 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/album/1/photo/1?user_id=1', ip: '127.0.0.1', author: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjEsImV4cCI6MTY0ODg3ODg0NH0.mbEedLMYH2S1uk63LIdUcqIW5Rj5gdgeiVYB8lcG1qg', query: 'user_id=1', body: '', time: 13ms
+2022-04-01 18:19:56.504 | ERROR    | conf.logger:log_request_error:18 - uid: 1, requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/album/1/photo/1?user_id=1', version='HTTP/1.1', remote_ip='127.0.0.1'), query: 'user_id=1', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.album.photo_views.PhotoHandler object at 0x7fe3d6bd4fd0>
+             │       │    └ ['1', '1']
+             │       └ <views.album.photo_views.PhotoHandler object at 0x7fe3d6bd4fd0>
+             └ <bound method PhotoHandler.get of <views.album.photo_views.PhotoHandler object at 0x7fe3d6bd4fd0>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/album/photo_views.py", line 40, in get
+    if not photo: raise ClientError('图片不存在')
+           │            └ <function ClientError at 0x7fe3d6b30e50>
+           └ None
+
+common.exception.SaoException: ('图片不存在', 1007)
+2022-04-01 18:19:56.517 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/album/1/photo/1?user_id=1', ip: '127.0.0.1', author: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjEsImV4cCI6MTY0ODg3ODg0NH0.mbEedLMYH2S1uk63LIdUcqIW5Rj5gdgeiVYB8lcG1qg', query: 'user_id=1', body: '', time: 99ms
+2022-04-01 18:20:08.220 | ERROR    | conf.logger:log_request_error:18 - uid: 1, requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='GET', uri='/v1/album/1/photo/1?user_id=1', version='HTTP/1.1', remote_ip='127.0.0.1'), query: 'user_id=1', body b''
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.album.photo_views.PhotoHandler object at 0x7fa887506040>
+             │       │    └ ['1', '1']
+             │       └ <views.album.photo_views.PhotoHandler object at 0x7fa887506040>
+             └ <bound method PhotoHandler.get of <views.album.photo_views.PhotoHandler object at 0x7fa887506040>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/album/photo_views.py", line 41, in get
+    if not photo: raise ClientError('图片不存在')
+           │            └ <function ClientError at 0x7fa887330e50>
+           └ None
+
+common.exception.SaoException: ('图片不存在', 1007)
+2022-04-01 18:20:08.236 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'GET', uri: '/v1/album/1/photo/1?user_id=1', ip: '127.0.0.1', author: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjEsImV4cCI6MTY0ODg3ODg0NH0.mbEedLMYH2S1uk63LIdUcqIW5Rj5gdgeiVYB8lcG1qg', query: 'user_id=1', body: '', time: 106ms

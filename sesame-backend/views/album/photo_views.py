@@ -6,13 +6,42 @@ from common.exception import ClientError, ServerError, ERROR_CODE_1001
 
 
 class PhotoHandler(AuthBaseHandler):
-    def get(self, album_id):
+    def get(self, album_id, photo_id):
         """
-        指定相册内的所有图片
-        :return:
+        @api {get} /album/:album_id Get photos of album
+        @apiVersion 0.0.1
+        @apiGroup Photo
+        @apiDescription Get photos of album
+
+        @apiParam {Number} album_id Album's id
+        @apiQuery {Number} [user_id] User's id
+
+        @apiSuccessExample {json} response:
+            {
+                count: int,
+                results: [
+                    {
+                        id: int,
+                        name: string,
+                        description: string?,
+                        favor: bool
+                    }
+                    ...
+                ]
+            }
+            or
+            signal photo info.
         """
-        count, photos = paginate(self, Photo, Photo.album_id == album_id)
-        self.success({'count': count, 'results': [photo.to_json() for photo in photos]})
+        user_id = self.get_argument('user_id', None) or self.current_user.id
+        album = Album.query.filter(Album.id == album_id, Album.user_id == user_id).first()
+        if not album: raise ClientError('对应相册不存在')
+        if photo_id:
+            photo = Photo.query.filter(Photo.id == photo_id, Photo.album_id == album_id, ~Photo.deleted).first()
+            if not photo: raise ClientError('图片不存在')
+            self.success(photo.to_json())
+        else:
+            count, photos = paginate(self, Photo, Photo.album_id == album_id)
+            self.success({'count': count, 'results': [photo.to_json() for photo in photos]})
 
     def post(self, album_id, photo_id):
         """
