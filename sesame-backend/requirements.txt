@@ -4,3 +4,4 @@ SQLAlchemy==1.4.31
 tornado==6.1
 mysqlclient==2.1.0
 Pillow==9.0.1
+alembic==1.7.7

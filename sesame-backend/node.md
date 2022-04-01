@@ -43,3 +43,10 @@ pip freeze > ./requirements.txt
 # 安装前激活 venv
 pip install -r ./requirements.txt
 ```
+
+## 4. 解决 mysql_config not found
+[引用](https://www.cnblogs.com/shellshell/p/7106426.html)
+
+```shell
+ln -s /usr/local/mysql/bin/mysql_config /usr/local/bin/mysql_config
+```

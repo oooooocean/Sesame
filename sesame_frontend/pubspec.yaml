@@ -34,10 +34,39 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  # 状态管理
+  # https://pub.dev/packages/get
+  get: ^4.6.1
+  # 网络请求
+  # https://pub.dev/packages/dio
+  dio: ^4.0.6
+  # 拍照
+  # https://pub.dev/packages/wechat_camera_picker
+  wechat_camera_picker: ^3.0.4
+  # 相册
+  # https://pub.dev/packages/wechat_assets_picker
+  wechat_assets_picker: ^7.0.5
+  # loading 动画
+  # https://pub.dev/packages/flutter_easyloading
+  flutter_easyloading: ^3.0.3
+  # 键盘tool bar
+  # https://pub.dev/packages/keyboard_actions
+  keyboard_actions: ^3.4.7
+  # 数据存储
+  # https://pub.dev/packages/shared_preferences
+  shared_preferences: ^2.0.13
+  # 刷新
+  # https://pub.dev/packages/pull_to_refresh
+  pull_to_refresh: ^2.0.0
+  # json
+  # https://pub.dev/packages/json_annotation
+  json_annotation: ^4.4.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  json_serializable: ^6.1.5
+  build_runner: ^2.1.8
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -58,9 +87,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+     - assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
