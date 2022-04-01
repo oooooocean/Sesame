@@ -40,10 +40,10 @@ class AlbumHandler(AuthBaseHandler):
 
     def post(self, album_id):
         """
-        @api {post} /album/:album_id Update/And user's albums
+        @api {post} /album/:album_id Update or Add user's albums
         @apiVersion 0.0.1
         @apiGroup Album
-        @apiDescription Update/And user's albums
+        @apiDescription Update or Add user's albums
 
         @apiParam {Number} [album_id] Album's id
         @apiBody {Number} [user_id] User's id
@@ -56,10 +56,10 @@ class AlbumHandler(AuthBaseHandler):
         name = self.json_args.get('name', None)
         description = self.json_args.get('description', None)
 
-        isValid, msg = validate_album_name(name)
-        if not isValid: raise ClientError(msg)
-        isValid, msg = validate_album_description(description)
-        if not isValid: raise ClientError(msg)
+        is_valid, msg = validate_album_name(name)
+        if not is_valid: raise ClientError(msg)
+        is_valid, msg = validate_album_description(description)
+        if not is_valid: raise ClientError(msg)
 
         if album_id:
             self._update(user_id, album_id, name, description)
@@ -68,7 +68,7 @@ class AlbumHandler(AuthBaseHandler):
 
     def delete(self, album_id):
         """
-        @api {delete} /album/:album_id Update/And user's albums
+        @api {delete} /album/:album_id Delete user's albums
         @apiVersion 0.0.1
         @apiGroup Album
         @apiDescription Delete user's albums
