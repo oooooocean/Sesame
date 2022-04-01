@@ -11,11 +11,17 @@ class PicHandler(BaseHandler):
 
     def get(self, image_name):
         """
-        返回图片的剪切版本
-        1. 如果没有 width height, 则返回原图
-        2. 否则, 返回缩略图
-        :param image_name:
-        :return:
+        @api {get} /pic/:pic_name Pic Tool
+        @apiVersion 0.0.1
+        @apiName Pic Tool
+        @apiGroup Other
+        @apiDescription Clip image with special size, if not width and height, will return origin data.
+
+        @apiParam {String} pic_name Image name
+        @apiQuery {Number} width clip width
+        @apiQuery {Number} height clip height
+
+        @apiSuccess {Object} data Image data
         """
         components = image_name.split('.')
         if len(components) != 2: raise HTTPError(status_code=500)
@@ -36,6 +42,6 @@ class PicHandler(BaseHandler):
             copy = im.copy()
             size = int(width if width else im.width), int(height if height else im.height)
             copy.thumbnail(size)
-            tempIO = BytesIO()
-            copy.save(tempIO, format=ext)
-            self.finish(tempIO.getvalue())
+            temp_io = BytesIO()
+            copy.save(temp_io, format=ext)
+            self.finish(temp_io.getvalue())

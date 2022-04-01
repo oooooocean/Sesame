@@ -8,12 +8,13 @@ from common.exception import ClientError, ServerError, ERROR_CODE_1001
 class PhotoHandler(AuthBaseHandler):
     def get(self, album_id, photo_id):
         """
-        @api {get} /album/:album_id Get photos of album
+        @api {get} /album/:album_id/photo/:photo_id Get photos of album
         @apiVersion 0.0.1
         @apiGroup Photo
         @apiDescription Get photos of album
 
         @apiParam {Number} album_id Album's id
+        @apiParam {Number} [photo_id] Photo's id
         @apiQuery {Number} [user_id] User's id
 
         @apiSuccessExample {json} response:
@@ -45,11 +46,18 @@ class PhotoHandler(AuthBaseHandler):
 
     def post(self, album_id, photo_id):
         """
-        添加图片
-        :return:
+        @api {post} /album/:album_id/photo/:photo_id Update photos of album
+        @apiVersion 0.0.1
+        @apiGroup Photo
+        @apiDescription Update photos of album
+
+        @apiParam {Number} album_id Album's id
+        @apiParam {Number} [photo_id] Photo's id
+        @apiBody {Number} [user_id] User's id
+
+        @apiSuccess {Boolean} data photo info
         """
-        album = Album.query.filter(Album.id == album_id, not Album.deleted).first()
-        if not album: raise ClientError('相册不存在: %r' % album_id)
+        if not self._check_album(album_id): raise ClientError('相册不存在: %r' % album_id)
 
         if not photo_id:
             self._edit_image(photo_id)
@@ -58,15 +66,31 @@ class PhotoHandler(AuthBaseHandler):
 
     def delete(self, album_id):
         """
-        删除图片
-        :return:
+        @api {delete} /album/:album_id/photo/:photo_id Delete photos of album
+        @apiVersion 0.0.1
+        @apiGroup Photo
+        @apiDescription Delete photos of album
+
+        @apiParam {Number} album_id Album's id
+        @apiParam {Number} photo_id Photo's id
+        @apiBody {Number} [user_id] User's id
+
+        @apiSuccess {Boolean} data success or fail
         """
+        if not self._check_album(album_id): raise ClientError('相册不存在: %r' % album_id)
         delete_ids = self.json_args.get('delete_ids', None)
-        assert delete_ids, '参数不能为空'
+        if not delete_ids: raise ClientError('参数不能为空')
         deleted_count = Photo.query.filter(Photo.id in delete_ids, Photo.album_id == album_id).delete()
-        if deleted_count == 0:
-            raise ServerError('删除失败')
+        if deleted_count == 0: raise ServerError('删除失败')
         self.simpleSuccess()
+
+    def _check_album(self, album_id):
+        """
+        检查 album 是否和 user_id 对应
+        """
+        user_id = self.json_args.get('user_id', None) or self.current_user.id
+        album = Album.query.filter(Album.id == album_id, Album.user_id == user_id, ~Album.deleted).first()
+        return album is not None
 
     def _edit_image(self, photo_id):
         """
@@ -74,17 +98,16 @@ class PhotoHandler(AuthBaseHandler):
         :param photo_id:
         :return:
         """
-        photo = Photo.query.filter(Photo.id == photo_id, not Photo.deleted).first()
+        photo = Photo.query.filter(Photo.id == photo_id, ~Photo.deleted).first()
         if not photo: raise ClientError('图片不存在')
         description = self.json_args.get('description', None)
         favor = self.json_args.get('favor', None)
         if not description and not favor: raise ERROR_CODE_1001
-        if description:
-            photo.description = description
-        if favor:
-            photo.favor = favor
+
+        if description: photo.description = description
+        if favor: photo.favor = favor
         photo.save()
-        self.simpleSuccess()
+        self.success(photo.to_json())
 
     def _add_images(self, album_id):
         """
@@ -99,4 +122,4 @@ class PhotoHandler(AuthBaseHandler):
         save_images(image_metas)
         photos = [Photo(album_id=album_id, name=image_name) for image_name in image_names]
         Photo.saveAll(photos)
-        self.simpleSuccess()
+        self.success([photo.to_json() for photo in photos])
