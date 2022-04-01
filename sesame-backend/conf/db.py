@@ -2,13 +2,15 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker, registry
 import os
-
 from importlib import import_module
+import pymysql
+
+pymysql.install_as_MySQLdb()
 
 DB_URL = 'mysql+mysqldb://root:bei1202jing@127.0.0.1:3306/sao'
 
 db_engine = create_engine('mysql+mysqldb://root:bei1202jing@127.0.0.1:3306/sao',
-                          encoding='utf8',
+                     encoding='utf8',
                           echo=False,
                           future=True)
 

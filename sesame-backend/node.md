@@ -1,5 +1,5 @@
 # 项目配置
-## 1. windows 使用 venv
+## 1. [Windows] 使用 venv
 [引用](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#creating-a-virtual-environment)
 ```shell
 # 构建环境 venv
@@ -10,7 +10,7 @@
 > .\venv\Scripts\activate
 ```
 
-## 2. windows 安装 mysql
+## 2. [Windows] 安装 mysql
 
 ```shell
 # 配置环境变量
@@ -37,16 +37,34 @@ mysql> alert user user() identified by "自定义的密码"
 
 ```shell
 # 生成 requirements
-pip freeze > ./requirements.txt
+> pip freeze > ./requirements.txt
 
 # 安装
 # 安装前激活 venv
-pip install -r ./requirements.txt
+> pip install -r ./requirements.txt
 ```
 
-## 4. 解决 mysql_config not found
+## 4. [MAC] 解决 mysql_config not found 和 NameError: name '_mysql' is not defined
 [引用](https://www.cnblogs.com/shellshell/p/7106426.html)
+[引用2](https://stackoverflow.com/questions/63109987/nameerror-name-mysql-is-not-defined-after-setting-change-to-mysql)
 
 ```shell
-ln -s /usr/local/mysql/bin/mysql_config /usr/local/bin/mysql_config
+# mysql_config not found
+> ln -s /usr/local/mysql/bin/mysql_config /usr/local/bin/mysql_config
+
+# NameError: name '_mysql' is not defined
+# 编辑配置
+> vi ~/.bash_profile
+
+# 添加
+export DYLD_LIBRARY_PATH=/usr/local/mysql/lib/
+
+# 刷新配置
+> source ~/.bash_profile
+
+# 运行项目 NameError: name '_mysql' is not defined
+# Mysqldb 不兼容 python3.5 以后的版本
+> pip install pymysql
+import pymysql
+pymysql.install_as_MySQLdb()
 ```
