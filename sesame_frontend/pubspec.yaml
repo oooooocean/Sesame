@@ -37,9 +37,6 @@ dependencies:
   # 状态管理
   # https://pub.dev/packages/get
   get: ^4.6.1
-  # 网络请求
-  # https://pub.dev/packages/dio
-  dio: ^4.0.6
   # 拍照
   # https://pub.dev/packages/wechat_camera_picker
   wechat_camera_picker: ^3.0.4
