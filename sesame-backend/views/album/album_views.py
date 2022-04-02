@@ -1,5 +1,5 @@
 from views.base.base_views import AuthBaseHandler
-from common.exception import ClientError, ERROR_CODE_0, ERROR_CODE_1005, ERROR_CODE_1006
+from common.exception import ClientError, ERROR_CODE_0
 from models.album_model import Album, Photo
 from service.validator import validate_album_name, validate_album_description
 

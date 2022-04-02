@@ -2,7 +2,7 @@ from views.base.base_views import BaseHandler
 from service.utils import save_images
 from common.exception import (
     ERROR_CODE_0,
-    ERROR_CODE_1001
+    ClientError
 )
 from models.feedback import FeedbackCategory
 
@@ -10,9 +10,9 @@ from models.feedback import FeedbackCategory
 class UploadHandler(BaseHandler):
     def post(self):
         try:
-            image_metas = self.request.files['image']
+            image_metas = self.request.files['files']
         except Exception:
-            raise ERROR_CODE_1001
+            raise ClientError('图片为空')
         else:
             image_url_list = save_images(image_metas)
             self.http_response(ERROR_CODE_0, image_url_list)

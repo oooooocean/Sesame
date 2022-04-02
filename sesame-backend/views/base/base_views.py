@@ -16,6 +16,7 @@ from conf.logger import log_request_error
 class BaseHandler(RequestHandler):
 
     def prepare(self):
+        self.json_args = None
         if self.request.method == "POST" and self.request.headers.get('Content-Type', '').startswith('application/json'):
             self.json_args = json_decode(self.request.body)
 

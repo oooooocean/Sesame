@@ -3,7 +3,7 @@ from views.base.base_views import BaseHandler
 import common.jwt_utils
 from service.utils import check_code
 from loguru import logger
-from common.exception import ERROR_CODE_1001
+from common.exception import ClientError
 from service.password import validate_password
 from service.validator import validate_phone, validate_password as validate_password_format
 from common.exception import ClientError
@@ -39,7 +39,7 @@ class LoginHandler(BaseHandler):
         elif code:
             self._login_with_code(phone, code)
         else:
-            raise ERROR_CODE_1001
+            raise ClientError('参数不可为空')
 
     def _login_with_password(self, phone, password):
         """

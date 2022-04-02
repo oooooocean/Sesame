@@ -2,10 +2,14 @@ from views.base.base_views import AuthBaseHandler
 from models.album_model import Album, Photo
 from service.utils import save_images
 from service.paginate import paginate
-from common.exception import ClientError, ServerError, ERROR_CODE_1001
+from common.exception import ClientError, ServerError
 
 
 class PhotoHandler(AuthBaseHandler):
+    def prepare(self):
+        super().prepare()
+        self.user_id = self.json_args.get('user_id', None) if self.json_args else self.get_argument('user_id', None) or self.current_user.id
+
     def get(self, album_id, photo_id):
         """
         @api {get} /album/:album_id/photo/:photo_id Get photos of album
@@ -60,9 +64,9 @@ class PhotoHandler(AuthBaseHandler):
         if not self._check_album(album_id): raise ClientError('相册不存在: %r' % album_id)
 
         if not photo_id:
-            self._edit_image(photo_id)
-        else:
             self._add_images(album_id)
+        else:
+            self._edit_image(photo_id)
 
     def delete(self, album_id):
         """
@@ -88,8 +92,7 @@ class PhotoHandler(AuthBaseHandler):
         """
         检查 album 是否和 user_id 对应
         """
-        user_id = self.json_args.get('user_id', None) or self.current_user.id
-        album = Album.query.filter(Album.id == album_id, Album.user_id == user_id, ~Album.deleted).first()
+        album = Album.query.filter(Album.id == album_id, Album.user_id == self.user_id, ~Album.deleted).first()
         return album is not None
 
     def _edit_image(self, photo_id):
@@ -102,7 +105,7 @@ class PhotoHandler(AuthBaseHandler):
         if not photo: raise ClientError('图片不存在')
         description = self.json_args.get('description', None)
         favor = self.json_args.get('favor', None)
-        if not description and not favor: raise ERROR_CODE_1001
+        if not description and not favor: raise ClientError('参数不可为空')
 
         if description: photo.description = description
         if favor: photo.favor = favor
@@ -115,11 +118,11 @@ class PhotoHandler(AuthBaseHandler):
         :param album_id:
         :return:
         """
-        image_metas = self.request.files.get('image', None)
+        print(self.request.files)
+        image_metas = self.request.files.get('files', None)
         if not image_metas: raise ClientError('图片不能为空')
 
-        image_names = [mate.get('filename') for mate in image_metas]
-        save_images(image_metas)
-        photos = [Photo(album_id=album_id, name=image_name) for image_name in image_names]
+        file_names = save_images(self.user_id, image_metas)
+        photos = [Photo(album_id=album_id, name=image_name) for image_name in file_names]
         Photo.saveAll(photos)
         self.success([photo.to_json() for photo in photos])
