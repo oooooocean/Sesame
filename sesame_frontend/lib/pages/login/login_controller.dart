@@ -15,6 +15,8 @@ class LoginController extends GetxController with SmsCodeMixin {
     pageState.value = state;
   }
 
+  void login() {}
+
   @override
   Future<bool> get fetchCodeRequest => Future.delayed(const Duration(seconds: 2)).then((value) => true);
 }

@@ -23,7 +23,8 @@ class LoginCodeView extends GetView<LoginController> with KeyboardAllocator {
                   children: [
                     const Text('Hello,\nThis is your world', style: TextStyle(fontSize: 28, color: Colors.white)),
                     _photoItem,
-                    _codeItem
+                    _codeItem,
+                    _submitItem
                   ]),
             ),
           ),
@@ -33,10 +34,11 @@ class LoginCodeView extends GetView<LoginController> with KeyboardAllocator {
   Widget get _photoItem => Row(children: [
         TextButton(
           onPressed: () {},
-          child: Row(mainAxisSize: MainAxisSize.min, children: const [
+          child: Row(children: const [
             Text('+86', style: TextStyle(color: Colors.white)),
             Icon(Icons.arrow_drop_down, color: Colors.white)
           ]),
+          style: ButtonStyle(padding: MaterialStateProperty.all(EdgeInsets.zero), alignment: Alignment.centerLeft),
         ),
         Expanded(
           child: TextField(
@@ -72,8 +74,23 @@ class LoginCodeView extends GetView<LoginController> with KeyboardAllocator {
         )),
         TextButton(
           onPressed: () => controller.fetchCode(controller.photoController.text),
-          child: const Text('发送验证码', style: TextStyle(color: Colors.white)),
+          child: const Text('Fetch Code', style: TextStyle(color: Colors.white, fontSize: 14)),
           style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.white.withOpacity(0.5))),
         ),
       ]);
+
+  Widget get _submitItem => Center(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 25.0),
+          child: TextButton(
+            onPressed: controller.login,
+            child:
+                const Text('Login', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500)),
+            style: ButtonStyle(
+              padding: MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 45)),
+              backgroundColor: MaterialStateProperty.all(Colors.white.withOpacity(0.5)),
+            ),
+          ),
+        ),
+      );
 }
