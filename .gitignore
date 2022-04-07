@@ -4,3 +4,10 @@
 
 /Sesame-backend/.idea/
 
+/.idea/
+
+/Sesame-backend
+
+*.py[cod]
+
+build
