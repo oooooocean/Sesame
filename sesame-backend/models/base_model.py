@@ -42,7 +42,7 @@ class ModelMixin:
         for column in self.__table__.columns:
             name = column.name
             if name in exclude_columns:
-                break
+                continue
             key_name = camel_case(name)
             value = getattr(self, name)
             if isinstance(value, datetime.datetime):

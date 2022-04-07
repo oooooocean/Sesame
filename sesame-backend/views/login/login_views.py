@@ -74,6 +74,7 @@ class LoginHandler(BaseHandler):
         :return: 用户信息和token
         """
         user_json = user.to_json()
+        user_json['info'] = user.info.to_json() if user.info else None
         token = common.jwt_utils.JWTUtils.create(user.id)
         self.success({'user': user_json, 'token': token})
 

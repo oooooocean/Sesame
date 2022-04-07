@@ -29,12 +29,21 @@ def validate_password(password: str) -> tuple:
     return True, None
 
 
-def validate_str(input: str, label: str, max_len: int, min_len: int = 1, nullable=False) -> tuple:
-    if not input:
+def validate_str(crude: str, label: str, max_len: int, min_len: int = 1, nullable=False) -> tuple:
+    """
+    字母 数字 下划线 中文
+    :param crude:
+    :param label:
+    :param max_len:
+    :param min_len:
+    :param nullable:
+    :return:
+    """
+    if not crude:
         return False, '%r不能为空' % label if not nullable else True, None
 
-    pattern = '\\w{%d,%d}' % (min_len, max_len)
-    if not re.match(pattern, input):
+    pattern = '[\\w\\u4e00-\\u9fa5]{%d,%d}' % (min_len, max_len)
+    if not re.match(pattern, crude):
         return False, '%r不能包含特殊字符, 且不超过%d个字符' % (label, max_len)
     return True, None
 
@@ -50,7 +59,7 @@ def validate_album_name(name: str) -> tuple:
 
 def validate_album_description(description: str) -> tuple:
     """
-    验证相册名称
+    验证相册描述
     :param description:
     :return:
     """
@@ -59,7 +68,7 @@ def validate_album_description(description: str) -> tuple:
 
 def validate_user_nickname(name: str) -> tuple:
     """
-    验证相册名称
+    用户昵称
     :param name:
     :return:
     """

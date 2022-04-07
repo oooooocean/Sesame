@@ -35,7 +35,7 @@ class UserInfo(BaseDB, ModelMixin):
     __tablename__ = 'user_info'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    nickname = Column(String(50), nullable=True)
+    nickname = Column(String(50), nullable=True, unique=True)
     gender = Column(Enum(models.gender.Gender), nullable=True)
     avatar = Column(String(255), nullable=True)
 

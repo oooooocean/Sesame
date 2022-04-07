@@ -63,6 +63,7 @@ class UserHandler(AuthBaseHandler):
         if nickname:
             is_valid, msg = validate_user_nickname(nickname)
             if not is_valid: raise ClientError(msg)
+            if UserInfo.query.filter(UserInfo.nickname == nickname, UserInfo.id != self.user.id).first(): raise ClientError('来晚一步咯~, 昵称已被使用')
             user_info.nickname = nickname
 
         gender = self.get_body_argument('gender', None)
@@ -79,4 +80,6 @@ class UserHandler(AuthBaseHandler):
         print(self.user.info.nickname)
         json = self.user.to_json()
         json['info'] = self.user.info.to_json()
+        print(self.user.info.nickname)
+        print(self.user.info.to_json())
         self.http_response(ERROR_CODE_0, json)

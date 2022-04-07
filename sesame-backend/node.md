@@ -70,3 +70,13 @@ pymysql.install_as_MySQLdb()
 ```
 
 # 技术点
+## 1. 正则匹配
+- `\w` 即 `[a-zA-Z0-9_]`
+- 汉字 `[\u4e00-\u9fa5]`
+
+## 2. SQLAlchemy
+
+```python
+# 1. info 可能为 None 的处理
+user_json['info'] = user.info.to_json() if user.info else None
+```

@@ -22,7 +22,7 @@
 * [x] 统一处理 404: default_handler_class
 * [x] 全局日志: log_function
 * [ ] 大量返回: 压缩处理
-* [ ] 用户昵称处理
+* [x] 用户昵称处理
 * [ ] 接入 Authing
 * [ ] 图片加水印
 * [ ] 清理脚本
