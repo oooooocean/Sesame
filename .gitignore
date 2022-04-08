@@ -6,8 +6,6 @@
 
 /.idea/
 
-/Sesame-backend
-
 *.py[cod]
 
 build

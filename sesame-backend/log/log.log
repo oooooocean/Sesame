@@ -1,0 +1,310 @@
+2022-04-07 17:55:46.282 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='POST', uri='/v1/login/', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b'{\n    "phone": "18856931381",\n    "code": "123456"\n}'
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.login.login_views.LoginHandler object at 0x7f942de26fa0>
+             │       │    └ []
+             │       └ <views.login.login_views.LoginHandler object at 0x7f942de26fa0>
+             └ <bound method LoginHandler.post of <views.login.login_views.LoginHandler object at 0x7f942de26fa0>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 40, in post
+    self._login_with_code(phone, code)
+    │    │                │      └ '123456'
+    │    │                └ '18856931381'
+    │    └ <function LoginHandler._login_with_code at 0x7f942dd78b80>
+    └ <views.login.login_views.LoginHandler object at 0x7f942de26fa0>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 68, in _login_with_code
+    self._login_success(user)
+    │    │              └ <models.user_model.User object at 0x7f942dec2b80>
+    │    └ <function LoginHandler._login_success at 0x7f942dd78c10>
+    └ <views.login.login_views.LoginHandler object at 0x7f942de26fa0>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 77, in _login_success
+    user_json['info'] = user.info.to_json()
+    │                   │    └ <sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x7f942dbad7c0>
+    │                   └ <models.user_model.User object at 0x7f942dec2b80>
+    └ {'id': 1, 'phone': '18856931381'}
+
+AttributeError: 'NoneType' object has no attribute 'to_json'
+2022-04-07 17:55:46.295 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'POST', uri: '/v1/login/', ip: '127.0.0.1', author: None, query: '', body: '{\n    "phone": "18856931381",\n    "code": "123456"\n}', time: 64ms
+2022-04-07 17:58:12.552 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='POST', uri='/v1/user/1', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b'----------------------------525950592381992539858853\r\nContent-Disposition: form-data; name="nickname"\r\n\r\n\xe9\x99\x88\xe8\x8a\x9d\xe9\xba\xbb\r\n----------------------------525950592381992539858853--\r\n'
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.users.user_views.UserHandler object at 0x7f9a1ece6eb0>
+             │       │    └ ['1']
+             │       └ <views.users.user_views.UserHandler object at 0x7f9a1ece6eb0>
+             └ <bound method UserHandler.post of <views.users.user_views.UserHandler object at 0x7f9a1ece6eb0>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/users/user_views.py", line 66, in post
+    if UserInfo.query.filter(UserInfo.nickname == nickname).exists(): raise ClientError('昵称已被使用')
+       │        │            │        │           │                         └ <function ClientError at 0x7f9a1ec44dc0>
+       │        │            │        │           └ '陈芝麻'
+       │        │            │        └ <sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x7f9a1eab0040>
+       │        │            └ <class 'models.user_model.UserInfo'>
+       │        └ <sqlalchemy.orm.scoping.scoped_session.query_property.<locals>.query object at 0x7f9a1ea41850>
+       └ <class 'models.user_model.UserInfo'>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/sqlalchemy/sql/elements.py", line 583, in __bool__
+    raise TypeError("Boolean value of this clause is not defined")
+
+TypeError: Boolean value of this clause is not defined
+2022-04-07 17:58:12.595 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'POST', uri: '/v1/user/1', ip: '127.0.0.1', author: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjEsImV4cCI6MTY0OTQxMTgwMX0.zFo7roNJAnBsJSPE9y2pybdxGlZ2GE8UpnmJKx3Dc0o', query: '', body: '----------------------------525950592381992539858853\r\nContent-Disposition: form-data; name="nickname"\r\n\r\n陈芝麻\r\n----------------------------525950592381992539858853--\r\n', time: 88ms
+2022-04-07 17:59:06.150 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='POST', uri='/v1/user/1', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b'----------------------------539829164279538400698836\r\nContent-Disposition: form-data; name="nickname"\r\n\r\n\xe9\x99\x88\xe8\x8a\x9d\xe9\xba\xbb\r\n----------------------------539829164279538400698836--\r\n'
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.users.user_views.UserHandler object at 0x7ff402ce7eb0>
+             │       │    └ ['1']
+             │       └ <views.users.user_views.UserHandler object at 0x7ff402ce7eb0>
+             └ <bound method UserHandler.post of <views.users.user_views.UserHandler object at 0x7ff402ce7eb0>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/users/user_views.py", line 67, in post
+    if UserInfo.query.filter(UserInfo.nickname == nickname).exists(): raise ClientError('昵称已被使用')
+       │        │            │        │           │                         └ <function ClientError at 0x7ff402c45dc0>
+       │        │            │        │           └ '陈芝麻'
+       │        │            │        └ <sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x7ff402bbdf40>
+       │        │            └ <class 'models.user_model.UserInfo'>
+       │        └ <sqlalchemy.orm.scoping.scoped_session.query_property.<locals>.query object at 0x7ff402b68850>
+       └ <class 'models.user_model.UserInfo'>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/sqlalchemy/sql/elements.py", line 583, in __bool__
+    raise TypeError("Boolean value of this clause is not defined")
+
+TypeError: Boolean value of this clause is not defined
+2022-04-07 17:59:06.163 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'POST', uri: '/v1/user/1', ip: '127.0.0.1', author: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjEsImV4cCI6MTY0OTQxMTgwMX0.zFo7roNJAnBsJSPE9y2pybdxGlZ2GE8UpnmJKx3Dc0o', query: '', body: '----------------------------539829164279538400698836\r\nContent-Disposition: form-data; name="nickname"\r\n\r\n陈芝麻\r\n----------------------------539829164279538400698836--\r\n', time: 68ms
+2022-04-07 18:00:01.706 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='POST', uri='/v1/user/1', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b'----------------------------386801125201266313115347\r\nContent-Disposition: form-data; name="nickname"\r\n\r\n\xe9\x99\x88\xe8\x8a\x9d\xe9\xba\xbb\r\n----------------------------386801125201266313115347--\r\n'
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/sqlalchemy/sql/elements.py", line 847, in __getattr__
+    return getattr(self.comparator, key)
+                   │    │           └ 'scalar'
+                   │    └ <sqlalchemy.sql.type_api.TypeEngine.Comparator object at 0x7ff0f9ae8550>
+                   └ <sqlalchemy.sql.selectable.Exists object at 0x7ff0fad37400>
+
+AttributeError: 'Comparator' object has no attribute 'scalar'
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.users.user_views.UserHandler object at 0x7ff0face6e50>
+             │       │    └ ['1']
+             │       └ <views.users.user_views.UserHandler object at 0x7ff0face6e50>
+             └ <bound method UserHandler.post of <views.users.user_views.UserHandler object at 0x7ff0face6e50>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/users/user_views.py", line 66, in post
+    print(UserInfo.query.filter(UserInfo.nickname == nickname).exists().scalar())
+          │        │            │        │           └ '陈芝麻'
+          │        │            │        └ <sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x7ff0fabbdef0>
+          │        │            └ <class 'models.user_model.UserInfo'>
+          │        └ <sqlalchemy.orm.scoping.scoped_session.query_property.<locals>.query object at 0x7ff0fab68850>
+          └ <class 'models.user_model.UserInfo'>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/sqlalchemy/sql/elements.py", line 849, in __getattr__
+    util.raise_(
+    │    └ <function raise_ at 0x7ff0f97403a0>
+    └ <module 'sqlalchemy.util' from '/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/sqlalchemy/ut...
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
+    raise exception
+
+AttributeError: Neither 'Exists' object nor 'Comparator' object has an attribute 'scalar'
+2022-04-07 18:00:01.724 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'POST', uri: '/v1/user/1', ip: '127.0.0.1', author: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjEsImV4cCI6MTY0OTQxMTgwMX0.zFo7roNJAnBsJSPE9y2pybdxGlZ2GE8UpnmJKx3Dc0o', query: '', body: '----------------------------386801125201266313115347\r\nContent-Disposition: form-data; name="nickname"\r\n\r\n陈芝麻\r\n----------------------------386801125201266313115347--\r\n', time: 62ms
+2022-04-07 18:00:12.313 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='POST', uri='/v1/user/1', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b'----------------------------700696142800998654232797\r\nContent-Disposition: form-data; name="nickname"\r\n\r\n\xe9\x99\x88\xe8\x8a\x9d\xe9\xba\xbb\r\n----------------------------700696142800998654232797--\r\n'
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/sqlalchemy/sql/elements.py", line 847, in __getattr__
+    return getattr(self.comparator, key)
+                   │    │           └ 'first'
+                   │    └ <sqlalchemy.sql.type_api.TypeEngine.Comparator object at 0x7fb2355a2e80>
+                   └ <sqlalchemy.sql.selectable.Exists object at 0x7fb2355373d0>
+
+AttributeError: 'Comparator' object has no attribute 'first'
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.users.user_views.UserHandler object at 0x7fb2353d5e80>
+             │       │    └ ['1']
+             │       └ <views.users.user_views.UserHandler object at 0x7fb2353d5e80>
+             └ <bound method UserHandler.post of <views.users.user_views.UserHandler object at 0x7fb2353d5e80>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/users/user_views.py", line 66, in post
+    print(UserInfo.query.filter(UserInfo.nickname == nickname).exists().first())
+          │        │            │        │           └ '陈芝麻'
+          │        │            │        └ <sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x7fb2352a2090>
+          │        │            └ <class 'models.user_model.UserInfo'>
+          │        └ <sqlalchemy.orm.scoping.scoped_session.query_property.<locals>.query object at 0x7fb235234850>
+          └ <class 'models.user_model.UserInfo'>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/sqlalchemy/sql/elements.py", line 849, in __getattr__
+    util.raise_(
+    │    └ <function raise_ at 0x7fb2347403a0>
+    └ <module 'sqlalchemy.util' from '/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/sqlalchemy/ut...
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
+    raise exception
+
+AttributeError: Neither 'Exists' object nor 'Comparator' object has an attribute 'first'
+2022-04-07 18:00:12.331 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'POST', uri: '/v1/user/1', ip: '127.0.0.1', author: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjEsImV4cCI6MTY0OTQxMTgwMX0.zFo7roNJAnBsJSPE9y2pybdxGlZ2GE8UpnmJKx3Dc0o', query: '', body: '----------------------------700696142800998654232797\r\nContent-Disposition: form-data; name="nickname"\r\n\r\n陈芝麻\r\n----------------------------700696142800998654232797--\r\n', time: 65ms
+2022-04-07 18:10:32.996 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='POST', uri='/v1/login/', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b'{\n    "phone": "15155920643",\n    "code": "123456"\n}'
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.login.login_views.LoginHandler object at 0x7fb5084d8f40>
+             │       │    └ []
+             │       └ <views.login.login_views.LoginHandler object at 0x7fb5084d8f40>
+             └ <bound method LoginHandler.post of <views.login.login_views.LoginHandler object at 0x7fb5084d8f40>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 40, in post
+    self._login_with_code(phone, code)
+    │    │                │      └ '123456'
+    │    │                └ '15155920643'
+    │    └ <function LoginHandler._login_with_code at 0x7fb50842cb80>
+    └ <views.login.login_views.LoginHandler object at 0x7fb5084d8f40>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 68, in _login_with_code
+    self._login_success(user)
+    │    │              └ <models.user_model.User object at 0x7fb508595eb0>
+    │    └ <function LoginHandler._login_success at 0x7fb50842cc10>
+    └ <views.login.login_views.LoginHandler object at 0x7fb5084d8f40>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 77, in _login_success
+    user_json['info'] = user.info.to_json() if user.info else None
+    │                   │    │                 │    └ <sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x7fb50838e8b0>
+    │                   │    │                 └ <models.user_model.User object at 0x7fb508595eb0>
+    │                   │    └ <sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x7fb50838e8b0>
+    │                   └ <models.user_model.User object at 0x7fb508595eb0>
+    └ {'id': 2, 'phone': '15155920643'}
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/attributes.py", line 481, in __get__
+    return self.impl.get(state, dict_)
+           │    │    │   │      └ {'_sa_instance_state': <sqlalchemy.orm.state.InstanceState object at 0x7fb5084f9580>, 'phone': '15155920643', 'id': 2, 'creat...
+           │    │    │   └ <sqlalchemy.orm.state.InstanceState object at 0x7fb5084f9580>
+           │    │    └ <function AttributeImpl.get at 0x7fb507e3aa60>
+           │    └ <sqlalchemy.orm.attributes.ScalarObjectAttributeImpl object at 0x7fb50851db80>
+           └ <sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x7fb50838e8b0>
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/attributes.py", line 941, in get
+    value = self._fire_loader_callables(state, key, passive)
+            │    │                      │      │    └ symbol('PASSIVE_OFF')
+            │    │                      │      └ 'info'
+            │    │                      └ <sqlalchemy.orm.state.InstanceState object at 0x7fb5084f9580>
+            │    └ <function AttributeImpl._fire_loader_callables at 0x7fb507e3aaf0>
+            └ <sqlalchemy.orm.attributes.ScalarObjectAttributeImpl object at 0x7fb50851db80>
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/attributes.py", line 977, in _fire_loader_callables
+    return self.callable_(state, passive)
+           │    │         │      └ symbol('PASSIVE_OFF')
+           │    │         └ <sqlalchemy.orm.state.InstanceState object at 0x7fb5084f9580>
+           │    └ <member 'callable_' of 'AttributeImpl' objects>
+           └ <sqlalchemy.orm.attributes.ScalarObjectAttributeImpl object at 0x7fb50851db80>
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/strategies.py", line 862, in _load_for_state
+    raise orm_exc.DetachedInstanceError(
+          │       └ <class 'sqlalchemy.orm.exc.DetachedInstanceError'>
+          └ <module 'sqlalchemy.orm.exc' from '/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/sqlalchemy...
+
+sqlalchemy.orm.exc.DetachedInstanceError: Parent instance <User at 0x7fb508595eb0> is not bound to a Session; lazy load operation of attribute 'info' cannot proceed (Background on this error at: https://sqlalche.me/e/14/bhk3)
+2022-04-07 18:10:33.031 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'POST', uri: '/v1/login/', ip: '127.0.0.1', author: None, query: '', body: '{\n    "phone": "15155920643",\n    "code": "123456"\n}', time: 59ms
+2022-04-07 18:12:28.797 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='POST', uri='/v1/login/', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b'{\n    "phone": "15155920644",\n    "code": "123456"\n}'
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.login.login_views.LoginHandler object at 0x7fb5084f9160>
+             │       │    └ []
+             │       └ <views.login.login_views.LoginHandler object at 0x7fb5084f9160>
+             └ <bound method LoginHandler.post of <views.login.login_views.LoginHandler object at 0x7fb5084f9160>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 40, in post
+    self._login_with_code(phone, code)
+    │    │                │      └ '123456'
+    │    │                └ '15155920644'
+    │    └ <function LoginHandler._login_with_code at 0x7fb50842cb80>
+    └ <views.login.login_views.LoginHandler object at 0x7fb5084f9160>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 68, in _login_with_code
+    self._login_success(user)
+    │    │              └ <models.user_model.User object at 0x7fb5084f90d0>
+    │    └ <function LoginHandler._login_success at 0x7fb50842cc10>
+    └ <views.login.login_views.LoginHandler object at 0x7fb5084f9160>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/login/login_views.py", line 77, in _login_success
+    user_json['info'] = user.info.to_json() if user.info else None
+    │                   │    │                 │    └ <sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x7fb50838e8b0>
+    │                   │    │                 └ <models.user_model.User object at 0x7fb5084f90d0>
+    │                   │    └ <sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x7fb50838e8b0>
+    │                   └ <models.user_model.User object at 0x7fb5084f90d0>
+    └ {'id': 3, 'phone': '15155920644'}
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/attributes.py", line 481, in __get__
+    return self.impl.get(state, dict_)
+           │    │    │   │      └ {'_sa_instance_state': <sqlalchemy.orm.state.InstanceState object at 0x7fb5084f9100>, 'phone': '15155920644', 'id': 3, 'creat...
+           │    │    │   └ <sqlalchemy.orm.state.InstanceState object at 0x7fb5084f9100>
+           │    │    └ <function AttributeImpl.get at 0x7fb507e3aa60>
+           │    └ <sqlalchemy.orm.attributes.ScalarObjectAttributeImpl object at 0x7fb50851db80>
+           └ <sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x7fb50838e8b0>
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/attributes.py", line 941, in get
+    value = self._fire_loader_callables(state, key, passive)
+            │    │                      │      │    └ symbol('PASSIVE_OFF')
+            │    │                      │      └ 'info'
+            │    │                      └ <sqlalchemy.orm.state.InstanceState object at 0x7fb5084f9100>
+            │    └ <function AttributeImpl._fire_loader_callables at 0x7fb507e3aaf0>
+            └ <sqlalchemy.orm.attributes.ScalarObjectAttributeImpl object at 0x7fb50851db80>
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/attributes.py", line 977, in _fire_loader_callables
+    return self.callable_(state, passive)
+           │    │         │      └ symbol('PASSIVE_OFF')
+           │    │         └ <sqlalchemy.orm.state.InstanceState object at 0x7fb5084f9100>
+           │    └ <member 'callable_' of 'AttributeImpl' objects>
+           └ <sqlalchemy.orm.attributes.ScalarObjectAttributeImpl object at 0x7fb50851db80>
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/strategies.py", line 862, in _load_for_state
+    raise orm_exc.DetachedInstanceError(
+          │       └ <class 'sqlalchemy.orm.exc.DetachedInstanceError'>
+          └ <module 'sqlalchemy.orm.exc' from '/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/sqlalchemy...
+
+sqlalchemy.orm.exc.DetachedInstanceError: Parent instance <User at 0x7fb5084f90d0> is not bound to a Session; lazy load operation of attribute 'info' cannot proceed (Background on this error at: https://sqlalche.me/e/14/bhk3)
+2022-04-07 18:12:28.821 | ERROR    | conf.logger:log_request:30 - status: 500, method: 'POST', uri: '/v1/login/', ip: '127.0.0.1', author: None, query: '', body: '{\n    "phone": "15155920644",\n    "code": "123456"\n}', time: 63ms
+2022-04-08 15:18:13.081 | ERROR    | conf.logger:log_request_error:18 - uid: '', requst: HTTPServerRequest(protocol='http', host='127.0.0.1:8000', method='POST', uri='/v1/user/2', version='HTTP/1.1', remote_ip='127.0.0.1'), query: '', body b'----------------------------570343797984992192298292\r\nContent-Disposition: form-data; name="nickname"\r\n\r\n\xe9\x99\x88\xe8\x8a\x9d\xe9\xba\xbb\r\n----------------------------570343797984992192298292--\r\n'
+Traceback (most recent call last):
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/venv/lib/python3.9/site-packages/tornado/web.py", line 1702, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+             │       │    │            │    └ {}
+             │       │    │            └ <views.users.user_views.UserHandler object at 0x7fab6ebd5eb0>
+             │       │    └ ['2']
+             │       └ <views.users.user_views.UserHandler object at 0x7fab6ebd5eb0>
+             └ <bound method UserHandler.post of <views.users.user_views.UserHandler object at 0x7fab6ebd5eb0>>
+
+  File "/Users/qiangchen/Desktop/sesame/sesame-backend/views/users/user_views.py", line 66, in post
+    if UserInfo.query.filter(UserInfo.nickname == nickname, UserInfo.id != self.user.id).first(): raise ClientError('来晚一步咯~, 昵称已被使用')
+       │        │            │        │           │         │        │     │    │    │                  └ <function ClientError at 0x7fab6eb35dc0>
+       │        │            │        │           │         │        │     │    │    └ <sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x7fab6ea93590>
+       │        │            │        │           │         │        │     │    └ <models.user_model.User object at 0x7fab6eccfd30>
+       │        │            │        │           │         │        │     └ <views.users.user_views.UserHandler object at 0x7fab6ebd5eb0>
+       │        │            │        │           │         │        └ <sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x7fab6eaa0cc0>
+       │        │            │        │           │         └ <class 'models.user_model.UserInfo'>
+       │        │            │        │           └ '陈芝麻'
+       │        │            │        └ <sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x7fab6eaa0e50>
+       │        │            └ <class 'models.user_model.UserInfo'>
+       │        └ <sqlalchemy.orm.scoping.scoped_session.query_property.<locals>.query object at 0x7fab6ea40eb0>
+       └ <class 'models.user_model.UserInfo'>
+
+common.exception.SaoException: ('来晚一步咯~, 昵称已被使用', 1007)
