@@ -16,10 +16,10 @@ enum NetCode {
 }
 
 class NetError extends Error {
-  String message = '';
+  String msg = '';
 
   @override
-  String toString() => message;
+  String toString() => msg;
 }
 
 @JsonSerializable()
@@ -34,5 +34,5 @@ class NetResponse extends NetError {
   Map<String, dynamic> toJson() => _$NetResponseToJson(this);
 
   @override
-  String toString() => 'code: $code, message: $message';
+  String toString() => 'code: $code, message: $msg';
 }

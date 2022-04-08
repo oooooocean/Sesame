@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
+import 'package:sesame_frontend/services/store.dart';
 
 part 'user.g.dart';
 
@@ -11,11 +14,11 @@ enum Gender {
 
 @JsonSerializable()
 class User {
-  var phone = '';
-  var id = '';
-  UserInfo info;
+  String phone;
+  int id;
+  UserInfo? info;
 
-  User(this.info);
+  User(this.id, this.phone, this.info);
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
@@ -23,13 +26,18 @@ class User {
 
   @override
   String toString() => '';
+
+  void save() => Store.set('user', const JsonEncoder().convert(toJson()));
+
+  static Future<User?> cached() =>
+      Store.get('user', decoder: (data) => User.fromJson(const JsonDecoder().convert(data)));
 }
 
 @JsonSerializable()
 class UserInfo {
-  var nickname = '';
-  var gender = Gender.male;
-  var avatar = '';
+  String? nickname;
+  Gender? gender;
+  String? avatar;
 
   UserInfo();
 

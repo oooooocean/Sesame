@@ -7,10 +7,12 @@ part of 'user.dart';
 // **************************************************************************
 
 User _$UserFromJson(Map<String, dynamic> json) => User(
-      UserInfo.fromJson(json['info'] as Map<String, dynamic>),
-    )
-      ..phone = json['phone'] as String
-      ..id = json['id'] as String;
+      json['id'] as int,
+      json['phone'] as String,
+      json['info'] == null
+          ? null
+          : UserInfo.fromJson(json['info'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'phone': instance.phone,
@@ -19,9 +21,9 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
     };
 
 UserInfo _$UserInfoFromJson(Map<String, dynamic> json) => UserInfo()
-  ..nickname = json['nickname'] as String
-  ..gender = $enumDecode(_$GenderEnumMap, json['gender'])
-  ..avatar = json['avatar'] as String;
+  ..nickname = json['nickname'] as String?
+  ..gender = $enumDecodeNullable(_$GenderEnumMap, json['gender'])
+  ..avatar = json['avatar'] as String?;
 
 Map<String, dynamic> _$UserInfoToJson(UserInfo instance) => <String, dynamic>{
       'nickname': instance.nickname,
