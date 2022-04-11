@@ -7,7 +7,7 @@ import 'package:sesame_frontend/services/launch_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   inject();
-  final isLogin = false; // await Get.find<LaunchService>().isLogin;
+  final isLogin = await Get.find<LaunchService>().isLogin;
 
   runApp(App(initRoute: isLogin ? AppRoutes.albumCreate : AppRoutes.login));
 }

@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/request/request.dart';
 import 'package:sesame_frontend/models/net_response.dart';
+import 'package:sesame_frontend/services/app_configuration.dart';
 import 'package:sesame_frontend/services/store.dart';
 
 class Net extends GetConnect {
@@ -23,7 +24,7 @@ class Net extends GetConnect {
   }
 
   @override
-  String get baseUrl => 'http://192.168.0.101:8000/v1/';
+  String get baseUrl => serviceHost;
 
   @override
   Decoder<NetResponse> get defaultDecoder => (data) {
