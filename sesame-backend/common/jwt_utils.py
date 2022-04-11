@@ -7,7 +7,7 @@ JWTPayload = namedtuple('JWTPayload', 'uid exp')
 
 class JWTUtils:
     SECRET = 'SAO-Sao_sao'
-    EXP = 24 * 60 * 60
+    EXP = 5 * 24 * 60 * 60
 
     @classmethod
     def create(cls, user_id):

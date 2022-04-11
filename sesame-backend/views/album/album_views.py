@@ -2,6 +2,7 @@ from views.base.base_views import AuthBaseHandler
 from common.exception import ClientError, ERROR_CODE_0
 from models.album_model import Album, Photo
 from service.validator import validate_album_name, validate_album_description
+from service.utils import save_images
 
 
 class AlbumHandler(AuthBaseHandler):
@@ -55,16 +56,13 @@ class AlbumHandler(AuthBaseHandler):
         user_id = self.get_argument('user_id', None) or self.json_args.get('user_id', None) or self.current_user.id
         name = self.get_argument('name', None) or self.json_args.get('name', None)
         description = self.get_argument('description', None) or self.json_args.get('description', None)
-
-        is_valid, msg = validate_album_name(name)
-        if not is_valid: raise ClientError(msg)
-        is_valid, msg = validate_album_description(description)
-        if not is_valid: raise ClientError(msg)
+        image_metas = self.request.files.get('image', None)
+        image = image_metas[0] if image_metas else None
 
         if album_id:
-            self._update(user_id, album_id, name, description)
+            self._update(user_id, album_id, name, description, image)
         else:
-            self._add(user_id, name, description)
+            self._add(user_id, name, description, image)
 
     def delete(self, album_id):
         """
@@ -85,23 +83,27 @@ class AlbumHandler(AuthBaseHandler):
         album.save()
         self.success(True)
 
-    def _add(self, user_id, name, description):
+    def _add(self, user_id, name, description, image):
         """
         新增
         :param name:
         :return:
         """
+        is_valid, msg = validate_album_name(name)
+        if not is_valid: raise ClientError(msg)
+        is_valid, msg = validate_album_description(description)
+        if not is_valid: raise ClientError(msg)
+
         album = Album.query.filter(Album.user_id == user_id,
                                    Album.name == name,
                                    ~Album.deleted).first()
-        print(user_id, name)
-        print(album)
         if album: raise ClientError('相册已存在: %r' % name)
-        album = Album(name=name, description=description, user_id=user_id)
+
+        album = Album(name=name, description=description, user_id=user_id, cover=save_images(user_id, [image])[0] if image else None)
         album.save()
         self.success(self._to_json(album))
 
-    def _update(self, user_id, album_id, name, description):
+    def _update(self, user_id, album_id, name, description, image):
         """
         修改
         :param name:
@@ -109,10 +111,22 @@ class AlbumHandler(AuthBaseHandler):
         :return:
         """
         if not album_id: raise ClientError('参数缺失: album_id')
-        album = Album.query.filter(Album.id == album_id, ~Album.deleted, Album.user_id==user_id).first()
+        album = Album.query.filter(Album.id == album_id, ~Album.deleted, Album.user_id == user_id).first()
         if not album: raise ClientError('相册不存在: %r' % name)
-        album.name = name
-        album.description = description
+
+        if name:
+            is_valid, msg = validate_album_name(name)
+            if not is_valid: raise ClientError(msg)
+            album.name = name
+
+        if description:
+            is_valid, msg = validate_album_description(description)
+            if not is_valid: raise ClientError(msg)
+            album.description = description
+
+        if image:
+            album.cover = save_images(user_id, [image])[0]
+
         album.save()
         self.http_response(ERROR_CODE_0, self._to_json(album))
 
