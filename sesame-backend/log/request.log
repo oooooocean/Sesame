@@ -365,3 +365,9 @@
 2022-04-11T18:07:01.541282+0800 ERROR status: 500, method: 'GET', uri: '/v1/pic/202204111736210?user_id=1', ip: '127.0.0.1', author: None, query: 'user_id=1', body: '', time:  7ms
 2022-04-11T18:07:54.390176+0800 INFO status: 200, method: 'GET', uri: '/v1/pic/202204111736210?user_id=1', ip: '127.0.0.1', author: None, query: 'user_id=1', body: '', time: 36ms
 2022-04-11T18:07:55.668997+0800 INFO status: 304, method: 'GET', uri: '/v1/pic/202204111736210?user_id=1', ip: '127.0.0.1', author: None, query: 'user_id=1', body: '', time: 19ms
+2022-04-11T18:12:56.862764+0800 INFO status: 200, method: 'GET', uri: '/v1/pic/202204111736210?user_id=1', ip: '127.0.0.1', author: None, query: 'user_id=1', body: '', time: 38ms
+2022-04-11T18:12:58.528512+0800 INFO status: 304, method: 'GET', uri: '/v1/pic/202204111736210?user_id=1', ip: '127.0.0.1', author: None, query: 'user_id=1', body: '', time: 17ms
+2022-04-11T18:12:59.142018+0800 INFO status: 304, method: 'GET', uri: '/v1/pic/202204111736210?user_id=1', ip: '127.0.0.1', author: None, query: 'user_id=1', body: '', time: 19ms
+2022-04-11T18:13:04.968520+0800 INFO status: 200, method: 'GET', uri: '/v1/pic/202204111736210?user_id=1', ip: '127.0.0.1', author: None, query: 'user_id=1', body: '', time: 32ms
+2022-04-11T18:13:11.922189+0800 INFO status: 200, method: 'GET', uri: '/v1/pic/202204111736210?user_id=1', ip: '127.0.0.1', author: None, query: 'user_id=1', body: '', time: 27ms
+2022-04-11T18:13:18.442401+0800 INFO status: 200, method: 'GET', uri: '/v1/pic/202204111736210?user_id=1', ip: '127.0.0.1', author: None, query: 'user_id=1', body: '', time: 28ms

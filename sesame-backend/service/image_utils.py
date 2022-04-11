@@ -1,7 +1,6 @@
 import os
 from service.utils import save_files
 from PIL import Image, ImageDraw, ImageFont
-from io import BytesIO
 
 
 def save_images(user_id, image_metas) -> [str]:
@@ -29,7 +28,7 @@ def get_thumbnail(image_path, width, height) -> Image.Image:
         return copy
 
 
-def add_watermark(image: Image.Image, text='Sesame', margin=10) -> Image.Image:
+def add_watermark(image: Image.Image, text='芝麻开门', margin=10) -> Image.Image:
     """
     图片添加水印
     图片转RGBA颜色格式 -> 创建遮罩 -> 绘制遮罩 -> 合并遮罩
@@ -45,8 +44,8 @@ def add_watermark(image: Image.Image, text='Sesame', margin=10) -> Image.Image:
 
     # 绘制文字
     imageWidth, imageHeight = copy.size
-    fontSize = int(imageWidth / 13)
-    font = ImageFont.truetype("static/font/AiDeep.otf", fontSize)
+    fontSize = int(imageWidth / 15)
+    font = ImageFont.truetype("static/font/font.ttf", fontSize)
     textWidth, textHeight = overlay_draw.textsize(text, font)
     x = imageWidth - textWidth - margin
     y = imageHeight - textHeight - margin
