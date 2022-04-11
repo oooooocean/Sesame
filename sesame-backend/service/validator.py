@@ -63,7 +63,7 @@ def validate_album_description(description: str) -> tuple:
     :param description:
     :return:
     """
-    return validate_str(description, '相册描述', 25, nullable=True)
+    return validate_str(description, '相册描述', 100, nullable=True)
 
 
 def validate_user_nickname(name: str) -> tuple:

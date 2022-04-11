@@ -30,5 +30,5 @@ def log_request(handler: RequestHandler):
     log_method('status: %d, method: %r, uri: %r, ip: %r, author: %r, query: %r, body: %r, time: %2.fms' % (handler.get_status(),
                handler.request.method,
                handler.request.uri, handler.request.remote_ip, handler.request.headers.get('Authorization', None), handler.request.query,
-               handler.request.body.decode('utf8'),
+               handler.request.body.decode('utf8') if handler.request.method == 'post' else '',
                request_time))

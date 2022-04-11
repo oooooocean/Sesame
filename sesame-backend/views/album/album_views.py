@@ -52,9 +52,9 @@ class AlbumHandler(AuthBaseHandler):
 
         @apiSuccess {Object} data Album info
         """
-        user_id = self.json_args.get('user_id', None) or self.current_user.id
-        name = self.json_args.get('name', None)
-        description = self.json_args.get('description', None)
+        user_id = self.get_argument('user_id', None) or self.json_args.get('user_id', None) or self.current_user.id
+        name = self.get_argument('name', None) or self.json_args.get('name', None)
+        description = self.get_argument('description', None) or self.json_args.get('description', None)
 
         is_valid, msg = validate_album_name(name)
         if not is_valid: raise ClientError(msg)
@@ -91,13 +91,15 @@ class AlbumHandler(AuthBaseHandler):
         :param name:
         :return:
         """
-        album = Album.query.filter(Album.user_id == self.current_user.id,
+        album = Album.query.filter(Album.user_id == user_id,
                                    Album.name == name,
-                                   not Album.deleted).first()
+                                   ~Album.deleted).first()
+        print(user_id, name)
+        print(album)
         if album: raise ClientError('相册已存在: %r' % name)
         album = Album(name=name, description=description, user_id=user_id)
         album.save()
-        self.http_response(ERROR_CODE_0, self._to_json(album))
+        self.success(self._to_json(album))
 
     def _update(self, user_id, album_id, name, description):
         """

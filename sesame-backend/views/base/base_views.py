@@ -16,7 +16,7 @@ from conf.logger import log_request_error
 class BaseHandler(RequestHandler):
 
     def prepare(self):
-        self.json_args = None
+        self.json_args = {}
         if self.request.method == "POST" and self.request.headers.get('Content-Type', '').startswith('application/json'):
             self.json_args = json_decode(self.request.body)
 
@@ -28,16 +28,17 @@ class BaseHandler(RequestHandler):
         :return:
         """
         self.set_status(error.getHttpStatus())
-        self.finish(json.dumps({'msg': error.msg, 'code': error.code, 'data': data}))
+        self.set_header('Content-type', 'application/json')
+        self.finish({'msg': error.msg, 'code': error.code, 'data': data})
 
     def success(self, data=None):
-        self.finish(json.dumps({'msg': ERROR_CODE_0.msg, 'code': ERROR_CODE_0.code, 'data': data}))
+        self.finish({'msg': ERROR_CODE_0.msg, 'code': ERROR_CODE_0.code, 'data': data})
 
     def simpleSuccess(self):
-        self.finish(json.dumps({'msg': ERROR_CODE_0.msg, 'code': ERROR_CODE_0.code, 'data': True}))
+        self.finish({'msg': ERROR_CODE_0.msg, 'code': ERROR_CODE_0.code, 'data': True})
 
     def simpleFail(self):
-        self.finish(json.dumps({'msg': ERROR_CODE_0.msg, 'code': ERROR_CODE_0.code, 'data': True}))
+        self.finish({'msg': ERROR_CODE_0.msg, 'code': ERROR_CODE_0.code, 'data': True})
 
     def write_error(self, status_code: int, **kwargs) -> None:
         exc_info = kwargs.get('exc_info', None)

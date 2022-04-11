@@ -9,6 +9,6 @@ if __name__ == '__main__':
     config_log()
     init_db()
     tornado.options.parse_command_line()
-    app.Application().listen(8000, xheaders=True)
+    app.Application().listen(8000, address='0.0.0.0', xheaders=True)
     tornado.ioloop.IOLoop.current().start()
     print('END SERVE')
