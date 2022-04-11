@@ -2,7 +2,7 @@ from views.base.base_views import AuthBaseHandler
 from common.exception import ClientError, ERROR_CODE_0
 from models.album_model import Album, Photo
 from service.validator import validate_album_name, validate_album_description
-from service.utils import save_images
+from service.image_utils import save_images
 
 
 class AlbumHandler(AuthBaseHandler):
@@ -77,7 +77,7 @@ class AlbumHandler(AuthBaseHandler):
         @apiSuccess {Boolean} data success or fail
         """
         if not album_id: raise ClientError('参数缺失: album_id')
-        user_id = self.get_argument('user_id') or self.current_user.id
+        user_id = self.get_argument('user_id', None) or self.current_user.id
         album = Album.query.filter(Album.id == album_id, Album.user_id == user_id).first()
         album.deleted = True
         album.save()

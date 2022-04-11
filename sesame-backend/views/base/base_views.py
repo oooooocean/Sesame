@@ -43,9 +43,12 @@ class BaseHandler(RequestHandler):
     def write_error(self, status_code: int, **kwargs) -> None:
         exc_info = kwargs.get('exc_info', None)
 
+        if not exc_info:
+            self.finish()
+            return
+
         if issubclass(exc_info[0], Exception):
             self.log_error()
-
         if exc_info[0] is SaoException:
             self.http_response(exc_info[1])
         elif exc_info[0] is AssertionError:

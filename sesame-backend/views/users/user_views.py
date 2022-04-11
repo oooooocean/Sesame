@@ -1,4 +1,4 @@
-from service.utils import save_images
+from service.image_utils import save_images
 from models.user_model import UserInfo, User
 from views.base.base_views import AuthBaseHandler
 from conf.db import Session

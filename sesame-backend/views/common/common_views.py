@@ -1,5 +1,5 @@
 from views.base.base_views import BaseHandler
-from service.utils import save_images
+from service.image_utils import save_images
 from common.exception import (
     ERROR_CODE_0,
     ClientError

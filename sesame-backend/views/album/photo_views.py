@@ -1,6 +1,6 @@
 from views.base.base_views import AuthBaseHandler
 from models.album_model import Album, Photo
-from service.utils import save_images
+from service.image_utils import save_images
 from service.paginate import paginate
 from common.exception import ClientError, ServerError
 
