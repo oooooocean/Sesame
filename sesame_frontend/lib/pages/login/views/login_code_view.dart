@@ -5,7 +5,10 @@ import 'package:sesame_frontend/components/mixins/keyboard_allocator.dart';
 import 'package:sesame_frontend/pages/login/login_controller.dart';
 
 class LoginCodeView extends GetView<LoginController> with KeyboardAllocator {
-  const LoginCodeView({Key? key}) : super(key: key);
+  final photoNode = FocusNode();
+  final codeNode = FocusNode();
+
+  LoginCodeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Center(
@@ -13,7 +16,7 @@ class LoginCodeView extends GetView<LoginController> with KeyboardAllocator {
           decoration: BoxDecoration(color: Colors.black.withOpacity(0.6)),
           child: KeyboardActions(
             disableScroll: true,
-            config: doneKeyboardConfig([controller.photoNode, controller.codeNode]),
+            config: doneKeyboardConfig([photoNode, codeNode]),
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 10),
               child: Column(
@@ -44,7 +47,7 @@ class LoginCodeView extends GetView<LoginController> with KeyboardAllocator {
           child: TextField(
             style: const TextStyle(color: Colors.white),
             controller: controller.photoController,
-            focusNode: controller.photoNode,
+            focusNode: photoNode,
             cursorColor: Colors.white,
             maxLength: 11,
             keyboardType: TextInputType.phone,
@@ -63,7 +66,7 @@ class LoginCodeView extends GetView<LoginController> with KeyboardAllocator {
             child: TextField(
           style: const TextStyle(color: Colors.white),
           controller: controller.codeController,
-          focusNode: controller.codeNode,
+          focusNode: codeNode,
           cursorColor: Colors.white,
           keyboardType: TextInputType.number,
           decoration: const InputDecoration(

@@ -16,7 +16,7 @@ class Net extends GetConnect {
     });
 
     httpClient.addResponseModifier((request, response) {
-      if (response.headers?['content-type'] != 'application/json') return response;
+      if (response.headers?['Content-type'] != 'application/json') return response;
       log("---- 响应 ----\n${response.bodyString ?? ''}");
       return response;
     });
@@ -27,8 +27,14 @@ class Net extends GetConnect {
 
   @override
   Decoder<NetResponse> get defaultDecoder => (data) {
-        final dataMap = const JsonDecoder().convert(data);
-        return NetResponse.fromJson(dataMap);
+        try {
+          return NetResponse.fromJson(data);
+        } catch (error) {
+          print(data.runtimeType);
+          print(data);
+          print(error);
+          return NetResponse(NetCode.serverError, null)..msg = '服务端未知错误';
+        }
       };
 
   String get _platform {

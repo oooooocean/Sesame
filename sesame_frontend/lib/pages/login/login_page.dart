@@ -18,9 +18,9 @@ class LoginPage extends GetView<LoginController> {
               case LoginPageState.prepare:
                 return const LoginPrepareView();
               case LoginPageState.code:
-                return const LoginCodeView();
+                return LoginCodeView();
               default:
-                return const LoginCodeView();
+                return LoginCodeView();
             }
           }),
         ),

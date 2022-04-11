@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:sesame_frontend/models/net_response.dart';
 import 'package:sesame_frontend/net/net.dart';
@@ -6,6 +8,18 @@ import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 mixin NetMixin {
   final net = Net();
+
+  Future request<T>(Future<T> future, {ValueSetter<T>? success, ValueSetter<Error>? fail}) async {
+    EasyLoading.show();
+    await future.then((value) {
+      EasyLoading.dismiss();
+      if (success != null) success(value);
+    }).catchError((error) {
+      EasyLoading.dismiss();
+      EasyLoading.showToast(error.toString());
+      if (fail != null) fail(error);
+    });
+  }
 
   Future<T> get<T>(String uri, Map<String, dynamic> query, Decoder<T> decoder) async {
     final res = (await net.get<NetResponse>(uri, query: query, decoder: net.defaultDecoder)).body;

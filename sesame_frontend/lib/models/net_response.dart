@@ -32,7 +32,4 @@ class NetResponse extends NetError {
   factory NetResponse.fromJson(Map<String, dynamic> json) => _$NetResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$NetResponseToJson(this);
-
-  @override
-  String toString() => 'code: $code, message: $msg';
 }

@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:sesame_frontend/components/comps/refresh_scaffold.dart';
+import 'package:sesame_frontend/components/mixins/theme_mixin.dart';
 import 'package:sesame_frontend/route/pages.dart';
 
 /// The entry of the app
-class App extends StatelessWidget {
-  App({Key? key}) : super(key: key) {
+class App extends StatelessWidget with ThemeMixin {
+  final String initRoute;
+
+  App({Key? key, required this.initRoute}) : super(key: key) {
     _customLoading();
   }
 
@@ -14,7 +17,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) => refreshScaffold(
         child: GetMaterialApp(
             enableLog: const bool.fromEnvironment('dart.vm.product'),
-            initialRoute: AppRoutes.login,
+            initialRoute: initRoute,
             getPages: appRoutes,
             builder: EasyLoading.init(),
             theme: themeData),
@@ -30,5 +33,12 @@ class App extends StatelessWidget {
   }
 
   /// theme
-  ThemeData get themeData => ThemeData(scaffoldBackgroundColor: const Color(0xfff4f4f4));
+  ThemeData get themeData => ThemeData(
+      inputDecorationTheme: const InputDecorationTheme(
+          hintStyle: TextStyle(color: Colors.grey), counterStyle: TextStyle(color: Colors.grey)),
+      appBarTheme: AppBarTheme(
+          backgroundColor: primaryColor,
+          centerTitle: true,
+          titleTextStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+      scaffoldBackgroundColor: const Color(0xfff4f4f4));
 }
