@@ -34,8 +34,8 @@ class App extends StatelessWidget with ThemeMixin {
 
   /// theme
   ThemeData get themeData => ThemeData(
-      inputDecorationTheme: const InputDecorationTheme(
-          hintStyle: TextStyle(color: Colors.grey), counterStyle: TextStyle(color: Colors.grey)),
+      inputDecorationTheme: InputDecorationTheme(
+          hintStyle: TextStyle(color: secondaryColor), counterStyle: const TextStyle(color: Colors.grey)),
       appBarTheme: AppBarTheme(
           backgroundColor: primaryColor,
           centerTitle: true,

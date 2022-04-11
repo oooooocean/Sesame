@@ -30,7 +30,7 @@ class AlbumCreatePage extends GetView<AlbumCreateController> with KeyboardAlloca
                   maxLength: 10,
                   decoration: InputDecoration(
                     hintText: 'Enter album\'s title',
-                    border: UnderlineInputBorder(borderSide: BorderSide(color: primaryColor, width: 1)),
+                    enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: borderColor, width: 1)),
                     focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: secondaryColor, width: 1)),
                   ),
                 ),
@@ -42,7 +42,7 @@ class AlbumCreatePage extends GetView<AlbumCreateController> with KeyboardAlloca
                 maxLength: 100,
                 decoration: InputDecoration(
                   hintText: 'Enter album\'s description',
-                  border: OutlineInputBorder(borderSide: BorderSide(color: primaryColor, width: 1)),
+                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: primaryColor, width: 1)),
                   focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: secondaryColor, width: 1)),
                 ),
               ),

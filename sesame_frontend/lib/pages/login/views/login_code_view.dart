@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
 import 'package:sesame_frontend/components/mixins/keyboard_allocator.dart';
@@ -51,6 +52,7 @@ class LoginCodeView extends GetView<LoginController> with KeyboardAllocator {
             cursorColor: Colors.white,
             maxLength: 11,
             keyboardType: TextInputType.phone,
+            inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))],
             decoration: const InputDecoration(
                 counterStyle: TextStyle(color: Colors.white),
                 hintStyle: TextStyle(color: Colors.white),
@@ -69,6 +71,7 @@ class LoginCodeView extends GetView<LoginController> with KeyboardAllocator {
           focusNode: codeNode,
           cursorColor: Colors.white,
           keyboardType: TextInputType.number,
+          inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))],
           decoration: const InputDecoration(
               hintStyle: TextStyle(color: Colors.white),
               hintText: 'Input SMS code',

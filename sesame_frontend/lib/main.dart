@@ -9,7 +9,7 @@ void main() async {
   inject();
   final isLogin = await Get.find<LaunchService>().isLogin;
 
-  runApp(App(initRoute: isLogin ? AppRoutes.albumCreate : AppRoutes.login));
+  runApp(App(initRoute: isLogin ? AppRoutes.userInfoSet : AppRoutes.login));
 }
 
 void inject() {

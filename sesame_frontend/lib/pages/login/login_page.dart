@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sesame_frontend/pages/login/login_controller.dart';
 import 'package:sesame_frontend/pages/login/views/login_code_view.dart';
-import 'package:sesame_frontend/pages/login/views/logoin_prepare_view.dart';
+import 'package:sesame_frontend/pages/login/views/login_prepare_view.dart';
 
 class LoginPage extends GetView<LoginController> {
   const LoginPage({Key? key}) : super(key: key);

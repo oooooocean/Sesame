@@ -9,7 +9,15 @@ import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 mixin NetMixin {
   final net = Net();
 
+  String? shouldRequest() => null;
+
   Future request<T>(Future<T> future, {ValueSetter<T>? success, ValueSetter<Error>? fail}) async {
+    final errorMsg = shouldRequest();
+    if (errorMsg != null) {
+      EasyLoading.showToast(errorMsg);
+      return;
+    }
+
     EasyLoading.show();
     await future.then((value) {
       EasyLoading.dismiss();
@@ -44,7 +52,7 @@ mixin NetMixin {
       if (bytes == null) continue;
       list.add(MultipartFile(bytes.toList(), filename: entity.title ?? ''));
     }
-    final formData = FormData({'files': list});
+    final formData = FormData({'images': list});
     final res =
         (await net.post(uri, formData, query: query, contentType: 'multipart/form-data', decoder: net.defaultDecoder))
             .body;

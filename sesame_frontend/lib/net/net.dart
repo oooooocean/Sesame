@@ -31,9 +31,6 @@ class Net extends GetConnect {
         try {
           return NetResponse.fromJson(data);
         } catch (error) {
-          print(data.runtimeType);
-          print(data);
-          print(error);
           return NetResponse(NetCode.serverError, null)..msg = '服务端未知错误';
         }
       };

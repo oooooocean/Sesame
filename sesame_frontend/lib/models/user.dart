@@ -12,6 +12,10 @@ enum Gender {
   female
 }
 
+extension GenderExtension on Gender {
+  String get string => ['Male', 'Female'][index];
+}
+
 @JsonSerializable()
 class User {
   String phone;
@@ -25,7 +29,7 @@ class User {
   Map<String, dynamic> toJson() => _$UserToJson(this);
 
   @override
-  String toString() => '';
+  String toString() => 'User: $phone';
 
   void save() => Store.set('user', const JsonEncoder().convert(toJson()));
 
