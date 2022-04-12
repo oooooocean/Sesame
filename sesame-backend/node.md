@@ -42,6 +42,8 @@ mysql> alert user user() identified by "自定义的密码"
 # 安装
 # 安装前激活 venv
 > pip install -r ./requirements.txt
+# 或
+> pip3 install -r ./requirements.txt -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
 ```
 
 ## 4. [MAC] 解决 mysql_config not found 和 NameError: name '_mysql' is not defined
@@ -70,38 +72,8 @@ pymysql.install_as_MySQLdb()
 ```
 
 ## 5. [CenterOS] 安装 Mysql
-
-```shell
-# 检查 linux 版本
-$ cat /etc/redhat-release
-# 下载对应的 mysql: https://dev.mysql.com/downloads/repo/yum/
-
-# 检查系统是否自带 Mysql mariadb
-$ rpm -qa | grep mysql
-# 删除
-$ rpm -e --nodeps mysql的名称
-
-# 将下载的 mysql 上传到服务器
-$ scp 本地mysql的路径 username@servername:/upload/
-# 安装
-$ yum -y install /upload/mysql
-# 安装 mysql server
-$ yum -y install mysql-community-server
-# 检查启动
-$ systemctl status mysqld
-   
-# 临时密码缺失, 修改
-# 1. 编辑 /etc/my.cnf:  [mysqld] 下加入 skip-grant-tables
-# 2. 重启 mysqld
-$ systemctl restart mysqld
-# 3. 修改密码
-$ mysql -u root -p
-$ use mysql;
-$ FLUSH PRIVILEGES;
-$ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';
-# 4. 删除 skip-grant-tables
-# 5. 重启 mysqld
-```
+[参考](https://blog.csdn.net/weixin_44244088/article/details/122286105)
+[mysql_config报错参考](https://blog.csdn.net/hknaruto/article/details/82852308)
 
 ## 6. [CenterOS] 安装Python3
 [参考](https://blog.csdn.net/qq_36750158/article/details/80609857)
