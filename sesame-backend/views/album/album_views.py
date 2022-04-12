@@ -56,7 +56,7 @@ class AlbumHandler(AuthBaseHandler):
         user_id = self.get_argument('user_id', None) or self.json_args.get('user_id', None) or self.current_user.id
         name = self.get_argument('name', None) or self.json_args.get('name', None)
         description = self.get_argument('description', None) or self.json_args.get('description', None)
-        image_metas = self.request.files.get('image', None)
+        image_metas = self.request.files.get('images', None)
         image = image_metas[0] if image_metas else None
 
         if album_id:

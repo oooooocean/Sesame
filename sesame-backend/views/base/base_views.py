@@ -32,13 +32,13 @@ class BaseHandler(RequestHandler):
         self.finish({'msg': error.msg, 'code': error.code, 'data': data})
 
     def success(self, data=None):
-        self.finish({'msg': ERROR_CODE_0.msg, 'code': ERROR_CODE_0.code, 'data': data})
+        self.http_response(ERROR_CODE_0, data)
 
     def simpleSuccess(self):
-        self.finish({'msg': ERROR_CODE_0.msg, 'code': ERROR_CODE_0.code, 'data': True})
+        self.http_response(ERROR_CODE_0, True)
 
     def simpleFail(self):
-        self.finish({'msg': ERROR_CODE_0.msg, 'code': ERROR_CODE_0.code, 'data': True})
+        self.http_response(ERROR_CODE_0, False)
 
     def write_error(self, status_code: int, **kwargs) -> None:
         exc_info = kwargs.get('exc_info', None)

@@ -1,6 +1,9 @@
-import enum
+from enum import IntEnum
 
 
-class Gender(enum.Enum):
-    male = 1
-    female = 2
+class Gender(IntEnum):
+    MALE = 1
+    FEMALE = 2
+
+    def __str__(self):
+        return '男性' if self is Gender.MALE else '女性'

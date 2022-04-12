@@ -1,5 +1,6 @@
 from service.image_utils import save_images
 from models.user_model import UserInfo, User
+from models.gender import Gender
 from views.base.base_views import AuthBaseHandler
 from conf.db import Session
 from common.exception import (
@@ -59,27 +60,27 @@ class UserHandler(AuthBaseHandler):
 
         user_info: UserInfo = self.user.info or UserInfo()
 
-        nickname = self.get_body_argument('nickname', None)
+        nickname = self.get_argument('nickname', None)
         if nickname:
             is_valid, msg = validate_user_nickname(nickname)
             if not is_valid: raise ClientError(msg)
             if UserInfo.query.filter(UserInfo.nickname == nickname, UserInfo.id != self.user.id).first(): raise ClientError('来晚一步咯~, 昵称已被使用')
             user_info.nickname = nickname
 
-        gender = self.get_body_argument('gender', None)
+        gender = self.get_argument('gender', None)
         if gender:
-            if gender not in [1, 2]: raise ClientError('性别错误, 只能是1或2')
-            user_info.gender = gender
+            try:
+                gender = Gender(int(gender))
+                user_info.gender = Gender.value2member_map_[gender]
+            except ValueError:
+                raise ClientError('性别错误, 只能是1或2')
 
-        image_mates = self.request.files.get('image', None)
+        image_mates = self.request.files.get('images', None)
         if image_mates:
-            user_info.avatar = save_images(image_mates)[0]
+            user_info.avatar = save_images(self.user.id, image_mates)[0]
 
         self.user.info = user_info
         self.user.save()
-        print(self.user.info.nickname)
         json = self.user.to_json()
         json['info'] = self.user.info.to_json()
-        print(self.user.info.nickname)
-        print(self.user.info.to_json())
-        self.http_response(ERROR_CODE_0, json)
+        self.success(json)

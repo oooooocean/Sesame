@@ -80,3 +80,38 @@ pymysql.install_as_MySQLdb()
 # 1. info 可能为 None 的处理
 user_json['info'] = user.info.to_json() if user.info else None
 ```
+
+## 3. enum.Enum
+define unique sets of names and values. 
+- property
+    -  `name`
+    -  `value`
+-  support iteration
+-  hashable
+-  if the exact value is unimportant you can use auto.
+-  `__members__`: mapping of names to members.
+-  members are compared by identity.
+
+```python
+# IntFlag: Int
+# can be combined using the bitwise operators without losing their IntFlag membership.
+
+# Create
+from enum import Enum
+class Color(Enum):
+    RED = 1  
+    GREEN = 2
+Color(1)  # Red
+Color['Red'] # Red
+Color.Red.name # 'Red'
+Color.Red.value # 1  
+
+# Iteration
+list(Color)
+for name, member in Color.__members__.items():
+
+# Comparisons
+Color.RED is Color.RED
+```
+
+
