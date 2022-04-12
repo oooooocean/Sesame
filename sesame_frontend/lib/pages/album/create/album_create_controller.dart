@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:sesame_frontend/models/album.dart';
 import 'package:sesame_frontend/net/net_mixin.dart';
@@ -9,13 +10,15 @@ class AlbumCreateController extends GetxController with NetMixin {
   final descriptionController = TextEditingController();
   AssetEntity? cover;
 
+  bool get shouldNext => cover != null && titleController.text.isNotEmpty;
+
   void choseCover() async {
     final config = AssetPickerConfig(
         selectedAssets: cover != null ? [cover!] : null, maxAssets: 1, requestType: RequestType.image);
     final results = await AssetPicker.pickAssets(Get.context!, pickerConfig: config);
     if (results == null || results.isEmpty) return;
     cover = results.first;
-    update(['cover']);
+    update(['cover', 'next']);
   }
 
   void create() async {
@@ -23,6 +26,6 @@ class AlbumCreateController extends GetxController with NetMixin {
     await request(
         postFormData('album/', {'name': titleController.text, 'description': descriptionController.text}, image,
             (data) => Album.fromJson(data)),
-        success: (album) => print(album));
+        success: (album) => EasyLoading.showSuccess('Success'));
   }
 }

@@ -16,3 +16,16 @@ flutter packages pub run build_runner watch --delete-conflicting-outputs
 ```text
 ButtonStyle(padding: MaterialStateProperty.all(EdgeInsets.zero), alignment: Alignment.centerLeft)
 ```
+
+## 2. 按钮配置
+
+```text
+ButtonStyle(
+          overlayColor: MaterialStateProperty.all(accentColor), # 配合 Opacity 设置点击颜色
+          elevation: MaterialStateProperty.all(5),
+          fixedSize: MaterialStateProperty.all(Size.fromHeight(coverHeight)), # 配合padding
+          padding: MaterialStateProperty.all(EdgeInsets.zero),
+          shape: MaterialStateProperty.all(
+              const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))))
+          );
+```

@@ -15,12 +15,6 @@ class Net extends GetConnect {
       await _setupHeader(request);
       return request;
     });
-
-    httpClient.addResponseModifier((request, response) {
-      if (response.headers?['Content-type'] != 'application/json') return response;
-      log("---- 响应 ----\n${response.bodyString ?? ''}");
-      return response;
-    });
   }
 
   @override
@@ -28,6 +22,7 @@ class Net extends GetConnect {
 
   @override
   Decoder<NetResponse> get defaultDecoder => (data) {
+        log("---- 响应 ----\n$data");
         try {
           return NetResponse.fromJson(data);
         } catch (error) {

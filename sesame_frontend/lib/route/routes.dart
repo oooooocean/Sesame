@@ -6,4 +6,6 @@ abstract class AppRoutes {
   static const albumCreate = '/album/create';
 
   static const userInfoSet = '/user/info/set';
+
+  static const albumList = '/album/list';
 }

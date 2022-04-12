@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:sesame_frontend/components/mixins/keyboard_allocator.dart';
 import 'package:sesame_frontend/components/mixins/theme_mixin.dart';
@@ -13,9 +14,7 @@ class AlbumCreatePage extends GetView<AlbumCreateController> with KeyboardAlloca
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: const Text('Build your world'),
-        ),
+        appBar: AppBar(title: const Text('Build your world')),
         body: Padding(
           padding: const EdgeInsets.symmetric(vertical: 25.0, horizontal: 15.0),
           child: Column(
@@ -23,35 +22,21 @@ class AlbumCreatePage extends GetView<AlbumCreateController> with KeyboardAlloca
               _imageItem,
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: TextField(
-                  textAlign: TextAlign.center,
-                  focusNode: titleNode,
-                  controller: controller.titleController,
-                  maxLength: 10,
-                  decoration: InputDecoration(
-                    hintText: 'Enter album\'s title',
-                    enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: borderColor, width: 1)),
-                    focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: secondaryColor, width: 1)),
-                  ),
-                ),
+                child: _albumTitleItem,
               ),
-              TextField(
-                focusNode: descriptionNode,
-                controller: controller.descriptionController,
-                maxLines: 5,
-                maxLength: 100,
-                decoration: InputDecoration(
-                  hintText: 'Enter album\'s description',
-                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: primaryColor, width: 1)),
-                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: secondaryColor, width: 1)),
-                ),
-              ),
+              _albumDescriptionItem,
               const Spacer(),
-              TextButton(
-                onPressed: controller.create,
-                child: Text('CREATE NOW', style: TextStyle(color: primaryColor)),
-                style: ButtonStyle(side: MaterialStateProperty.all(BorderSide(color: primaryColor))),
-              )
+              GetBuilder<AlbumCreateController>(
+                  id: 'next',
+                  builder: (_) {
+                    final enable = controller.shouldNext;
+                    final color = controller.shouldNext ? accentColor : Colors.grey;
+                    return TextButton(
+                      onPressed: enable ? controller.create : null,
+                      child: Text('CREATE NOW', style: TextStyle(color: color)),
+                      style: ButtonStyle(side: MaterialStateProperty.all(BorderSide(color: color))),
+                    );
+                  }),
             ],
           ),
         ),
@@ -62,11 +47,35 @@ class AlbumCreatePage extends GetView<AlbumCreateController> with KeyboardAlloca
             id: 'cover',
             builder: (_) => controller.cover != null
                 ? Image(image: AssetEntityImageProvider(controller.cover!), width: Get.width, fit: BoxFit.cover)
-                : Icon(Icons.add_a_photo_outlined, size: 40, color: primaryColor)),
+                : Icon(Icons.add_a_photo_outlined, size: 40, color: secondaryColor)),
         onPressed: controller.choseCover,
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(Colors.grey.withOpacity(0.5)),
+          backgroundColor: MaterialStateProperty.all(borderColor),
           fixedSize: MaterialStateProperty.all(Size(Get.width, 140)),
         ),
+      );
+
+  Widget get _albumTitleItem => TextField(
+        textAlign: TextAlign.center,
+        focusNode: titleNode,
+        controller: controller.titleController,
+        maxLength: 10,
+        onChanged: (_) => controller.update(['next']),
+        inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[\w\u4e00-\u9fa5_]'))],
+        decoration: InputDecoration(
+            hintText: 'Enter album\'s title',
+            enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: borderColor, width: 1)),
+            focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: secondaryColor, width: 1))),
+      );
+
+  Widget get _albumDescriptionItem => TextField(
+        focusNode: descriptionNode,
+        controller: controller.descriptionController,
+        maxLines: 5,
+        maxLength: 100,
+        decoration: InputDecoration(
+            hintText: 'Enter album\'s description',
+            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: borderColor, width: 1)),
+            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: secondaryColor, width: 1))),
       );
 }

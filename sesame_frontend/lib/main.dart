@@ -6,12 +6,11 @@ import 'package:sesame_frontend/services/launch_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  inject();
-  final isLogin = await Get.find<LaunchService>().isLogin;
-
-  runApp(App(initRoute: isLogin ? AppRoutes.userInfoSet : AppRoutes.login));
+  runApp(App(initRoute: await init()));
 }
 
-void inject() {
+Future<String> init() async {
+  await LaunchService.shared.init();
   Get.put(LaunchService.shared);
+  return LaunchService.shared.isLogin ? AppRoutes.albumList : AppRoutes.login;
 }

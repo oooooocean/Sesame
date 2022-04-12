@@ -7,9 +7,9 @@ class Album {
   int id;
   String name;
   String? description;
-  String? cover;
+  String cover;
 
-  Album(this.id, this.name);
+  Album(this.id, this.name, this.cover);
 
   factory Album.fromJson(Map<String, dynamic> json) => _$AlbumFromJson(json);
 

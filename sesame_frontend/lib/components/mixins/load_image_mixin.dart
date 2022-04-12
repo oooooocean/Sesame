@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sesame_frontend/services/app_configuration.dart';
+import 'package:sesame_frontend/services/launch_service.dart';
 
 mixin LoadImageMixin {
   Image buildAssetImage(String name, {double? width, BoxFit fit = BoxFit.fitWidth}) =>
@@ -17,10 +19,16 @@ mixin LoadImageMixin {
   }
 
   String buildNetImageUrl(String imageName, {double? width, double? height}) {
-    Map<String, dynamic> query = {};
-
-    if (width != null) query['width'] = width;
-    if (height != null) query['height'] = height;
-    return Uri(host: serviceHost, path: 'pic/' + imageName, queryParameters: query).toString();
+    Map<String, dynamic> query = {'user_id': Get.find<LaunchService>().userId};
+    if (width != null) query['width'] = (width * Get.pixelRatio).toString();
+    if (height != null) query['height'] = (height * Get.pixelRatio).toString();
+    final host = Uri.parse(serviceHost);
+    final uri = Uri(
+        scheme: host.scheme,
+        host: host.host,
+        port: host.port,
+        path: host.path + 'pic/' + imageName,
+        queryParameters: query);
+    return uri.toString();
   }
 }
