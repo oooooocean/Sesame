@@ -1,6 +1,7 @@
 import os
 from service.utils import save_files
 from PIL import Image, ImageDraw, ImageFont
+from conf.base import UPLOAD_PATH
 
 
 def save_images(user_id, image_metas) -> [str]:
@@ -13,7 +14,7 @@ def save_images(user_id, image_metas) -> [str]:
     if len(image_metas) == 0: return []
 
     cwd = os.getcwd()
-    save_image_path = os.path.join(cwd, 'static/upload/%s/' % user_id)
+    save_image_path = os.path.join(cwd, '%s%s/' % (UPLOAD_PATH, user_id))
     if not os.path.exists(save_image_path): os.mkdir(save_image_path)
 
     file_name_list = save_files(image_metas, save_image_path)

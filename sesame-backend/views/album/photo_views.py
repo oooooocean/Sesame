@@ -118,7 +118,7 @@ class PhotoHandler(AuthBaseHandler):
         :param album_id:
         :return:
         """
-        image_metas = self.request.files.get('files', None)
+        image_metas = self.request.files.get('images', None)
         if not image_metas: raise ClientError('图片不能为空')
 
         file_names = save_images(self.user_id, image_metas)

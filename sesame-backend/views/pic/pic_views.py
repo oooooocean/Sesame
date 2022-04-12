@@ -3,8 +3,7 @@ import os.path as path
 from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
 from service.image_utils import get_thumbnail, add_watermark
-from tornado.web import HTTPError
-from common.exception import ClientError
+from conf.base import UPLOAD_PATH
 
 
 class PicHandler(BaseHandler):
@@ -29,8 +28,7 @@ class PicHandler(BaseHandler):
         width = self.get_argument('width', None)
         height = self.get_argument('height', None)
         user_id = self.get_argument('user_id', None)
-        image_name = 'upload/%s/%s.png' % (user_id, image_name) if user_id else 'upload/%s.png' % (image_name,)
-        image_path = path.join(self.application.settings['static_path'], image_name)
+        image_path = UPLOAD_PATH + ('%s/%s.png' % (user_id, image_name) if user_id else '%s.png' % (image_name,))
 
         if not path.exists(image_path):
             self.send_error(400)
