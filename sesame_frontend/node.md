@@ -29,3 +29,9 @@ ButtonStyle(
               const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))))
           );
 ```
+
+## 3. nullable 强转
+
+```dart
+final validFiles = files.where((element) => element != null).map((e) => e!).toList();
+```

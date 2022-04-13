@@ -2,11 +2,14 @@ import 'package:get/get.dart';
 import 'package:sesame_frontend/models/album.dart';
 import 'package:sesame_frontend/models/user.dart';
 import 'package:sesame_frontend/net/net_mixin.dart';
+import 'package:sesame_frontend/route/pages.dart';
 
 class AlbumListController extends GetxController with NetMixin, StateMixin<List<Album>> {
   List<Album> get albums => state!;
 
-  void selected(Album album) {}
+  void selected(Album album) {
+    Get.toNamed(AppRoutes.photoList, arguments: album);
+  }
 
   @override
   void onReady() {

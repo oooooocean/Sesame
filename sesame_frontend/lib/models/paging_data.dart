@@ -3,7 +3,7 @@ enum RefreshType { refresh, loadMore }
 class PagingData<T> {
   int count;
   List<T> items;
-  int current = 1;
+  int current = 0;
 
   PagingData(this.count, this.items);
 
@@ -24,5 +24,5 @@ class PagingData<T> {
     items.addAll(other.items);
   }
 
-  void prepare(RefreshType refreshType) => current = refreshType == RefreshType.refresh ? 1 : (current + 1);
+  void prepare(RefreshType refreshType) => current = refreshType == RefreshType.refresh ? 0 : (current + 1);
 }

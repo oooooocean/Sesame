@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:sesame_frontend/models/net_response.dart';
@@ -46,17 +47,34 @@ mixin NetMixin {
   }
 
   Future<T> postFormData<T>(String uri, Map<String, dynamic> query, List<AssetEntity> files, Decoder<T> decoder) async {
-    List<MultipartFile> list = [];
-    for (var entity in files) {
-      final bytes = await entity.originBytes;
-      if (bytes == null) continue;
-      list.add(MultipartFile(bytes.toList(), filename: entity.title ?? ''));
-    }
-    final formData = FormData({'images': list});
-    final res =
-        (await net.post(uri, formData, query: query, contentType: 'multipart/form-data', decoder: net.defaultDecoder))
-            .body;
-    return _parse(res, decoder);
+    final filesFutures = files
+        .map((entity) => entity
+                .thumbnailDataWithSize(
+                    ThumbnailSize((Get.width * Get.pixelRatio).toInt(), (Get.height * Get.pixelRatio).toInt()),
+                    format: ThumbnailFormat.png)
+                .then((value) {
+              if (value == null) return null;
+              return MultipartFile(value.toList(), filename: entity.title ?? '');
+            }))
+        .toList();
+    return Future.wait(filesFutures).then((files) {
+      final validFiles = files.where((element) => element != null).map((e) => e!).toList();
+
+      return net.post(uri, FormData({'images': validFiles}),
+          query: query, contentType: 'multipart/form-data', decoder: net.defaultDecoder);
+    }).then((res) => _parse(res.body, decoder));
+    // List<MultipartFile> list = [];
+    // for (var entity in files) {
+    //   final bytes = await entity.thumbnailDataWithSize(
+    //       ThumbnailSize((Get.width * Get.pixelRatio).toInt(), (Get.height * Get.pixelRatio).toInt()));
+    //   if (bytes == null) continue;
+    //   list.add(MultipartFile(bytes.toList(), filename: entity.title ?? ''));
+    // }
+    // final formData = FormData({'images': list});
+    // final res =
+    //     (await net.post(uri, formData, query: query, contentType: 'multipart/form-data', decoder: net.defaultDecoder))
+    //         .body;
+    // return _parse(res, decoder);
   }
 
   Future<T> _parse<T>(NetResponse? res, Decoder<T> decoder) async {
