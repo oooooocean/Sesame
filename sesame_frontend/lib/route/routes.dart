@@ -10,4 +10,6 @@ abstract class AppRoutes {
   static const albumList = '/album/list';
 
   static const photoList = '/photo/list';
+
+  static const photoBrowser = '/photo/browser';
 }

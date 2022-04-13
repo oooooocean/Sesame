@@ -5,6 +5,8 @@ import 'package:sesame_frontend/pages/album/list/album_list_controller.dart';
 import 'package:sesame_frontend/pages/album/list/album_list_page.dart';
 import 'package:sesame_frontend/pages/login/login_controller.dart';
 import 'package:sesame_frontend/pages/login/login_page.dart';
+import 'package:sesame_frontend/pages/photo/photo_browser_controller.dart';
+import 'package:sesame_frontend/pages/photo/photo_browser_page.dart';
 import 'package:sesame_frontend/pages/photo/photo_list_controller.dart';
 import 'package:sesame_frontend/pages/photo/photo_list_page.dart';
 import 'package:sesame_frontend/pages/user/user_info_set_page.dart';
@@ -32,4 +34,9 @@ final appRoutes = [
       name: AppRoutes.photoList,
       page: () => PhotoListPage(),
       binding: BindingsBuilder(() => Get.lazyPut(() => PhotoListController()))),
+  GetPage(
+      opaque: false,
+      name: AppRoutes.photoBrowser,
+      page: () => const PhotoBrowserPage(),
+      binding: BindingsBuilder(() => Get.lazyPut(() => PhotoBrowserController()))),
 ];

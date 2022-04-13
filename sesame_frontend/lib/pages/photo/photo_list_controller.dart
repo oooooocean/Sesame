@@ -5,6 +5,7 @@ import 'package:sesame_frontend/models/album.dart';
 import 'package:sesame_frontend/models/paging_data.dart';
 import 'package:sesame_frontend/models/photo.dart';
 import 'package:sesame_frontend/net/net_mixin.dart';
+import 'package:sesame_frontend/route/pages.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 class PhotoListController extends GetxController with RefreshMixin<Photo>, NetMixin {
@@ -12,7 +13,9 @@ class PhotoListController extends GetxController with RefreshMixin<Photo>, NetMi
 
   PhotoListController() : album = Get.arguments;
 
-  void onTap(int index) {}
+  void onTap(int index) {
+    Get.toNamed(AppRoutes.photoBrowser, arguments: [items, index]);
+  }
 
   void add() async {
     const config = AssetPickerConfig(maxAssets: 1, requestType: RequestType.image);

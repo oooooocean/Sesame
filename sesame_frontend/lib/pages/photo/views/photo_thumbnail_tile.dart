@@ -13,15 +13,17 @@ class PhotoThumbnailTile extends StatelessWidget with ThemeMixin, LoadImageMixin
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) =>
-      TextButton(
+  Widget build(BuildContext context) => TextButton(
         onPressed: onTap,
         child: Stack(
           fit: StackFit.expand,
           children: [
             Opacity(
                 opacity: 0.85,
-                child: buildNetImage(buildNetImageUrl(photo.name, height: height, width: width), fit: BoxFit.cover)),
+                child: Hero(
+                    tag: photo.name,
+                    child:
+                        buildNetImage(buildNetImageUrl(photo.name, height: height, width: width), fit: BoxFit.cover))),
             Positioned(right: 5, bottom: 5, child: Icon(Icons.star, color: photo.favor ? Colors.yellow : Colors.grey))
           ],
         ),

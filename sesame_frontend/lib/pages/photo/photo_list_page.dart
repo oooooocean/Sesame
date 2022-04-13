@@ -38,13 +38,12 @@ class PhotoListPage extends GetView<PhotoListController> {
                 repeatPattern: QuiltedGridRepeatPattern.inverted,
                 pattern: pattern),
             childrenDelegate: SliverChildBuilderDelegate(
-              (context, index) => PhotoThumbnailTile(
-                  photo: controller.items[index],
-                  onTap: () => controller.onTap(index),
-                  width: itemMaxWidth,
-                  height: itemMaxWidth),
-              childCount: controller.items.length
-            ),
+                (context, index) => PhotoThumbnailTile(
+                    photo: controller.items[index],
+                    onTap: () => controller.onTap(index),
+                    width: itemMaxWidth,
+                    height: itemMaxWidth),
+                childCount: controller.items.length),
           ),
         ),
       ),
