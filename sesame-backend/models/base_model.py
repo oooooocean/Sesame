@@ -17,7 +17,7 @@ class ModelMixin:
         return ['create_time', 'deleted']
 
     @classmethod
-    def paginate(cls, offset=None, limit=PAGE_DEFAULT_LIMIT, *criterion) -> tuple:
+    def paginate(cls, offset=None, limit=PAGE_DEFAULT_LIMIT, *criterion, **kwargs) -> tuple:
         """
         分页查询
         :param offset:
@@ -26,10 +26,14 @@ class ModelMixin:
         :return:
         """
         count = cls.query.filter(*criterion).count()
+
+        statement = cls.query.filter(*criterion)
+        order_by = kwargs.get('order_by')
+        if order_by is not None:
+            statement = statement.order_by(order_by)
         if offset:
-            results = cls.query.filter(*criterion).offset(offset).limit(limit).all()
-        else:
-            results = cls.query.filter(*criterion).limit(limit).all()
+            statement = statement.offset(offset)
+        results = statement.limit(limit).all()
         return count, results
 
     def to_json(self) -> dict:

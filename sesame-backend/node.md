@@ -149,3 +149,16 @@ for name, member in Color.__members__.items():
 # Comparisons
 Color.RED is Color.RED
 ```
+
+## 4. dict KeyError 解决
+
+```python
+m_dict = {}
+
+if 'key' in m_dict:
+    pass
+
+# or
+
+m_dict.get('key', default=None)
+```

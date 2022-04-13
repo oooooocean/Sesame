@@ -3,7 +3,7 @@ from conf.base import PAGE_DEFAULT_LIMIT
 from common.exception import ClientError
 
 
-def paginate(request: RequestHandler, model_cls, *criterion) -> tuple:
+def paginate(request: RequestHandler, model_cls, *criterion, **kwargs) -> tuple:
     """
     分页结果
     :param request:
@@ -25,7 +25,7 @@ def paginate(request: RequestHandler, model_cls, *criterion) -> tuple:
     else:
         criterion.append(model_cls.id > int(start))
 
-    return model_cls.paginate(offset, limit, *criterion)
+    return model_cls.paginate(offset, limit, *criterion, **kwargs)
 
 
 def paginate_json(request: RequestHandler, model_cls, *criterion) -> dict:
