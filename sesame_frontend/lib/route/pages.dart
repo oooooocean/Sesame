@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:sesame_frontend/pages/album/create/album_create_controller.dart';
 import 'package:sesame_frontend/pages/album/create/album_create_page.dart';
 import 'package:sesame_frontend/pages/album/list/album_list_controller.dart';
@@ -36,6 +37,8 @@ final appRoutes = [
       binding: BindingsBuilder(() => Get.lazyPut(() => PhotoListController()))),
   GetPage(
       opaque: false,
+      transition: Transition.noTransition,
+      showCupertinoParallax: false,
       name: AppRoutes.photoBrowser,
       page: () => const PhotoBrowserPage(),
       binding: BindingsBuilder(() => Get.lazyPut(() => PhotoBrowserController()))),

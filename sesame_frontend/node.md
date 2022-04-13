@@ -35,3 +35,19 @@ ButtonStyle(
 ```dart
 final validFiles = files.where((element) => element != null).map((e) => e!).toList();
 ```
+
+## 4. GetX, ExtendedImage 配置微信返回效果
+
+```dart
+ExtendedImageSlidePage
+  | Scaffold // 黑色背景
+    | ExtendedImageGesturePageView
+      | ExtendedImage // 开启 enableSlideOutPage
+
+GetPage(
+  opaque: false,
+  transition: Transition.noTransition,
+  showCupertinoParallax: false,
+  ...
+)
+```

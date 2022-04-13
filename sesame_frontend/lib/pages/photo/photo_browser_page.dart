@@ -8,19 +8,20 @@ class PhotoBrowserPage extends GetView<PhotoBrowserController> with LoadImageMix
   const PhotoBrowserPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => ExtendedImageSlidePage(
+  Widget build(BuildContext context) =>
+      ExtendedImageSlidePage(
         child: Scaffold(
           body: ExtendedImageGesturePageView.builder(
-            itemBuilder: _itemBuilder,
-            itemCount: controller.images.length,
-            onPageChanged: (index) {
-              controller.initIndex = index;
-              controller.update([index.toString()]);
-            },
-            controller: ExtendedPageController(initialPage: controller.initIndex),
-          ),
+          itemBuilder: _itemBuilder,
+          itemCount: controller.images.length,
+          onPageChanged: (index) {
+            controller.initIndex = index;
+            controller.update([index.toString()]);
+          },
+          controller: ExtendedPageController(initialPage: controller.initIndex),
         ),
-      );
+      )
+  );
 
   Widget _itemBuilder(BuildContext context, int index) {
     final photo = controller.images[index];
