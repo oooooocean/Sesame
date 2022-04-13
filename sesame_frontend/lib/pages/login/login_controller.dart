@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:sesame_frontend/components/mixins/sms_code_mixin.dart';
 import 'package:sesame_frontend/models/user.dart';
@@ -18,19 +17,20 @@ class LoginController extends GetxController with SmsCodeMixin, NetMixin {
     pageState.value = state;
   }
 
+  @override
+  String? shouldRequest() {
+    if (photoController.text.isEmpty) return 'Please enter phone';
+    if (codeController.text.isEmpty) return 'Please enter code';
+    return null;
+  }
+
   void login() async {
-    EasyLoading.show();
-    await post('login/', {'phone': photoController.text, 'code': codeController.text}, (data) {
+    final api = post('login/', {'phone': photoController.text, 'code': codeController.text}, (data) {
       final user = User.fromJson(data['user']);
       final token = data['token'];
       Get.find<LaunchService>().login(user, token);
-    }).then((value) {
-      EasyLoading.dismiss();
-      Get.offAllNamed(AppRoutes.albumCreate);
-    }).catchError((error) {
-      EasyLoading.dismiss();
-      EasyLoading.showToast(error.toString());
     });
+    await request(api, success: (_) => Get.offAllNamed(AppRoutes.albumList));
   }
 
   @override
