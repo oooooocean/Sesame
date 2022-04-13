@@ -149,5 +149,3 @@ for name, member in Color.__members__.items():
 # Comparisons
 Color.RED is Color.RED
 ```
-
-

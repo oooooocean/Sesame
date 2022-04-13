@@ -28,7 +28,7 @@ class PicHandler(BaseHandler):
         width = self.get_argument('width', None)
         height = self.get_argument('height', None)
         user_id = self.get_argument('user_id', None)
-        image_path = UPLOAD_PATH + ('%s/%s.png' % (user_id, image_name) if user_id else '%s.png' % (image_name,))
+        image_path = UPLOAD_PATH + ('%s/%s' % (user_id, image_name) if user_id else '%s' % (image_name,))
 
         if not path.exists(image_path):
             self.send_error(400)

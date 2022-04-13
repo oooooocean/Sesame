@@ -24,7 +24,7 @@ def save_images(user_id, image_metas) -> [str]:
 def get_thumbnail(image_path, width, height) -> Image.Image:
     with Image.open(image_path) as im:
         copy = im.copy()
-        size = int(width if width else im.width), int(height if height else im.height)
+        size = int(float(width)) if width else im.width, int(float(height)) if height else im.height
         copy.thumbnail(size)
         return copy
 
