@@ -40,5 +40,5 @@ class App extends StatelessWidget with ThemeMixin {
           backgroundColor: primaryColor,
           centerTitle: true,
           titleTextStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
-      scaffoldBackgroundColor: primaryColor);
+      scaffoldBackgroundColor: const Color(0xfff4f4f4));
 }

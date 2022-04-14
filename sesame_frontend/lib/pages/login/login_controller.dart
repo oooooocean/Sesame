@@ -30,7 +30,12 @@ class LoginController extends GetxController with SmsCodeMixin, NetMixin {
       final token = data['token'];
       Get.find<LaunchService>().login(user, token);
     });
-    await request(api, success: (_) => Get.offAllNamed(AppRoutes.albumList));
+    await request(api, success: (_) {
+      final launch = Get.find<LaunchService>();
+      launch.setRegisterFlows();
+      final registerFlows = launch.registerFlows;
+      Get.offAllNamed(registerFlows.isNotEmpty ? registerFlows.first : AppRoutes.albumList);
+    });
   }
 
   @override

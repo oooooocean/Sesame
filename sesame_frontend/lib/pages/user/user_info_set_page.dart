@@ -4,9 +4,12 @@ import 'package:get/get.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
 import 'package:sesame_frontend/components/mixins/keyboard_allocator.dart';
 import 'package:sesame_frontend/components/mixins/load_image_mixin.dart';
+import 'package:sesame_frontend/components/mixins/register_flow_mixin.dart';
 import 'package:sesame_frontend/components/mixins/theme_mixin.dart';
 import 'package:sesame_frontend/models/user.dart';
 import 'package:sesame_frontend/net/net_mixin.dart';
+import 'package:sesame_frontend/route/pages.dart';
+import 'package:sesame_frontend/services/launch_service.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 part 'user_info_set_controller.dart';

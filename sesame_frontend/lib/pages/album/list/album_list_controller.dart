@@ -1,10 +1,11 @@
 import 'package:get/get.dart';
+import 'package:sesame_frontend/components/mixins/reload_mixin.dart';
 import 'package:sesame_frontend/models/album.dart';
 import 'package:sesame_frontend/models/user.dart';
 import 'package:sesame_frontend/net/net_mixin.dart';
 import 'package:sesame_frontend/route/pages.dart';
 
-class AlbumListController extends GetxController with NetMixin, StateMixin<List<Album>> {
+class AlbumListController extends GetxController with NetMixin, StateMixin<List<Album>>, ReloadMixin {
   List<Album> get albums => state!;
 
   void selected(Album album) {
@@ -16,6 +17,9 @@ class AlbumListController extends GetxController with NetMixin, StateMixin<List<
     load();
     super.onReady();
   }
+
+  @override
+  void reload() => load();
 
   void load() async {
     change(null, status: RxStatus.loading());

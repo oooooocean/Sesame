@@ -73,6 +73,7 @@ class AlbumCreatePage extends GetView<AlbumCreateController> with KeyboardAlloca
         controller: controller.descriptionController,
         maxLines: 5,
         maxLength: 100,
+        onChanged: (_) => controller.update(['next']),
         decoration: InputDecoration(
             hintText: 'Enter album\'s description',
             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: borderColor, width: 1)),

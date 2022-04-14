@@ -1,6 +1,6 @@
 part of 'user_info_set_page.dart';
 
-class UserInfoSetController extends GetxController with LoadImageMixin, NetMixin {
+class UserInfoSetController extends GetxController with LoadImageMixin, NetMixin, RegisterFlowMixin {
   late TextEditingController nicknameController;
   AssetEntity? avatar;
   UserInfo? userInfo;
@@ -19,8 +19,11 @@ class UserInfoSetController extends GetxController with LoadImageMixin, NetMixin
         avatar != null ? [avatar!] : [],
         (data) => User.fromJson(data));
     request<User>(api, success: (user) {
-      print(user);
-      user.save();
+      final launch = Get.find<LaunchService>();
+      launch.updateUser(user);
+
+      final result = nextRegisterStep();
+      if (!result) Get.back();
     });
   }
 

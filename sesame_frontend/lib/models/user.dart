@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:json_annotation/json_annotation.dart';
 import 'package:sesame_frontend/services/store.dart';
@@ -51,4 +52,6 @@ class UserInfo {
 
   @override
   String toString() => '';
+
+  bool get isCompletion => (nickname?.isNotEmpty ?? false) && gender != null && avatar != null;
 }

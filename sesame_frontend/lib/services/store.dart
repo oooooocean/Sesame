@@ -13,6 +13,10 @@ class Store {
   static void set(String key, String value) {
     SharedPreferences.getInstance().then((instance) => instance.setString(key, value));
   }
+
+  static Future clear() async {
+    (await SharedPreferences.getInstance()).clear();
+  }
 }
 
 extension StoreToken on Store {

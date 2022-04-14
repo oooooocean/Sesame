@@ -19,7 +19,7 @@ mixin LoadImageMixin {
   }
 
   String buildNetImageUrl(String imageName, {double? width, double? height}) {
-    Map<String, dynamic> query = {'user_id': Get.find<LaunchService>().userId};
+    Map<String, dynamic> query = {'user_id': (Get.find<LaunchService>().user?.id ?? '').toString()};
     if (width != null) query['width'] = (width * Get.pixelRatio).toString();
     if (height != null) query['height'] = (height * Get.pixelRatio).toString();
     final host = Uri.parse(serviceHost);

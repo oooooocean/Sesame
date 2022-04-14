@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:sesame_frontend/components/mixins/load_image_mixin.dart';
 import 'package:sesame_frontend/components/mixins/theme_mixin.dart';
 import 'package:sesame_frontend/pages/album/list/album_list_controller.dart';
+import 'package:sesame_frontend/pages/user/user_info_page.dart';
+import 'package:sesame_frontend/route/pages.dart';
 
 class AlbumListPage extends GetView<AlbumListController> with ThemeMixin, LoadImageMixin {
   final coverHeight = 150.0;
@@ -13,7 +15,16 @@ class AlbumListPage extends GetView<AlbumListController> with ThemeMixin, LoadIm
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: buildAssetImage('logo', width: 25)),
+      appBar: AppBar(
+        title: buildAssetImage('logo', width: 25),
+        leading: Builder(
+            builder: (context) => IconButton(
+                onPressed: () => Scaffold.of(context).openDrawer(),
+                icon: const Icon(Icons.home_rounded, color: Colors.white))),
+        actions: [
+          IconButton(onPressed: () => Get.toNamed(AppRoutes.albumCreate), icon: const Icon(Icons.add, color: Colors.white))
+        ],
+      ),
       body: controller.obx(
           (state) => ListView.separated(
               padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15.0),
@@ -22,6 +33,7 @@ class AlbumListPage extends GetView<AlbumListController> with ThemeMixin, LoadIm
               itemCount: controller.albums.length),
           onError: (msg) => Center(child: Text(msg ?? '')),
           onLoading: const Center(child: CupertinoActivityIndicator())),
+      drawer: const UserInfoPage(),
     );
   }
 
