@@ -3,6 +3,7 @@ from common.exception import ClientError, ERROR_CODE_0
 from models.album_model import Album, Photo
 from service.validator import validate_album_name, validate_album_description
 from service.image_utils import save_images
+from conf.base import SERVER_CONFIGS
 
 
 class AlbumHandler(AuthBaseHandler):
@@ -31,13 +32,13 @@ class AlbumHandler(AuthBaseHandler):
         user_id = self.get_argument('user_id', None) or self.current_user.id
 
         if album_id:
-            album = Album.query.filter(Album.id == album_id, not Album.deleted).first()
+            album = Album.query.filter(Album.id == album_id, ~Album.deleted).first()
             if not album: raise ClientError('album 不存在: %r' % album_id)
-            self.http_response(ERROR_CODE_0, self._to_json(album))
+            self.success(self._to_json(album))
         else:
             albums = Album.query.filter(Album.user_id == user_id, ~Album.deleted).all()
             albums_json = [self._to_json(album) for album in albums]
-            self.http_response(ERROR_CODE_0, albums_json)
+            self.success(albums_json)
 
     def post(self, album_id):
         """
@@ -81,7 +82,7 @@ class AlbumHandler(AuthBaseHandler):
         album = Album.query.filter(Album.id == album_id, Album.user_id == user_id).first()
         album.deleted = True
         album.save()
-        self.success(True)
+        self.simpleSuccess()
 
     def _add(self, user_id, name, description, image):
         """
@@ -93,6 +94,9 @@ class AlbumHandler(AuthBaseHandler):
         if not is_valid: raise ClientError(msg)
         is_valid, msg = validate_album_description(description)
         if not is_valid: raise ClientError(msg)
+
+        count = Album.query.filter(Album.user_id == user_id).count()
+        if count >= SERVER_CONFIGS['album_count_limit']: raise ClientError('每个用户最多创建20个相册')
 
         album = Album.query.filter(Album.user_id == user_id,
                                    Album.name == name,
@@ -128,10 +132,10 @@ class AlbumHandler(AuthBaseHandler):
             album.cover = save_images(user_id, [image])[0]
 
         album.save()
-        self.http_response(ERROR_CODE_0, self._to_json(album))
+        self.success(self._to_json(album))
 
     def _to_json(self, album):
         if not album.cover:
-            photo = Photo.query.filter(Photo.album_id == album.id, not Photo.deleted).first()
-            album.cover = photo
+            photo = Photo.query.filter(Photo.album_id == album.id, ~Photo.deleted).first()
+            album.cover = photo.name
         return album.to_json()

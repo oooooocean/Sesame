@@ -1,5 +1,5 @@
 from tornado.web import RequestHandler
-from conf.base import PAGE_DEFAULT_LIMIT
+from conf.base import COMMON_CONFIGS
 from common.exception import ClientError
 
 
@@ -13,7 +13,7 @@ def paginate(request: RequestHandler, model_cls, *criterion, **kwargs) -> tuple:
     """
     criterion = list(criterion)
 
-    limit = int(request.get_query_argument('limit', PAGE_DEFAULT_LIMIT))
+    limit = int(request.get_query_argument('limit', COMMON_CONFIGS['page_default_limit']))
     page = request.get_query_argument('page', None)
     start = request.get_query_argument('start', None)
 

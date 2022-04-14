@@ -1,11 +1,12 @@
 from tornado.web import RequestHandler
 from models.user_model import User
-import json
 from common.jwt_utils import JWTUtils
 from common.exception import (
     ERROR_CODE_0,
+    ERROR_CODE_1001,
     ERROR_CODE_1003,
-    SaoException
+    SaoException,
+    ClientError
 )
 import jwt
 from tornado.escape import json_decode
@@ -49,6 +50,7 @@ class BaseHandler(RequestHandler):
 
         if issubclass(exc_info[0], Exception):
             self.log_error()
+
         if exc_info[0] is SaoException:
             self.http_response(exc_info[1])
         elif exc_info[0] is AssertionError:
@@ -74,5 +76,6 @@ class AuthBaseHandler(BaseHandler):
             raise ERROR_CODE_1003
         else:
             self.current_user = Session.get(User, jwtPayload.uid)
-            assert self.current_user, '用户不存在'
+            if not self.current_user: raise ClientError('用户不存在')
+            if self.current_user.deleted: raise ERROR_CODE_1001
             super(AuthBaseHandler, self).prepare()

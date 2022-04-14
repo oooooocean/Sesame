@@ -5,6 +5,8 @@ from common.exception import (
     ClientError
 )
 from models.feedback import FeedbackCategory
+from service.utils import camel_case
+from conf.base import COMMON_CONFIGS
 
 
 class UploadHandler(BaseHandler):
@@ -21,3 +23,8 @@ class UploadHandler(BaseHandler):
 class FeedbackHandler(BaseHandler):
     def get(self):
         self.render('feedback.html', categorys=FeedbackCategory)
+
+
+class AppConfigHandler(BaseHandler):
+    def get(self):
+        return self.success({camel_case(key): value for key, value in COMMON_CONFIGS.items()})

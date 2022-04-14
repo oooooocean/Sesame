@@ -3,7 +3,7 @@ from sqlalchemy.orm import Query
 import datetime
 from service.utils import camel_case
 import enum
-from conf.base import PAGE_DEFAULT_LIMIT
+from conf.base import COMMON_CONFIGS
 
 
 class ModelMixin:
@@ -17,7 +17,7 @@ class ModelMixin:
         return ['create_time', 'deleted']
 
     @classmethod
-    def paginate(cls, offset=None, limit=PAGE_DEFAULT_LIMIT, *criterion, **kwargs) -> tuple:
+    def paginate(cls, offset=None, limit=COMMON_CONFIGS['page_default_limit'], *criterion, **kwargs) -> tuple:
         """
         分页查询
         :param offset:

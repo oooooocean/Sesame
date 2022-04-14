@@ -8,7 +8,7 @@ from common.exception import ClientError, ServerError
 class PhotoHandler(AuthBaseHandler):
     def prepare(self):
         super().prepare()
-        self.user_id = self.json_args.get('user_id', None) if self.json_args else self.get_argument('user_id', None) or self.current_user.id
+        self.user_id = self.json_args.get('user_id', None) or self.get_argument('user_id', None) or self.current_user.id
 
     def get(self, album_id, photo_id):
         """
@@ -38,7 +38,7 @@ class PhotoHandler(AuthBaseHandler):
             signal photo info.
         """
         user_id = self.get_argument('user_id', None) or self.current_user.id
-        album = Album.query.filter(Album.id == album_id, Album.user_id == user_id).first()
+        album = Album.query.filter(Album.id == album_id, Album.user_id == user_id, ~Album.deleted).first()
         if not album: raise ClientError('对应相册不存在')
         if photo_id:
             photo = Photo.query.filter(Photo.id == photo_id, Photo.album_id == album_id, ~Photo.deleted).first()
@@ -84,8 +84,9 @@ class PhotoHandler(AuthBaseHandler):
         if not self._check_album(album_id): raise ClientError('相册不存在: %r' % album_id)
         delete_ids = self.json_args.get('delete_ids', None)
         if not delete_ids: raise ClientError('参数不能为空')
-        deleted_count = Photo.query.filter(Photo.id in delete_ids, Photo.album_id == album_id).delete()
-        if deleted_count == 0: raise ServerError('删除失败')
+        photos = Photo.query.filter(Photo.id in delete_ids, Photo.album_id == album_id).all()
+        for photo in photos:
+            photo.delete()
         self.simpleSuccess()
 
     def _check_album(self, album_id):

@@ -3,10 +3,9 @@ from views.base.base_views import BaseHandler
 import common.jwt_utils
 from service.utils import check_code
 from loguru import logger
-from common.exception import ClientError
 from service.password import validate_password
 from service.validator import validate_phone, validate_password as validate_password_format
-from common.exception import ClientError
+from common.exception import ClientError, ERROR_CODE_1001
 
 
 class LoginHandler(BaseHandler):
@@ -65,6 +64,7 @@ class LoginHandler(BaseHandler):
         """
         if not check_code(code): raise ClientError('验证码错误')
         user = User.query.filter_by(phone=phone).first() or self._add_new_user(phone)
+        if user.deleted: raise ERROR_CODE_1001
         self._login_success(user)
 
     def _login_success(self, user):
@@ -73,10 +73,8 @@ class LoginHandler(BaseHandler):
         :param user:
         :return: 用户信息和token
         """
-        user_json = user.to_json()
-        user_json['info'] = user.info.to_json() if user.info else None
         token = common.jwt_utils.JWTUtils.create(user.id)
-        self.success({'user': user_json, 'token': token})
+        self.success({'user': user.to_json(), 'token': token})
 
     def _add_new_user(self, phone):
         """
@@ -84,7 +82,6 @@ class LoginHandler(BaseHandler):
         :param phone:
         :return:
         """
-        logger.info('LoginHandle/post: 插入新用户 %r' % (phone,))
         ex_user = User(phone=phone)
         ex_user.save()
         return ex_user

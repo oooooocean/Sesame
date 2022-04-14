@@ -1,4 +1,5 @@
 import re
+from conf.base import COMMON_CONFIGS
 
 
 def validate_phone(phone: str):
@@ -18,7 +19,7 @@ def validate_password(password: str) -> tuple:
     """
     if not password:
         return False, '密码不能为空'
-    if len(password) < 8:
+    if len(password) < COMMON_CONFIGS['password_min_limit']:
         return False, '密码长度至少8位'
     if not re.search(r'[\d]+', password):
         return False, '密码错误: 必须包含数字'
@@ -54,7 +55,7 @@ def validate_album_name(name: str) -> tuple:
     :param name:
     :return:
     """
-    return validate_str(name, '相册', 10)
+    return validate_str(name, '相册', COMMON_CONFIGS['album_name_limit'])
 
 
 def validate_album_description(description: str) -> tuple:
@@ -63,7 +64,7 @@ def validate_album_description(description: str) -> tuple:
     :param description:
     :return:
     """
-    return validate_str(description, '相册描述', 100, nullable=True)
+    return validate_str(description, '相册描述', COMMON_CONFIGS['album_description_limit'], nullable=True)
 
 
 def validate_user_nickname(name: str) -> tuple:
@@ -72,4 +73,4 @@ def validate_user_nickname(name: str) -> tuple:
     :param name:
     :return:
     """
-    return validate_str(name, '昵称', 20)
+    return validate_str(name, '昵称', COMMON_CONFIGS['nick_name_limit'])

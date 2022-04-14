@@ -30,6 +30,11 @@ class User(BaseDB, ModelMixin):
     def json_exclude_columns(self):
         return ModelMixin.json_exclude_columns(self) + ['password']
 
+    def to_json(self) -> dict:
+        json = ModelMixin.to_json(self)
+        json['info'] = self.info.to_json() if self.info else None
+        return json
+
 
 class UserInfo(BaseDB, ModelMixin):
     __tablename__ = 'user_info'

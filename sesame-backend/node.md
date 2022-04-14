@@ -162,3 +162,10 @@ if 'key' in m_dict:
 
 m_dict.get('key', default=None)
 ```
+
+## 5. override
+
+```python
+def to_json(self) -> dict:
+    json = ModelMixin.to_json(self)
+```

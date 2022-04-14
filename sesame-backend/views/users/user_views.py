@@ -38,10 +38,7 @@ class UserHandler(AuthBaseHandler):
                 }
             }
         """
-
-        json = self.user.to_json()
-        json['info'] = self.user.info.to_json()
-        return self.http_response(ERROR_CODE_0, json)
+        return self.success(self.user.to_json())
 
     def post(self, _):
         """
@@ -70,8 +67,7 @@ class UserHandler(AuthBaseHandler):
         gender = self.get_argument('gender', None)
         if gender:
             try:
-                gender = Gender(int(gender))
-                user_info.gender = Gender.value2member_map_[gender]
+                user_info.gender = Gender(int(gender))
             except ValueError:
                 raise ClientError('性别错误, 只能是1或2')
 
@@ -81,6 +77,4 @@ class UserHandler(AuthBaseHandler):
 
         self.user.info = user_info
         self.user.save()
-        json = self.user.to_json()
-        json['info'] = self.user.info.to_json()
-        self.success(json)
+        self.success(self.user.to_json())
