@@ -14,7 +14,7 @@ class Application(web.Application):
             (r'/v1/pic/', include('views.pic.pic_urls')),
         ])
         settings = dict(
-            debug=True,
+            debug=False,
             static_path=path.join(path.dirname(__file__), 'static'),
             template_path=path.join(path.dirname(__file__), 'templates'),
             log_function=log_request,
