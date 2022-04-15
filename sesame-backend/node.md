@@ -1,5 +1,6 @@
 # 项目配置
-## 1. [Windows] 使用 venv
+## 1. venv
+### 1.1 windows
 [引用](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#creating-a-virtual-environment)
 ```shell
 # 构建环境 venv
@@ -8,6 +9,11 @@
 # 激活环境
 # 报错的话执行: Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 > .\venv\Scripts\activate
+```
+
+### 1.2 centos
+```shell
+source ./venv/bin/activate
 ```
 
 ## 2. [Windows] 安装 mysql
@@ -77,6 +83,12 @@ pymysql.install_as_MySQLdb()
 
 ## 6. [CenterOS] 安装Python3
 [参考](https://blog.csdn.net/qq_36750158/article/details/80609857)
+[ssl报错, 更新ssl版本](https://blog.csdn.net/weixin_32110907/article/details/116884575)
+[ssl报错, 重新编译python](https://blog.csdn.net/qq_23889009/article/details/100887640)
+```shell
+cd Python-3.10
+./configure -C --with-openssl=/usr/local/openssl --with-openssl-rpath=auto
+```
 
 ## 7. [Git] 拉取指定文件夹
 
@@ -104,6 +116,10 @@ $ ./nginx -t
 # 重启
 $ ./nginx -s reload
 ```
+
+## 9. [Supervisor] 配置
+[参考](https://www.cnblogs.com/qq419139624/p/14866148.html)
+[报错 Exited too quickly (process log may have details)](https://blog.csdn.net/nbcsdn/article/details/108660702)
 
 # 技术点
 ## 1. 正则匹配
