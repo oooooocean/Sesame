@@ -11,7 +11,8 @@
 > .\venv\Scripts\activate
 ```
 
-### 1.2 centos
+### 1.2 linux
+[参考](https://blog.csdn.net/weixin_40903525/article/details/122299094)
 ```shell
 source ./venv/bin/activate
 ```
@@ -103,10 +104,12 @@ $ git pull origin master
 
 ## 8. [nginx] 配置
 [nginx启动、重启、关闭](https://blog.csdn.net/hyy147/article/details/119734841)
+
+### 8.1 操作
 ```shell
 # 查找配置文件
 $ ps aux|grep nginx
-# cd 到查找到的目录
+# cd 到查找到的目录 xxx/nginx/sbin
 # 启动
 $ ./nginx
 # 修改配置
@@ -116,6 +119,19 @@ $ ./nginx -t
 # 重启
 $ ./nginx -s reload
 ```
+
+### 8.2 报错
+```shell
+# bind() to 0.0.0.0:80 failed (98: Address already in use)
+# 80端口被占用
+# fuser 命令可以干掉绝大数占用端口的程序或文件
+fuser -k 80/tcp 
+# 或
+sudo fuser -k 80/tcp
+```
+
+### 8.3 卸载
+[参考](https://blog.csdn.net/qq_39505065/article/details/106765950)
 
 ## 9. [Supervisor] 配置
 [参考](https://www.cnblogs.com/qq419139624/p/14866148.html)

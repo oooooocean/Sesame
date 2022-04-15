@@ -1,1 +1,1 @@
-const serviceHost = 'http://192.168.29.11:8000/v1/';
+const serviceHost = 'http://39.107.136.94/v1/';
