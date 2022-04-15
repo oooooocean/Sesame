@@ -7,9 +7,9 @@ import pymysql
 
 pymysql.install_as_MySQLdb()
 
-DB_URL = 'mysql+mysqldb://root:bei1202jing@127.0.0.1:3306/sao'
+DB_URL = 'mysql+mysqldb://root:BEI1202jing_@127.0.0.1:3306/sesame'
 
-db_engine = create_engine('mysql+mysqldb://root:bei1202jing@127.0.0.1:3306/sao',
+db_engine = create_engine('mysql+mysqldb://root:BEI1202jing_@127.0.0.1:3306/sesame',
                           encoding='utf8',
                           echo=False,
                           future=True)
