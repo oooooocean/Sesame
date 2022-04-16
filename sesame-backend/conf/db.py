@@ -7,12 +7,11 @@ import pymysql
 
 pymysql.install_as_MySQLdb()
 
-DB_URL = 'mysql+mysqldb://root:BEI1202jing_@127.0.0.1:3306/sesame'
+DB_PASSWORD = 'BEI1202jing_'  # 'bei1202jing'
 
-db_engine = create_engine('mysql+mysqldb://root:BEI1202jing_@127.0.0.1:3306/sesame',
-                          encoding='utf8',
-                          echo=False,
-                          future=True)
+DB_URL = 'mysql+mysqldb://root:%s@127.0.0.1:3306/sesame' % DB_PASSWORD
+
+db_engine = create_engine(DB_URL, encoding='utf8', echo=False, future=True)
 
 # registry().generate_base()
 BaseDB = declarative_base(db_engine)

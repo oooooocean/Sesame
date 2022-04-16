@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:keyboard_actions/keyboard_actions.dart';
 import 'package:sesame_frontend/components/mixins/keyboard_allocator.dart';
 import 'package:sesame_frontend/components/mixins/theme_mixin.dart';
 import 'package:sesame_frontend/pages/album/create/album_create_controller.dart';
@@ -15,30 +17,27 @@ class AlbumCreatePage extends GetView<AlbumCreateController> with KeyboardAlloca
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(title: const Text('Build your world')),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 25.0, horizontal: 15.0),
-          child: Column(
-            children: [
-              _imageItem,
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: _albumTitleItem,
+        body: SafeArea(
+          child: KeyboardActions(
+            config: doneKeyboardConfig([titleNode, descriptionNode]),
+            child: SizedBox(
+                height: Get.height - Get.statusBarHeight - kToolbarHeight,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 25.0, horizontal: 15.0),
+                  child: Column(
+                    children: [
+                      _imageItem,
+                      Column(mainAxisSize: MainAxisSize.min, children: [
+                        Padding(padding: const EdgeInsets.symmetric(vertical: 10.0), child: _albumTitleItem),
+                        _albumDescriptionItem,
+                      ]),
+                      const Spacer(),
+                      _nextItem
+                    ],
+                  ),
+                ),
               ),
-              _albumDescriptionItem,
-              const Spacer(),
-              GetBuilder<AlbumCreateController>(
-                  id: 'next',
-                  builder: (_) {
-                    final enable = controller.shouldNext;
-                    final color = controller.shouldNext ? accentColor : Colors.grey;
-                    return TextButton(
-                      onPressed: enable ? controller.create : null,
-                      child: Text('CREATE NOW', style: TextStyle(color: color)),
-                      style: ButtonStyle(side: MaterialStateProperty.all(BorderSide(color: color))),
-                    );
-                  }),
-            ],
-          ),
+            ),
         ),
       );
 
@@ -79,4 +78,16 @@ class AlbumCreatePage extends GetView<AlbumCreateController> with KeyboardAlloca
             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: borderColor, width: 1)),
             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: secondaryColor, width: 1))),
       );
+
+  Widget get _nextItem => GetBuilder<AlbumCreateController>(
+      id: 'next',
+      builder: (_) {
+        final enable = controller.shouldNext;
+        final color = controller.shouldNext ? accentColor : Colors.grey;
+        return TextButton(
+          onPressed: enable ? controller.create : null,
+          child: Text('CREATE NOW', style: TextStyle(color: color)),
+          style: ButtonStyle(side: MaterialStateProperty.all(BorderSide(color: color))),
+        );
+      });
 }

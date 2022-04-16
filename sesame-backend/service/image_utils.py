@@ -52,4 +52,4 @@ def add_watermark(image: Image.Image, text='芝麻开门', margin=10) -> Image.I
     y = imageHeight - textHeight - margin
     overlay_draw.text((x, y), text, font=font, fill=(255, 255, 255, 50))
 
-    return Image.alpha_composite(copy, overlay)
+    return Image.alpha_composite(copy, overlay).convert('RGB')

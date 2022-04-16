@@ -51,3 +51,16 @@ GetPage(
   ...
 )
 ```
+
+## 5. wechat_assets_picker 使用
+
+### 5.1 压缩图片
+1. 卡顿原因: 图片太大, 上传卡主线程. PS: Flutter 中的异步操作并没有开启线程
+2. 压缩使用JPEG: PNG格式包含alpha通道, 压缩后体积较大.
+3. 不使用isolate的原因: 入参和出参的数据格式只能是基本类型, 限制太大.
+
+```dart
+final size = ThumbnailSize((min(Get.width * Get.pixelRatio, entity.size.width)).toInt(),
+            (min(Get.height * Get.pixelRatio, entity.size.height).toInt()));
+bytes = entity.thumbnailDataWithSize(size, quality: 50, format: ThumbnailFormat.jpeg);
+```

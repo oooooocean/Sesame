@@ -10,7 +10,7 @@ def save_files(file_metas, in_rel_path):
     """
     file_name_list = []
     for index, meta in enumerate(file_metas):
-        file_name = time.strftime('%Y%m%d%H%M%S') + '%d' % index + '.png'
+        file_name = time.strftime('%Y%m%d%H%M%S') + '%d' % index + '.jpeg'
         file_path = os.path.join(in_rel_path, file_name)
         file_name_list.append(file_name)
 

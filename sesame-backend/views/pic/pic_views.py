@@ -42,5 +42,5 @@ class PicHandler(BaseHandler):
 
         copy = add_watermark(image)
         temp_io = BytesIO()
-        copy.save(temp_io, format='png')
+        copy.save(temp_io, format='jpeg')
         self.finish(temp_io.getvalue())
