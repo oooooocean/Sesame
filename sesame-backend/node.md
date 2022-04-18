@@ -91,7 +91,8 @@ cd Python-3.10
 ./configure -C --with-openssl=/usr/local/openssl --with-openssl-rpath=auto
 ```
 
-## 7. [Git] 拉取指定文件夹
+## 7. 文件同步到服务器
+### 7.1 [Git] 拉取指定文件夹
 
 ```shell
 $ git init    //git初始化
@@ -100,6 +101,15 @@ $ git config core.sparsecheckout true
 $ echo "sesame-backend" >> .git/info/sparse-checkout
 $ cat .git/info/sparse-checkout
 $ git pull origin master
+```
+
+### 7.2 SCP
+[Secure copy](https://blog.csdn.net/qq_36078992/article/details/105847132)
+
+```shell
+# 拷贝并覆盖文件夹的内容
+# /web, 仅拷贝文件夹, 如果存在不会覆盖
+scp -r sesame_www/build/web/. root@39.107.136.94:/projects/sesame_www
 ```
 
 ## 8. [nginx] 配置
@@ -132,6 +142,16 @@ sudo fuser -k 80/tcp
 
 ### 8.3 卸载
 [参考](https://blog.csdn.net/qq_39505065/article/details/106765950)
+
+### 8.4 缓存
+1. location 中添加 `add_header Cache-Control "no-cache, no-store";`
+2. 编译产物中的资源文件添加 query
+
+```text
+scriptTag.src = 'main.dart.js?v=1';
+// 或
+scriptTag.src = 'main.dart.js?1;
+```
 
 ## 9. [Supervisor] 配置
 [参考](https://www.cnblogs.com/qq419139624/p/14866148.html)

@@ -1,16 +1,26 @@
-# sesame_www
+## 1. 工程
+### 1.1 创建工程
 
-A new Flutter project.
+```shell
+flutter create --platforms web sesame_www
+```
 
-## Getting Started
+### 1.2 打包和部署
 
-This project is a starting point for a Flutter application.
+```shell
+flutter build web --release
+```
 
-A few resources to get you started if this is your first Flutter project:
+## 2. 自定义 ScrollBehavior 以支持鼠标刷滑动
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```dart
+class MyCustomScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices =>
+      {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse
+      };
+}
+```
