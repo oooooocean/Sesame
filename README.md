@@ -14,7 +14,7 @@
 - 网络框架: [Tornado](https://github.com/tornadoweb/tornado)
 - 日志: [loguru]()
 - 数据库ORM: [SQLAlchemy]()
-- 图片处理: [Pillow]()
+- 图片处理: [Pillow]()> 
 - 数据库版本管理: [alembic]()
 
 ### 前端
@@ -30,3 +30,5 @@
 * [ ] 图片广场, 图片说说
 
 ## 贡献者
+感谢各位老铁的鼎力支持.
+[hainuo](https://github.com/hainuodev) [小予]()

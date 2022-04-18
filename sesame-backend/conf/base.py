@@ -1,7 +1,7 @@
 SERVER_HOST = 'http://127.0.0.1:8000'
 
 SERVER_CONFIGS = {
-    'upload_path': '/store/sesame/',  # '/Users/qiangchen/Desktop/sesame-store/'
+    'upload_path': '/Users/qiangchen/Desktop/sesame-store/',  # '/store/sesame/'
     'album_count_limit': 20,
     'photo_count_limit': 500
 }

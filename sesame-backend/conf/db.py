@@ -7,7 +7,7 @@ import pymysql
 
 pymysql.install_as_MySQLdb()
 
-DB_PASSWORD = 'BEI1202jing_'  # 'bei1202jing'
+DB_PASSWORD = 'bei1202jing'  # 'BEI1202jing_'
 
 DB_URL = 'mysql+mysqldb://root:%s@127.0.0.1:3306/sesame' % DB_PASSWORD
 
