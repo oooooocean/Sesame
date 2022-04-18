@@ -31,4 +31,4 @@
 
 ## 贡献者
 感谢各位老铁的鼎力支持.
-[hainuo](https://github.com/hainuodev) [小予]()
+[hainuo](https://github.com/hainuodev) [小予]() [Succeed](https://github.com/SuccessGo) [RoyalLiang](https://github.com/RoyalLiang)
