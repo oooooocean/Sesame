@@ -9,6 +9,7 @@ from sqlalchemy import (
 from sqlalchemy.orm import relationship
 from models.base_model import ModelMixin
 from time import time
+from models.relationship_models import PostPhoto
 
 
 class Album(conf.db.BaseDB, ModelMixin):
@@ -43,6 +44,7 @@ class Photo(conf.db.BaseDB, ModelMixin):
     album_id = Column(Integer, ForeignKey('album.id'))
 
     album = relationship('Album', back_populates='photos')
+    posts = relationship('Post', secondary=PostPhoto.__tablename__, back_populates='photos')
 
     def json_exclude_columns(self):
         return ModelMixin.json_exclude_columns(self) + ['user_id']

@@ -153,6 +153,17 @@ scriptTag.src = 'main.dart.js?v=1';
 scriptTag.src = 'main.dart.js?1;
 ```
 
+### 8.5 配置
+
+```text
+# 路径重写
+location /api/ {
+  rewrite ^/api/(.*) /$1 break;
+  proxy_pass http://forontends;
+}
+```
+
+
 ## 9. [Supervisor] 配置
 [参考](https://www.cnblogs.com/qq419139624/p/14866148.html)
 [报错 Exited too quickly (process log may have details)](https://blog.csdn.net/nbcsdn/article/details/108660702)

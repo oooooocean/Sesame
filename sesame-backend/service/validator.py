@@ -74,3 +74,12 @@ def validate_user_nickname(name: str) -> tuple:
     :return:
     """
     return validate_str(name, '昵称', COMMON_CONFIGS['nick_name_limit'])
+
+
+def validate_post_description(description: str) -> tuple:
+    """
+    帖子描述
+    :param description:
+    :return:
+    """
+    return validate_str(description, '内容', COMMON_CONFIGS['post_description_limit'])

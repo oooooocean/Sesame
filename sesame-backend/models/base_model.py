@@ -42,7 +42,7 @@ class ModelMixin:
         :return:
         """
         json_dict = {}
-        exclude_columns = self.json_exclude_columns()
+        exclude_columns = self.json_exclude_columns() or []
         for column in self.__table__.columns:
             name = column.name
             if name in exclude_columns:

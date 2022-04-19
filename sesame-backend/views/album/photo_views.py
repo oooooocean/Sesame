@@ -45,7 +45,7 @@ class PhotoHandler(AuthBaseHandler):
             if not photo: raise ClientError('图片不存在')
             self.success(photo.to_json())
         else:
-            count, photos = paginate(self, Photo, Photo.album_id == album_id, order_by=Photo.id.desc())
+            count, photos = paginate(self, Photo, Photo.album_id == album_id, ~Photo.deleted, order_by=Photo.id.desc())
             self.success({'count': count, 'results': [photo.to_json() for photo in photos]})
 
     def post(self, album_id, photo_id):
