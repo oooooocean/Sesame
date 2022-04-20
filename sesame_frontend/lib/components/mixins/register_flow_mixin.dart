@@ -9,7 +9,7 @@ mixin RegisterFlowMixin {
     if (launch.registerFlows.isEmpty) return false;
 
     launch.registerFlows.remove(Get.currentRoute);
-    final next = launch.registerFlows.isNotEmpty ? launch.registerFlows.first : AppRoutes.albumList;
+    final next = launch.registerFlows.isNotEmpty ? launch.registerFlows.first : AppRoutes.scaffold;
     Get.offAllNamed(next);
     return true;
   }

@@ -12,6 +12,5 @@ void main() async {
 Future<String> _init() async {
   await LaunchService.shared.init();
   Get.put(LaunchService.shared);
-  return AppRoutes.scaffold;
-  // return LaunchService.shared.firstRoute;
+  return LaunchService.shared.firstRoute;
 }

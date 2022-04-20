@@ -78,9 +78,22 @@ import pymysql
 pymysql.install_as_MySQLdb()
 ```
 
-## 5. [CenterOS] 安装 Mysql
+## 5. Mysql
+### 5.1 [CenterOS] 安装 
 [参考](https://blog.csdn.net/weixin_44244088/article/details/122286105)
 [mysql_config报错参考](https://blog.csdn.net/hknaruto/article/details/82852308)
+
+### 5.2 操作
+- 清空数据库
+
+```sql
+# 删除外键约束
+SET foreign_key_checks = 0;
+# 生成截断语句
+select CONCAT('TRUNCATE TABLE ',table_name,';') from information_schema.tables where TABLE_SCHEMA = 'sesame';
+# 启动外键约束
+SET foreign_key_checks = 1;
+```
 
 ## 6. [CenterOS] 安装Python3
 [参考](https://blog.csdn.net/qq_36750158/article/details/80609857)

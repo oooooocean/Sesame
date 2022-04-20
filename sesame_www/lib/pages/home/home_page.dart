@@ -117,7 +117,7 @@ class HomePage extends GetView<HomePageController> with ThemeMixin {
 
   Widget get _qrItem => QrImage(
         padding: EdgeInsets.zero,
-        data: "http://39.107.136.94/sesame/doc/index.html",
+        data: "https://www.pgyer.com/26Ta",
         version: QrVersions.auto,
         foregroundColor: Colors.white,
         size: isSmallScreen ? 120.0 : 180.0,
