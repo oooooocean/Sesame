@@ -26,6 +26,7 @@ class Post(BaseDB, ModelMixin):
     def to_json(self) -> dict:
         json_dict = ModelMixin.to_json(self)
         json_dict['photos'] = [photo.to_json() for photo in self.photos]
+        json_dict['owner'] = self.owner.info.to_json()
         return json_dict
 
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sesame_frontend/app.dart';
+import 'package:sesame_frontend/route/pages.dart';
 import 'package:sesame_frontend/services/launch_service.dart';
 
 void main() async {
@@ -11,5 +12,6 @@ void main() async {
 Future<String> _init() async {
   await LaunchService.shared.init();
   Get.put(LaunchService.shared);
-  return LaunchService.shared.firstRoute;
+  return AppRoutes.scaffold;
+  // return LaunchService.shared.firstRoute;
 }

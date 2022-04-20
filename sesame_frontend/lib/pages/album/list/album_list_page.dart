@@ -2,19 +2,31 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sesame_frontend/components/mixins/load_image_mixin.dart';
+import 'package:sesame_frontend/components/mixins/separable_page_mixin.dart';
 import 'package:sesame_frontend/components/mixins/theme_mixin.dart';
 import 'package:sesame_frontend/pages/album/list/album_list_controller.dart';
-import 'package:sesame_frontend/pages/user/user_info_page.dart';
 import 'package:sesame_frontend/route/pages.dart';
 
-class AlbumListPage extends GetView<AlbumListController> with ThemeMixin, LoadImageMixin {
-  final coverHeight = 150.0;
-
+class AlbumListPage extends StatefulWidget {
   const AlbumListPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  State<StatefulWidget> createState() => _AlbumListState();
+}
+
+class _AlbumListState extends State<AlbumListPage>
+    with
+        AutomaticKeepAliveClientMixin,
+        ThemeMixin,
+        LoadImageMixin,
+        SeparablePageMixin<AlbumListController, AlbumListPage> {
+  final double coverHeight = 150.0;
+
+  @override
+  String get routeName => AppRoutes.albumList;
+
+  @override
+  Widget get page => Scaffold(
       appBar: AppBar(
         title: buildAssetImage('logo', width: 25),
         leading: Builder(
@@ -22,20 +34,24 @@ class AlbumListPage extends GetView<AlbumListController> with ThemeMixin, LoadIm
                 onPressed: () => Scaffold.of(context).openDrawer(),
                 icon: const Icon(Icons.home_rounded, color: Colors.white))),
         actions: [
-          IconButton(onPressed: () => Get.toNamed(AppRoutes.albumCreate), icon: const Icon(Icons.add, color: Colors.white))
+          IconButton(
+              onPressed: () => Get.toNamed(AppRoutes.albumCreate), icon: const Icon(Icons.add, color: Colors.white))
         ],
       ),
-      body: controller.obx(
-          (state) => ListView.separated(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15.0),
-              itemBuilder: _itemBuilder,
-              separatorBuilder: _separatorBuilder,
-              itemCount: controller.albums.length),
-          onError: (msg) => Center(child: Text(msg ?? '')),
-          onLoading: const Center(child: CupertinoActivityIndicator())),
-      drawer: const UserInfoPage(),
-    );
-  }
+      body: body);
+
+  @override
+  Widget get body => controller.obx(
+        (state) => ListView.separated(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15.0),
+            itemBuilder: _itemBuilder,
+            separatorBuilder: _separatorBuilder,
+            itemCount: controller.albums.length),
+        onError: (msg) => Center(child: Text(msg ?? '')),
+        onLoading: const Center(
+          child: CupertinoActivityIndicator(),
+        ),
+      );
 
   Widget _itemBuilder(BuildContext context, int index) {
     final album = controller.albums[index];

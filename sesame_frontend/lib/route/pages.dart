@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:sesame_frontend/models/photo.dart';
 import 'package:sesame_frontend/pages/album/create/album_create_controller.dart';
 import 'package:sesame_frontend/pages/album/create/album_create_page.dart';
 import 'package:sesame_frontend/pages/album/list/album_list_controller.dart';
@@ -9,6 +10,14 @@ import 'package:sesame_frontend/pages/photo/photo_browser_controller.dart';
 import 'package:sesame_frontend/pages/photo/photo_browser_page.dart';
 import 'package:sesame_frontend/pages/photo/photo_list_controller.dart';
 import 'package:sesame_frontend/pages/photo/photo_list_page.dart';
+import 'package:sesame_frontend/pages/photo/photo_select_controller.dart';
+import 'package:sesame_frontend/pages/photo/photo_select_page.dart';
+import 'package:sesame_frontend/pages/post/create/post_create_controller.dart';
+import 'package:sesame_frontend/pages/post/create/post_create_page.dart';
+import 'package:sesame_frontend/pages/post/list/post_list_controller.dart';
+import 'package:sesame_frontend/pages/post/list/post_list_page.dart';
+import 'package:sesame_frontend/pages/scaffold/scaffold_controller.dart';
+import 'package:sesame_frontend/pages/scaffold/scaffold_page.dart';
 import 'package:sesame_frontend/pages/user/user_info_controller.dart';
 import 'package:sesame_frontend/pages/user/user_info_set_page.dart';
 import 'package:sesame_frontend/services/launch_service.dart';
@@ -38,7 +47,7 @@ final appRoutes = [
           Get.lazyPut(() => UserInfoSetController(userInfo: Get.arguments ?? Get.find<LaunchService>().user!.info)))),
   GetPage(
       name: AppRoutes.photoList,
-      page: () => PhotoListPage(),
+      page: () => const PhotoListPage(),
       binding: BindingsBuilder(() => Get.lazyPut(() => PhotoListController()))),
   GetPage(
       opaque: false,
@@ -47,4 +56,26 @@ final appRoutes = [
       name: AppRoutes.photoBrowser,
       page: () => const PhotoBrowserPage(),
       binding: BindingsBuilder(() => Get.lazyPut(() => PhotoBrowserController()))),
+  GetPage<List<Photo>>(
+      name: AppRoutes.photoSelect,
+      page: () => PhotoSelectPage(),
+      fullscreenDialog: true,
+      binding: BindingsBuilder(() => Get.lazyPut(() => PhotoSelectController()))),
+  GetPage(
+      name: AppRoutes.postCreate,
+      page: () => PostCreatePage(),
+      binding: BindingsBuilder(() => Get.lazyPut(() => PostCreateController()))),
+  GetPage(
+      name: AppRoutes.postList,
+      page: () => const PostListPage(),
+      binding: BindingsBuilder(() => Get.lazyPut(() => PostListController()))),
+  GetPage(
+      name: AppRoutes.scaffold,
+      page: () => const ScaffoldPage(),
+      binding: BindingsBuilder(() {
+        Get.lazyPut(() => AlbumListController());
+        Get.lazyPut(() => PostListController());
+        Get.lazyPut(() => ScaffoldController());
+        Get.lazyPut(() => UserInfoController());
+      })),
 ];

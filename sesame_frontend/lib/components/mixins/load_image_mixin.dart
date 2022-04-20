@@ -8,12 +8,13 @@ mixin LoadImageMixin {
   Image buildAssetImage(String name, {double? width, BoxFit fit = BoxFit.fitWidth}) =>
       Image.asset('assets/images/$name.png', width: width, fit: fit);
 
-  Image buildNetImage(String url, {BoxFit fit = BoxFit.fitWidth, double? width, double? height}) {
+  Image buildNetImage(String url, {BoxFit fit = BoxFit.fitWidth, double? width, double? height, Alignment alignment = Alignment.center}) {
     Widget placeholder = const Center(child: CupertinoActivityIndicator());
     return Image.network(url,
         width: width,
         height: height,
         fit: fit,
+        alignment: alignment,
         errorBuilder: (_, __, ___) => const Center(child: Icon(Icons.error, size: 20.0)),
         loadingBuilder: (ctx, child, progress) => progress == null ? child : placeholder);
   }

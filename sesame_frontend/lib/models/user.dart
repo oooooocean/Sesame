@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:ffi';
 
+import 'package:get/get.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:sesame_frontend/components/mixins/load_image_mixin.dart';
 import 'package:sesame_frontend/services/store.dart';
 
 part 'user.g.dart';
@@ -39,7 +41,7 @@ class User {
 }
 
 @JsonSerializable()
-class UserInfo {
+class UserInfo with LoadImageMixin {
   String? nickname;
   Gender? gender;
   String? avatar;
@@ -54,4 +56,6 @@ class UserInfo {
   String toString() => '';
 
   bool get isCompletion => (nickname?.isNotEmpty ?? false) && gender != null && avatar != null;
+
+  String get thumbnailUrl => buildNetImageUrl(avatar!, width: Get.width / 4);
 }

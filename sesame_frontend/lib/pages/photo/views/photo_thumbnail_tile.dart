@@ -6,11 +6,9 @@ import 'package:sesame_frontend/models/photo.dart';
 class PhotoThumbnailTile extends StatelessWidget with ThemeMixin, LoadImageMixin {
   final VoidCallback onTap;
   final Photo photo;
-  final double width;
-  final double height;
+  final VoidCallback? onTapCorner;
 
-  PhotoThumbnailTile({Key? key, required this.photo, required this.onTap, required this.width, required this.height})
-      : super(key: key);
+  PhotoThumbnailTile({Key? key, required this.photo, required this.onTap, this.onTapCorner}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => TextButton(
@@ -20,11 +18,8 @@ class PhotoThumbnailTile extends StatelessWidget with ThemeMixin, LoadImageMixin
           children: [
             Opacity(
                 opacity: 0.85,
-                child: Hero(
-                    tag: photo.name,
-                    child:
-                        buildNetImage(buildNetImageUrl(photo.name, height: height, width: width), fit: BoxFit.cover))),
-            Positioned(right: 5, bottom: 5, child: Icon(Icons.star, color: photo.favor ? Colors.yellow : Colors.grey))
+                child: Hero(tag: photo.name, child: buildNetImage(photo.thumbnailUrl, fit: BoxFit.cover))),
+            _cornerItem
           ],
         ),
         clipBehavior: Clip.hardEdge,
@@ -35,4 +30,18 @@ class PhotoThumbnailTile extends StatelessWidget with ThemeMixin, LoadImageMixin
             shape: MaterialStateProperty.all(
                 const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5))))),
       );
+
+  bool get _shouldStar => onTapCorner == null;
+
+  Widget get _cornerItem => _shouldStar
+      ? Positioned(right: 5, bottom: 5, child: Icon(Icons.star, color: photo.favor ? Colors.yellow : Colors.grey))
+      : Positioned(
+          right: 0,
+          top: 0,
+          child: IconButton(
+            onPressed: onTapCorner,
+            icon: Icon(photo.selected ? Icons.radio_button_checked : Icons.radio_button_unchecked,
+                color: photo.selected ? Colors.green : Colors.white),
+          ),
+        );
 }

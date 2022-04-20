@@ -11,6 +11,7 @@ class Application(web.Application):
             (r'/v1/login/', include('views.login.login_urls')),
             (r'/v1/user/', include('views.users.user_urls')),
             (r'/v1/album/', include('views.album.album_urls')),
+            (r'/v1/photos/', include('views.album.photos_urls')),
             (r'/v1/common/', include('views.common.common_urls')),
             (r'/v1/pic/', include('views.pic.pic_urls')),
             (r'/v1/post/', include('views.post.post_urls')),

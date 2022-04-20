@@ -175,10 +175,29 @@ location /api/ {
 
 ## 2. SQLAlchemy
 
+### 2.1 技巧
+#### 2.1.1 可能为 None 的处理
+
 ```python
-# 1. info 可能为 None 的处理
 user_json['info'] = user.info.to_json() if user.info else None
 ```
+
+### 2.2 Query
+#### 2.2.1 直接更新
+
+```python
+Foo.query.filter(...).update()
+
+# 多执行一次语句 
+foo = Foo.query.filter(...).first()
+...
+foo.save()
+```
+
+### 2.3 Column
+#### 2.3.1 default 
+- `default`: the default value for this column. 插入操作时有效.
+- `server_default`: **DDL DEFAULT** value for the column. 
 
 ## 3. enum.Enum
 define unique sets of names and values. 
