@@ -80,7 +80,7 @@ class UserInfoSetPage extends GetView<UserInfoSetController> with ThemeMixin, Ke
         decoration: InputDecoration(
             hintText: 'Enter your nickname',
             enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: borderColor, width: 1)),
-            focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: secondaryColor, width: 1))),
+            focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: greyColor, width: 1))),
       ));
 
   Widget get _genderItem => GetBuilder<UserInfoSetController>(

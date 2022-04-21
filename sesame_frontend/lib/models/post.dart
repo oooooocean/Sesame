@@ -16,8 +16,12 @@ class Post {
   int ownerId;
   List<Photo> photos;
   UserInfo owner;
+  int shareCount;
+  int commentCount;
+  int favorCount;
 
-  Post(this.id, this.description, this.createTime, this.updateTime, this.ownerId, this.photos, this.owner);
+  Post(this.id, this.description, this.createTime, this.updateTime, this.ownerId, this.photos, this.owner,
+      this.shareCount, this.commentCount, this.favorCount);
 
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
 

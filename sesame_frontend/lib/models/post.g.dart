@@ -16,6 +16,9 @@ Post _$PostFromJson(Map<String, dynamic> json) => Post(
           .map((e) => Photo.fromJson(e as Map<String, dynamic>))
           .toList(),
       UserInfo.fromJson(json['owner'] as Map<String, dynamic>),
+      json['shareCount'] as int,
+      json['commentCount'] as int,
+      json['favorCount'] as int,
     );
 
 Map<String, dynamic> _$PostToJson(Post instance) => <String, dynamic>{
@@ -26,4 +29,7 @@ Map<String, dynamic> _$PostToJson(Post instance) => <String, dynamic>{
       'ownerId': instance.ownerId,
       'photos': instance.photos,
       'owner': instance.owner,
+      'shareCount': instance.shareCount,
+      'commentCount': instance.commentCount,
+      'favorCount': instance.favorCount,
     };

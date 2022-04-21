@@ -30,19 +30,17 @@ class _PostLisState extends State<PostListPage>
 
   @override
   Widget get body => GetBuilder<PostListController>(
-      builder: (_) => SmartRefresher(
-            controller: controller.refreshController,
-            enablePullUp: true,
-            onRefresh: () => controller.load(RefreshType.refresh),
-            onLoading: () => controller.load(RefreshType.loadMore),
-            child: ListView.separated(
-                itemBuilder: _itemBuilder, separatorBuilder: _separatorBuilder, itemCount: controller.items.length),
-          ));
+        builder: (_) => SmartRefresher(
+          controller: controller.refreshController,
+          enablePullUp: true,
+          onRefresh: () => controller.load(RefreshType.refresh),
+          onLoading: () => controller.load(RefreshType.loadMore),
+          child: ListView.separated(
+              itemBuilder: _itemBuilder, separatorBuilder: _separatorBuilder, itemCount: controller.items.length),
+        ),
+      );
 
-  Widget _itemBuilder(BuildContext context, int index) {
-    final post = controller.items[index];
-    return PostTile(post: post);
-  }
+  Widget _itemBuilder(BuildContext context, int index) => PostTile(post: controller.items[index]);
 
   Widget _separatorBuilder(BuildContext context, int index) => Divider(height: 5, thickness: 5, color: borderColor);
 }

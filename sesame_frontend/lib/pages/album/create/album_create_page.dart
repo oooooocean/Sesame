@@ -46,7 +46,7 @@ class AlbumCreatePage extends GetView<AlbumCreateController> with KeyboardAlloca
             id: 'cover',
             builder: (_) => controller.cover != null
                 ? Image(image: AssetEntityImageProvider(controller.cover!), width: Get.width, fit: BoxFit.cover)
-                : Icon(Icons.add_a_photo_outlined, size: 40, color: secondaryColor)),
+                : Icon(Icons.add_a_photo_outlined, size: 40, color: greyColor)),
         onPressed: controller.choseCover,
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(borderColor),
@@ -64,7 +64,7 @@ class AlbumCreatePage extends GetView<AlbumCreateController> with KeyboardAlloca
         decoration: InputDecoration(
             hintText: 'Enter album\'s title',
             enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: borderColor, width: 1)),
-            focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: secondaryColor, width: 1))),
+            focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: greyColor, width: 1))),
       );
 
   Widget get _albumDescriptionItem => TextField(
@@ -76,7 +76,7 @@ class AlbumCreatePage extends GetView<AlbumCreateController> with KeyboardAlloca
         decoration: InputDecoration(
             hintText: 'Enter album\'s description',
             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: borderColor, width: 1)),
-            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: secondaryColor, width: 1))),
+            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: greyColor, width: 1))),
       );
 
   Widget get _nextItem => GetBuilder<AlbumCreateController>(

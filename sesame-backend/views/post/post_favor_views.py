@@ -1,5 +1,6 @@
 from views.base.base_views import AuthBaseHandler
-from models.post_model import Post, PostFavor
+from models.post_model import Post
+from models.post_favor_model import PostFavor
 from common.exception import ClientError
 
 
