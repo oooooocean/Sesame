@@ -18,7 +18,8 @@ class BaseHandler(RequestHandler):
 
     def prepare(self):
         self.json_args = {}
-        if self.request.method == "POST" and self.request.headers.get('Content-Type', '').startswith('application/json'):
+        if self.request.method == "POST" and self.request.headers.get('Content-Type', '').startswith(
+                'application/json'):
             self.json_args = json_decode(self.request.body)
 
     def http_response(self, error: SaoException, data=None):
@@ -28,17 +29,17 @@ class BaseHandler(RequestHandler):
         :param data: 数据体
         :return:
         """
-        self.set_status(error.getHttpStatus())
+        self.set_status(error.get_http_status())
         self.set_header('Content-type', 'application/json')
         self.finish({'msg': error.msg, 'code': error.code, 'data': data})
 
     def success(self, data=None):
         self.http_response(ERROR_CODE_0, data)
 
-    def simpleSuccess(self):
+    def simple_success(self):
         self.http_response(ERROR_CODE_0, True)
 
-    def simpleFail(self):
+    def simple_fail(self):
         self.http_response(ERROR_CODE_0, False)
 
     def write_error(self, status_code: int, **kwargs) -> None:

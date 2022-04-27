@@ -15,7 +15,9 @@ COMMON_CONFIGS = {
     'album_name_limit': 10,
     'password_min_limit': 8,
     'post_description_limit': 200,
-    'post_photo_limit': 9
+    'post_photo_limit': 9,
+    'post_comment_limit': 200
 }
 
-DB_URL = 'mysql+mysqldb://root:BEI1202jing_@127.0.0.1:3306/sesame' if IS_PRODUCT else 'mysql+mysqldb://root:bei1202jing@127.0.0.1:3306/sao'
+DB_URL = 'mysql+mysqldb://root:BEI1202jing_@127.0.0.1:3306/sesame' if IS_PRODUCT \
+    else 'mysql+mysqldb://root:bei1202jing@127.0.0.1:3306/sao'

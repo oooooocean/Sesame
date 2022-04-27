@@ -1,8 +1,8 @@
 from views.base.base_views import AuthBaseHandler
 from models.album_model import Album, Photo
 from service.image_utils import save_images
-from service.paginate import paginate
-from common.exception import ClientError, ServerError
+from service.paginate import paginate_json
+from common.exception import ClientError
 
 
 class PhotoHandler(AuthBaseHandler):
@@ -45,7 +45,8 @@ class PhotoHandler(AuthBaseHandler):
             if not photo: raise ClientError('图片不存在')
             self.success(photo.to_json())
         else:
-            count, photos = paginate(self, Photo, Photo.album_id == album_id, ~Photo.deleted, order_by=Photo.id.desc())
+            count, photos = paginate_json(self, Photo, Photo.album_id == album_id, ~Photo.deleted,
+                                          order_by=Photo.id.desc())
             self.success({'count': count, 'results': [photo.to_json() for photo in photos]})
 
     def post(self, album_id, photo_id):
@@ -87,7 +88,7 @@ class PhotoHandler(AuthBaseHandler):
         photos = Photo.query.filter(Photo.id in delete_ids, Photo.album_id == album_id).all()
         for photo in photos:
             photo.delete()
-        self.simpleSuccess()
+        self.simple_success()
 
     def _check_album(self, album_id):
         """
@@ -124,5 +125,5 @@ class PhotoHandler(AuthBaseHandler):
 
         file_names = save_images(self.user_id, image_metas)
         photos = [Photo(album_id=album_id, name=image_name) for image_name in file_names]
-        Photo.saveAll(photos)
+        Photo.save_all(photos)
         self.success([photo.to_json() for photo in photos])

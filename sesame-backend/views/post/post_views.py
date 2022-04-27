@@ -6,6 +6,12 @@ from models.post_model import Post
 from models.relationship_models import PostPhoto
 
 
+def _validate_photo(photo_ids):
+    if not photo_ids or len(photo_ids) not in range(1, COMMON_CONFIGS['post_photo_limit']):
+        return False, '图片数量必须是1-9张'
+    return True, None
+
+
 class PostHandler(AuthBaseHandler):
 
     def get(self, post_id):
@@ -70,13 +76,13 @@ class PostHandler(AuthBaseHandler):
     def _add(self, user_id, description, photo_ids):
         ok, msg = validate_post_description(description)
         if not ok: raise ClientError(msg)
-        ok, msg = self._validate_photo(photo_ids)
+        ok, msg = _validate_photo(photo_ids)
         if not ok: raise ClientError(msg)
 
         post = Post(description=description, owner_id=user_id)
         post.save()
         post_photos = [PostPhoto(photo_id=photo_id, post_id=post.id) for photo_id in photo_ids]
-        PostPhoto.saveAll(post_photos)
+        PostPhoto.save_all(post_photos)
         return self.success(post.to_json())
 
     def _modify(self, user_id, post_id, description, photo_ids):
@@ -85,14 +91,9 @@ class PostHandler(AuthBaseHandler):
         ok, _ = validate_post_description(description)
         if ok: post.description = description
 
-        ok, msg = self._validate_photo(photo_ids)
+        ok, msg = _validate_photo(photo_ids)
         if ok:
-            PostPhoto.query.delete(PostPhoto.post_id == post_id)
+            PostPhoto.query.filter(PostPhoto.post_id == post_id).delete()
             post_photos = [PostPhoto(photo_id=photo_id, post_id=post.id) for photo_id in photo_ids]
-            PostPhoto.saveAll(post_photos)
+            PostPhoto.save_all(post_photos)
         return self.success(post.to_json())
-
-    def _validate_photo(self, photo_ids):
-        if not photo_ids or len(photo_ids) not in range(1, COMMON_CONFIGS['post_photo_limit']):
-            return False, '图片数量必须是1-9张'
-        return True, None

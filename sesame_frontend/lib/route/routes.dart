@@ -20,4 +20,6 @@ abstract class AppRoutes {
   static const postCreate = '/post/Create';
 
   static const postList = '/post/list';
+
+  static const postDetail = '/post/detail';
 }

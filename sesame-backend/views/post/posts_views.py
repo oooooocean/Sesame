@@ -1,6 +1,6 @@
 from views.base.base_views import AuthBaseHandler
 from models.post_model import Post
-from service.paginate import paginate
+from service.paginate import paginate_json
 
 
 class PostsHandler(AuthBaseHandler):
@@ -17,7 +17,7 @@ class PostsHandler(AuthBaseHandler):
         @apiSuccess {Object[]} posts list of post.
         """
         if user_id:
-            count, posts = paginate(self, Post, Post.owner_id == user_id, ~Post.deleted, order_by=Post.id.desc())
+            result = paginate_json(self, Post, Post.owner_id == user_id, ~Post.deleted, order_by=Post.id.desc())
         else:
-            count, posts = paginate(self, Post, ~Post.deleted, order_by=Post.id.desc())
-        self.success({'count': count, 'results': [post.to_json() for post in posts]})
+            result = paginate_json(self, Post, ~Post.deleted, order_by=Post.id.desc())
+        self.success(result)

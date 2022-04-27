@@ -67,16 +67,17 @@ class ModelMixin:
         Session.add(self)
         Session.commit()
 
-    def delete(self):
+    @classmethod
+    def delete(cls, *criterion):
         """
         删除
         :return:
         """
-        Session.delete(self)
+        cls.query.filter(*criterion).delete()
         Session.commit()
 
     @classmethod
-    def saveAll(cls, objs):
+    def save_all(cls, objs):
         """
         保存对象
         :param objs:

@@ -17,6 +17,10 @@
 source ./venv/bin/activate
 ```
 
+### 1.3 更新python到3.10
+1. 重新执行 `python -m venv venv`
+2. 重新设置执行环境的python解释器版本
+
 ## 2. [Windows] 安装 mysql
 
 ```shell
@@ -93,6 +97,46 @@ SET foreign_key_checks = 0;
 select CONCAT('TRUNCATE TABLE ',table_name,';') from information_schema.tables where TABLE_SCHEMA = 'sesame';
 # 启动外键约束
 SET foreign_key_checks = 1;
+```
+
+- 重启
+
+```shell
+# liunx
+service mysqld restart
+```
+
+### 5.3 修改字符集
+
+```shell
+# 查找配置文件可能的位置
+$ mysql --help --verbose | grep my.cnf
+
+# 如果配置文件不存在
+$ sudo touch /etc/my.cnf
+$ sudo chmod 664 /etc/my.cnf
+$ sudo vim /etc/my.cnf
+# 添加如下内容
+[client]
+default-character-set = utf8mb4
+
+[mysql]
+default-character-set = utf8mb4
+
+[mysqld]
+character-set-client-handshake = FALSE
+character-set-server = utf8mb4
+collation-server = utf8mb4_unicode_ci
+init_connect='SET NAMES utf8mb4'
+
+# 检查变量是否修改成功
+mysql > SHOW VARIABLES WHERE Variable_name LIKE 'character_set_%' OR Variable_name LIKE 'collation%';
+
+# 修改数据库编码
+mysql > ALTER DATABASE sesame CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+# 修改表编码
+mysql > ALTER TABLE user_info CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci; 
 ```
 
 ## 6. [CenterOS] 安装Python3
@@ -180,6 +224,30 @@ location /api/ {
 ## 9. [Supervisor] 配置
 [参考](https://www.cnblogs.com/qq419139624/p/14866148.html)
 [报错 Exited too quickly (process log may have details)](https://blog.csdn.net/nbcsdn/article/details/108660702)
+
+### 9.1 venv 报错
+
+```text
+[group:sesames]
+programs=sesame-0,sesame-1
+
+[program:sesame-0]
+# 重点: 执行环境设置为venv
+command=/projects/sesame/sesame-backend/venv/bin/python3 /projects/sesame/sesame-backend/main.py --port=8000
+directory=/projects/sesame/sesame-backend/
+...
+```
+
+## 10. ssh
+### 10.1 登录后台
+
+```shell
+# 登录
+$ ssh root@ip
+
+# 登出
+$ logout
+```
 
 # 技术点
 ## 1. 正则匹配

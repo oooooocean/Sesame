@@ -1,6 +1,6 @@
 from views.base.base_views import AuthBaseHandler
 from models.album_model import Album, Photo
-from service.paginate import paginate
+from service.paginate import paginate_json
 
 
 class AlbumFavorHandler(AuthBaseHandler):
@@ -17,5 +17,5 @@ class AlbumFavorHandler(AuthBaseHandler):
         """
         user_id = self.get_argument('user_id', None) or self.current_user.id
         album_ids = [album.id for album in Album.query.filter(Album.user_id == user_id, ~Album.deleted).all()]
-        count, photos = paginate(self, Photo, Photo.favor, Photo.album_id in album_ids, ~Photo.deleted)
+        count, photos = paginate_json(self, Photo, Photo.favor, Photo.album_id in album_ids, ~Photo.deleted)
         self.success({'count': count, 'results': [photo.to_json() for photo in photos]})

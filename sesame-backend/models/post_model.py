@@ -3,6 +3,7 @@ from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
 from sqlalchemy.orm import relationship, declared_attr
 from time import time
 from models.relationship_models import PostPhoto
+from service.utils import camel_case
 
 
 class Post(BaseDB, ModelMixin):
@@ -45,13 +46,16 @@ class PostHandlerBase(BaseDB, ModelMixin):
 
     @declared_attr
     def post_id(self):
-        return Column(Integer, ForeignKey('post.id'))
+        return Column(Integer, ForeignKey('post.id'), nullable=False)
 
     @declared_attr
     def post(self):
         return relationship('Post', back_populates=self.__post_back_populates__)
 
+    def json_exclude_columns(self) -> list:
+        return ['deleted']
+
     def to_json(self) -> dict:
         json_dict = ModelMixin.to_json(self)
-        json_dict[self.__user_key__] = self.__getattribute__(self.__user_key__).info.to_json()
+        json_dict[camel_case(self.__user_key__)] = self.__getattribute__(self.__user_key__).info.to_json()
         return json_dict

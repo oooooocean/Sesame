@@ -2,6 +2,7 @@ from views.base.base_views import AuthBaseHandler
 from models.post_model import Post
 from models.post_favor_model import PostFavor
 from common.exception import ClientError
+from service.paginate import paginate_json
 
 
 class PostFavorHandler(AuthBaseHandler):
@@ -18,8 +19,7 @@ class PostFavorHandler(AuthBaseHandler):
 
         @apiSuccess {Object[]} data all favors.
         """
-        favors = [favor.to_json() for favor in PostFavor.query.filter(PostFavor.post_id == post_id).all()]
-        self.success(favors)
+        self.success(paginate_json(self, PostFavor, PostFavor.post_id == post_id))
 
     def post(self, post_id):
         """
@@ -35,11 +35,15 @@ class PostFavorHandler(AuthBaseHandler):
         """
         user_id = self.json_args.get('user_id', None) or self.current_user.id
         post = Post.query.filter(Post.id == post_id, ~Post.deleted).first()
-        if not post: raise ClientError('帖子不存在')
+        if not post:
+            raise ClientError('帖子不存在')
+
+        if PostFavor.query.filter(PostFavor.post_id == post_id, PostFavor.favor_user_id == user_id).first():
+            raise ClientError('请不要重复点赞')
 
         favor = PostFavor(post_id=post_id, favor_user_id=user_id)
         favor.save()
-        self.simpleSuccess()
+        self.success(favor.to_json())
 
     def delete(self, post_id):
         """
@@ -57,6 +61,5 @@ class PostFavorHandler(AuthBaseHandler):
         post = Post.query.filter(Post.id == post_id, ~Post.deleted).first()
         if not post: raise ClientError('帖子不存在')
 
-        favor = PostFavor.query.filter(PostFavor.post_id == post_id, PostFavor.favor_user_id == user_id).first()
-        if favor: favor.delete()
-        self.simpleSuccess()
+        PostFavor.delete(PostFavor.post_id == post_id, PostFavor.favor_user_id == user_id)
+        self.simple_success()

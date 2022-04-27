@@ -82,7 +82,7 @@ class AlbumHandler(AuthBaseHandler):
         album = Album.query.filter(Album.id == album_id, Album.user_id == user_id).first()
         album.deleted = True
         album.save()
-        self.simpleSuccess()
+        self.simple_success()
 
     def _add(self, user_id, name, description, image):
         """

@@ -61,6 +61,8 @@ dependencies:
   # json
   # https://pub.dev/packages/json_annotation
   json_annotation: ^4.4.0
+  # https://pub.dev/packages/date_format
+  date_format: 2.0.4
 
 dev_dependencies:
   flutter_test:
