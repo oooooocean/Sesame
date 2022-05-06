@@ -14,7 +14,6 @@ def paginate(request: RequestHandler, model_cls, *criterion, **kwargs) -> tuple:
     criterion = list(criterion)
 
     limit = int(request.get_query_argument('limit', COMMON_CONFIGS['page_default_limit']))
-    print(limit)
     page = request.get_query_argument('page', None)
     start = request.get_query_argument('start', None)
 

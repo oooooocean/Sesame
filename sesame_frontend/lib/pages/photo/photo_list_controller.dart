@@ -14,7 +14,7 @@ class PhotoListController extends GetxController with RefreshMixin<Photo>, NetMi
   PhotoListController() : album = Get.arguments;
 
   void onTap(int index) {
-    Get.toNamed(AppRoutes.photoBrowser, arguments: [items, index]);
+    Get.toNamed(AppRoutes.photoBrowser, arguments: [items, index, (photo) => photo.name]);
   }
 
   void add() async {

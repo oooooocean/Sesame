@@ -9,8 +9,8 @@ part of 'post.dart';
 Post _$PostFromJson(Map<String, dynamic> json) => Post(
       json['id'] as int,
       json['description'] as String,
-      convertTimestampToDatetime(json['createTime'] as int),
-      convertTimestampToDatetime(json['updateTime'] as int),
+      convertTimestampToDatetime(json['createTime']),
+      convertTimestampToDatetime(json['updateTime']),
       json['ownerId'] as int,
       (json['photos'] as List<dynamic>)
           .map((e) => Photo.fromJson(e as Map<String, dynamic>))
@@ -19,6 +19,7 @@ Post _$PostFromJson(Map<String, dynamic> json) => Post(
       json['shareCount'] as int,
       json['commentCount'] as int,
       json['favorCount'] as int,
+      json['hasFavor'] as bool,
     );
 
 Map<String, dynamic> _$PostToJson(Post instance) => <String, dynamic>{
@@ -32,4 +33,5 @@ Map<String, dynamic> _$PostToJson(Post instance) => <String, dynamic>{
       'shareCount': instance.shareCount,
       'commentCount': instance.commentCount,
       'favorCount': instance.favorCount,
+      'hasFavor': instance.hasFavor,
     };

@@ -69,7 +69,10 @@ class PostDetailState extends State<PostDetailPage> with SingleTickerProviderSta
                     ),
                   ),
                 ),
-                PostHandlerTile(onTap: controller.tapAction)
+                GetBuilder<PostDetailController>(
+                  id: 'handler',
+                  builder: (_) => PostHandlerTile(onTap: controller.tapAction, hasFavor: controller.data.hasFavor),
+                )
               ],
             ),
           ),

@@ -12,7 +12,7 @@ PostComment _$PostCommentFromJson(Map<String, dynamic> json) => PostComment(
       json['commentUserId'] as int,
       json['postId'] as int,
       UserInfo.fromJson(json['commentUser'] as Map<String, dynamic>),
-      convertTimestampToDatetime(json['createTime'] as int),
+      convertTimestampToDatetime(json['createTime']),
     );
 
 Map<String, dynamic> _$PostCommentToJson(PostComment instance) =>

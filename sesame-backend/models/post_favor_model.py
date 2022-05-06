@@ -10,3 +10,8 @@ class PostFavor(PostHandlerBase):
 
     favor_user_id = Column(Integer, ForeignKey('user.id'))
     favor_user = relationship('User', back_populates='favors')
+
+    @classmethod
+    def has_favor(cls, user_id, post_id) -> bool:
+        return PostFavor.query.filter(PostFavor.post_id == post_id,
+                                      PostFavor.favor_user_id == user_id).first() is not None

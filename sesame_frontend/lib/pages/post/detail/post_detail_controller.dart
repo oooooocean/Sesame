@@ -40,7 +40,20 @@ class PostDetailController extends GetxController with NetMixin {
       case PostHandlerType.comment:
         _comment();
         break;
+      case PostHandlerType.favor:
+        _favor();
+        break;
     }
+  }
+  
+  void _favor() async {
+    final url = 'post/${data.id}/favor';
+    Future<bool> api = data.hasFavor ? delete(url, {}, (data) => data) : post(url, {}, (data) => data);
+    request<bool>(api, success: (isSuccess) {
+      if (!isSuccess) return;
+      data.hasFavor = !data.hasFavor;
+      update(['handler']);
+    });
   }
 
   void _comment() async {

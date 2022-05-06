@@ -12,8 +12,9 @@ class PostTile extends GetView<PostListController> with LoadImageMixin, ThemeMix
   final Post post;
   final space = const SizedBox(height: 5);
   final bool panel;
+  final ValueSetter<Post>? onTap;
 
-  PostTile({Key? key, required this.post, this.panel = true}) : super(key: key);
+  PostTile({Key? key, required this.post, this.panel = true, this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,12 +29,20 @@ class PostTile extends GetView<PostListController> with LoadImageMixin, ThemeMix
     ];
     if (panel) children.addAll([const Divider(), _panel]);
 
-    return ColoredBox(
+    final content = ColoredBox(
       color: Colors.white,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: children),
       ),
+    );
+
+    if (!panel) return content;
+
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () => onTap!(post),
+      child: content,
     );
   }
 
@@ -52,14 +61,14 @@ class PostTile extends GetView<PostListController> with LoadImageMixin, ThemeMix
 
   Widget get _descriptionItem => Text(post.description, style: TextStyle(color: primaryColor, fontSize: 15));
 
-  Widget get _photosItem => PostPhotosTile(photos: post.photos, onTap: (index) => controller.onTapPhoto(post, index));
+  Widget get _photosItem => PostPhotosTile(
+      photos: post.photos,
+      onTap: (index) => controller.onTapPhoto(post, index),
+      heroTagGetter: (photo) => post.id.toString() + photo.name);
 
   Widget get _panel => SizedBox(
         height: 40,
         child: PostHandlerDisplayTile(
-            shareCount: post.shareCount,
-            commentCount: post.commentCount,
-            favorCount: post.favorCount,
-            onTap: (type) => controller.onTapAction(post, type)),
+            shareCount: post.shareCount, commentCount: post.commentCount, favorCount: post.favorCount),
       );
 }

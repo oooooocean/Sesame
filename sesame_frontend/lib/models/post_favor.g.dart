@@ -8,7 +8,7 @@ part of 'post_favor.dart';
 
 PostFavor _$PostFavorFromJson(Map<String, dynamic> json) => PostFavor(
       json['id'] as int,
-      convertTimestampToDatetime(json['createTime'] as int),
+      convertTimestampToDatetime(json['createTime']),
       json['postId'] as int,
       UserInfo.fromJson(json['favorUser'] as Map<String, dynamic>),
       json['favorUserId'] as int,

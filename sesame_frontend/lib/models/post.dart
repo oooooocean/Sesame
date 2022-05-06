@@ -19,9 +19,10 @@ class Post {
   int shareCount;
   int commentCount;
   int favorCount;
+  bool hasFavor;
 
   Post(this.id, this.description, this.createTime, this.updateTime, this.ownerId, this.photos, this.owner,
-      this.shareCount, this.commentCount, this.favorCount);
+      this.shareCount, this.commentCount, this.favorCount, this.hasFavor);
 
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
 

@@ -23,7 +23,7 @@ class PostFavorHandler(AuthBaseHandler):
 
     def post(self, post_id):
         """
-        @api {post} /post/favor/:post_id like a post
+        @api {post} /post/:post_id/favor like a post
         @apiVersion 0.0.1
         @apiName Like a post
         @apiGroup Post
@@ -43,7 +43,7 @@ class PostFavorHandler(AuthBaseHandler):
 
         favor = PostFavor(post_id=post_id, favor_user_id=user_id)
         favor.save()
-        self.success(favor.to_json())
+        self.simple_success()
 
     def delete(self, post_id):
         """

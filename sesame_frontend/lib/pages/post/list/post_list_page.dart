@@ -40,7 +40,8 @@ class _PostLisState extends State<PostListPage>
         ),
       );
 
-  Widget _itemBuilder(BuildContext context, int index) => PostTile(post: controller.items[index]);
+  Widget _itemBuilder(BuildContext context, int index) =>
+      PostTile(post: controller.items[index], onTap: controller.onTap);
 
   Widget _separatorBuilder(BuildContext context, int index) => Divider(height: 5, thickness: 5, color: borderColor);
 }

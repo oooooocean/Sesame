@@ -33,6 +33,8 @@ class Post(BaseDB, ModelMixin):
         json_dict['commentCount'] = len(self.comments)
         json_dict['shareCount'] = len(self.shares)
         json_dict['favorCount'] = len(self.favors)
+        from models.post_favor_model import PostFavor
+        json_dict['hasFavor'] = PostFavor.has_favor(self.owner_id, self.id)
         return json_dict
 
 
