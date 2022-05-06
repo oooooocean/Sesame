@@ -9,6 +9,7 @@
 - [贡献者](#贡献者)
 
 ## 项目截图
+![](node/screenshot.jpg)
 ## 技术架构
 ### 后端
 - 网络框架: [Tornado](https://github.com/tornadoweb/tornado)
