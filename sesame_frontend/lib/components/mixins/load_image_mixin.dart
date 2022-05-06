@@ -8,7 +8,8 @@ mixin LoadImageMixin {
   Image buildAssetImage(String name, {double? width, BoxFit fit = BoxFit.fitWidth}) =>
       Image.asset('assets/images/$name.png', width: width, fit: fit);
 
-  Image buildNetImage(String url, {BoxFit fit = BoxFit.fitWidth, double? width, double? height, Alignment alignment = Alignment.center}) {
+  Image buildNetImage(String url,
+      {BoxFit fit = BoxFit.fitWidth, double? width, double? height, Alignment alignment = Alignment.center}) {
     Widget placeholder = const Center(child: CupertinoActivityIndicator());
     return Image.network(url,
         width: width,
@@ -19,8 +20,8 @@ mixin LoadImageMixin {
         loadingBuilder: (ctx, child, progress) => progress == null ? child : placeholder);
   }
 
-  String buildNetImageUrl(String imageName, {double? width, double? height}) {
-    Map<String, dynamic> query = {'user_id': (Get.find<LaunchService>().user?.id ?? '').toString()};
+  String buildNetImageUrl(String imageName, {double? width, double? height, int? userId}) {
+    Map<String, dynamic> query = {'user_id': (userId ?? Get.find<LaunchService>().user?.id ?? '').toString()};
     if (width != null) query['width'] = (width * Get.pixelRatio).toString();
     if (height != null) query['height'] = (height * Get.pixelRatio).toString();
     final host = Uri.parse(serviceHost);

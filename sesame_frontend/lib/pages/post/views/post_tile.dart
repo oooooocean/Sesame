@@ -57,7 +57,7 @@ class PostTile extends GetView<PostListController> with LoadImageMixin, ThemeMix
         ),
       );
 
-  Widget get _avatarItem => CircleAvatarButton(url: post.owner.thumbnailUrl, onTap: () => controller.onTapAvatar(post));
+  Widget get _avatarItem => CircleAvatarButton(url: post.avatarUrl, onTap: () => controller.onTapAvatar(post));
 
   Widget get _descriptionItem => Text(post.description, style: TextStyle(color: primaryColor, fontSize: 15));
 

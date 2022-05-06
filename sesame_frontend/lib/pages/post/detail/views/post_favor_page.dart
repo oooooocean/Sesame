@@ -24,7 +24,7 @@ class PostFavorView extends StatelessWidget with ThemeMixin {
           SizedBox(
             height: 30,
             child: CircleAvatarButton(
-                url: favor.favorUser.thumbnailUrl, onTap: () => controller.toUserTimeline(favor.favorUserId)),
+                url: favor.avatarUrl, onTap: () => controller.toUserTimeline(favor.favorUserId)),
           ),
           const SizedBox(width: 8),
           Text(favor.favorUser.nickname ?? '', style: TextStyle(color: secondaryColor, fontSize: 13)),

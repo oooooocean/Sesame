@@ -48,3 +48,8 @@ class Photo(conf.db.BaseDB, ModelMixin):
 
     def json_exclude_columns(self):
         return ModelMixin.json_exclude_columns(self) + ['user_id']
+
+    def to_json(self) -> dict:
+        json = ModelMixin.to_json(self)
+        json['userId'] = self.album.user_id
+        return json

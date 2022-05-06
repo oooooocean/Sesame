@@ -19,7 +19,7 @@ extension GenderExtension on Gender {
 }
 
 @JsonSerializable()
-class User {
+class User with LoadImageMixin {
   String phone;
   int id;
   UserInfo? info;
@@ -37,10 +37,12 @@ class User {
 
   static Future<User?> cached() =>
       Store.get('user', decoder: (data) => User.fromJson(const JsonDecoder().convert(data)));
+
+  String get thumbnailUrl => buildNetImageUrl(info?.avatar ?? '', width: Get.width / 4, userId: id);
 }
 
 @JsonSerializable()
-class UserInfo with LoadImageMixin {
+class UserInfo {
   String? nickname;
   Gender? gender;
   String? avatar;
@@ -55,6 +57,4 @@ class UserInfo with LoadImageMixin {
   String toString() => '';
 
   bool get isCompletion => (nickname?.isNotEmpty ?? false) && gender != null && avatar != null;
-
-  String get thumbnailUrl => buildNetImageUrl(avatar!, width: Get.width / 4);
 }

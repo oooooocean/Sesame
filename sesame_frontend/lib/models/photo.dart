@@ -11,8 +11,9 @@ class Photo with LoadImageMixin, SelectableMixin {
   String name;
   String? description;
   bool favor;
+  int userId;
 
-  Photo(this.id, this.name, this.description, this.favor);
+  Photo(this.id, this.name, this.description, this.favor, this.userId);
 
   factory Photo.fromJson(Map<String, dynamic> json) =>  _$PhotoFromJson(json);
   Map<String, dynamic> toJson() => _$PhotoToJson(this);
@@ -20,5 +21,7 @@ class Photo with LoadImageMixin, SelectableMixin {
   @override
   String toString() => '图片: $name';
 
-  String get thumbnailUrl => buildNetImageUrl(name, width: Get.width / 3);
+  String get thumbnailUrl => buildNetImageUrl(name, width: Get.width / 3, userId: userId);
+
+  String get url => buildNetImageUrl(name, userId: userId, width: Get.width, height: Get.height);
 }

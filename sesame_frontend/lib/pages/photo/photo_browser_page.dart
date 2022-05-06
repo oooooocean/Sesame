@@ -26,7 +26,7 @@ class PhotoBrowserPage extends GetView<PhotoBrowserController> with LoadImageMix
     final photo = controller.images[index];
     final image = Padding(
       padding: const EdgeInsets.all(5),
-      child: ExtendedImage.network(buildNetImageUrl(photo.name, width: Get.width, height: Get.height),
+      child: ExtendedImage.network(photo.url,
           fit: BoxFit.contain,
           mode: ExtendedImageMode.gesture,
           initGestureConfigHandler: (_) => GestureConfig(inPageView: true),

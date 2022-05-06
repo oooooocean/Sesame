@@ -1,4 +1,6 @@
+import 'package:get/get.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:sesame_frontend/components/mixins/load_image_mixin.dart';
 import 'package:sesame_frontend/models/photo.dart';
 import 'package:sesame_frontend/models/user.dart';
 import 'package:sesame_frontend/services/utils.dart';
@@ -6,7 +8,7 @@ import 'package:sesame_frontend/services/utils.dart';
 part 'post.g.dart';
 
 @JsonSerializable()
-class Post {
+class Post with LoadImageMixin {
   final int id;
   String description;
   @JsonKey(fromJson: convertTimestampToDatetime)
@@ -30,4 +32,6 @@ class Post {
 
   @override
   String toString() => '';
+
+  String get avatarUrl => buildNetImageUrl(owner.avatar ?? '', userId: ownerId, width: Get.width / 4);
 }

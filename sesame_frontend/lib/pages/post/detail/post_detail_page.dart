@@ -44,9 +44,7 @@ class PostDetailState extends State<PostDetailPage> with SingleTickerProviderSta
             onPressed: () {},
             icon: ClipOval(
                 child: SizedBox(
-                    width: 30,
-                    height: 30,
-                    child: buildNetImage(controller.data.owner.thumbnailUrl, fit: BoxFit.cover))),
+                    width: 30, height: 30, child: buildNetImage(controller.data.avatarUrl, fit: BoxFit.cover))),
             label: Text(controller.data.owner.nickname ?? '', style: const TextStyle(color: Colors.white)),
           ),
         ),

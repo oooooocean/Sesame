@@ -25,7 +25,7 @@ class PostCommentView extends StatelessWidget with ThemeMixin {
           SizedBox(
             height: 30,
             child: CircleAvatarButton(
-                url: comment.commentUser.thumbnailUrl, onTap: () => controller.toUserTimeline(comment.commentUserId)),
+                url: comment.avatarUrl, onTap: () => controller.toUserTimeline(comment.commentUserId)),
           ),
           const SizedBox(width: 8),
           Expanded(
