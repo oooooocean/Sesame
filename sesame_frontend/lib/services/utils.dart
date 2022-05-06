@@ -1,1 +1,9 @@
-DateTime convertTimestampToDatetime(int timestamp) => DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
+DateTime convertTimestampToDatetime(dynamic timestamp) {
+  int intTimestamp;
+  if (timestamp is String) {
+    intTimestamp = int.parse(timestamp);
+  } else {
+    intTimestamp = timestamp;
+  }
+  return DateTime.fromMillisecondsSinceEpoch(intTimestamp * 1000);
+}

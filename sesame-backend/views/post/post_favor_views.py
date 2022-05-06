@@ -9,7 +9,7 @@ class PostFavorHandler(AuthBaseHandler):
 
     def get(self, post_id):
         """
-        @api {get} /post/favor/:post_id fetch all like of particular post
+        @api {get} /post/:post_id/favor fetch all like of particular post
         @apiVersion 0.0.1
         @apiName All favors
         @apiGroup Post
@@ -19,7 +19,7 @@ class PostFavorHandler(AuthBaseHandler):
 
         @apiSuccess {Object[]} data all favors.
         """
-        self.success(paginate_json(self, PostFavor, PostFavor.post_id == post_id))
+        self.success(paginate_json(self, PostFavor, PostFavor.post_id == post_id, order_by=PostFavor.id.desc()))
 
     def post(self, post_id):
         """

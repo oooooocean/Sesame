@@ -11,7 +11,7 @@ class PostCommentHandler(AuthBaseHandler):
 
     def get(self, post_id):
         """
-        @api {get} /posts/post_id/comment/ All comments of particular post
+        @api {get} /post/post_id/comment/ All comments of particular post
         @apiVersion 0.0.1
         @apiName Post comments
         @apiGroup Post
@@ -37,7 +37,8 @@ class PostCommentHandler(AuthBaseHandler):
                 ]
             }
         """
-        return self.success( paginate_json(self, PostComment, PostComment.post_id == post_id))
+        return self.success(
+            paginate_json(self, PostComment, PostComment.post_id == post_id, order_by=PostComment.id.desc()))
 
     def post(self, post_id):
         """

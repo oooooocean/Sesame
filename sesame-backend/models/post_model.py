@@ -59,3 +59,10 @@ class PostHandlerBase(BaseDB, ModelMixin):
         json_dict = ModelMixin.to_json(self)
         json_dict[camel_case(self.__user_key__)] = self.__getattribute__(self.__user_key__).info.to_json()
         return json_dict
+
+    def __getattribute__(self, item):
+        value = super().__getattribute__(item)
+        if item == 'post_id':
+            return int(value)
+        else:
+            return value

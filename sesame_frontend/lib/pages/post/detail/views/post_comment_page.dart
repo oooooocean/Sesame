@@ -2,22 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sesame_frontend/components/comps/circle_avatar_button.dart';
 import 'package:sesame_frontend/components/mixins/theme_mixin.dart';
-import 'package:sesame_frontend/pages/post/detail/views/post_comment_controller.dart';
+import 'package:sesame_frontend/pages/post/detail/post_detail_controller.dart';
 import 'package:sesame_frontend/components/extension/date_extension.dart';
 
-class PostCommentView extends GetView<PostCommentController> with ThemeMixin {
-  const PostCommentView({Key? key}) : super(key: key);
+class PostCommentView extends StatelessWidget with ThemeMixin {
+  PostCommentView({Key? key}) : super(key: key);
+
+  PostDetailController get controller => Get.find<PostDetailController>();
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<PostCommentController>(
-        builder: (_) => SliverList(
-              delegate: SliverChildBuilderDelegate(_childBuilder, childCount: controller.items.length),
-            ));
+    return SliverList(delegate: SliverChildBuilderDelegate(_childBuilder, childCount: controller.comments.length));
   }
 
   Widget _childBuilder(BuildContext context, int index) {
-    final comment = controller.items[index];
+    final comment = controller.comments[index];
     return ColoredBox(
       color: Colors.white,
       child: Padding(

@@ -14,10 +14,9 @@ import 'package:sesame_frontend/pages/photo/photo_select_controller.dart';
 import 'package:sesame_frontend/pages/photo/photo_select_page.dart';
 import 'package:sesame_frontend/pages/post/create/post_create_controller.dart';
 import 'package:sesame_frontend/pages/post/create/post_create_page.dart';
-import 'package:sesame_frontend/pages/post/detail/views/post_comment_controller.dart';
+import 'package:sesame_frontend/pages/post/detail/post_comment_edit_page.dart';
 import 'package:sesame_frontend/pages/post/detail/post_detail_controller.dart';
 import 'package:sesame_frontend/pages/post/detail/post_detail_page.dart';
-import 'package:sesame_frontend/pages/post/detail/views/post_favor_controller.dart';
 import 'package:sesame_frontend/pages/post/list/post_list_controller.dart';
 import 'package:sesame_frontend/pages/post/list/post_list_page.dart';
 import 'package:sesame_frontend/pages/scaffold/scaffold_controller.dart';
@@ -86,8 +85,12 @@ final appRoutes = [
       name: AppRoutes.postDetail,
       page: () => const PostDetailPage(),
       binding: BindingsBuilder(() {
-        Get.put(PostFavorController());
-        Get.put(PostCommentController());
         Get.put(PostDetailController());
       })),
+  GetPage<String>(
+      name: AppRoutes.postComment,
+      opaque: false,
+      popGesture: false,
+      fullscreenDialog: true,
+      page: () => PostCommentEditPage()),
 ];

@@ -56,7 +56,7 @@ class PostTile extends GetView<PostListController> with LoadImageMixin, ThemeMix
 
   Widget get _panel => SizedBox(
         height: 40,
-        child: PostHandlerTile(
+        child: PostHandlerDisplayTile(
             shareCount: post.shareCount,
             commentCount: post.commentCount,
             favorCount: post.favorCount,
