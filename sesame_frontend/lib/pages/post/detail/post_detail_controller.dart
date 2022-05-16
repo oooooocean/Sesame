@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show ScrollController, TabController;
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -45,10 +45,12 @@ class PostDetailController extends GetxController with NetMixin {
         break;
     }
   }
-  
+
   void _favor() async {
     final url = 'post/${data.id}/favor';
-    Future<bool> api = data.hasFavor ? delete(url, {}, (data) => data) : post(url, {}, (data) => data);
+    Future<bool> api = data.hasFavor
+        ? delete(url, {}, (data) => data)
+        : post(url, {}, (data) => data);
     request<bool>(api, success: (isSuccess) {
       if (!isSuccess) return;
       data.hasFavor = !data.hasFavor;
@@ -59,7 +61,8 @@ class PostDetailController extends GetxController with NetMixin {
   void _comment() async {
     final result = await Get.toNamed(AppRoutes.postComment);
     if (result == null || result.isEmpty) return;
-    final api = post('post/${data.id}/comment', {'comment': result}, (data) => PostComment.fromJson(data));
+    final api = post('post/${data.id}/comment', {'comment': result},
+        (data) => PostComment.fromJson(data));
     request<PostComment>(api, success: (comment) {
       comments.insert(0, comment);
       update();
@@ -86,8 +89,10 @@ class PostDetailController extends GetxController with NetMixin {
 
   void refreshLoad() {
     Future.wait([commentRequest, favorRequest]).then((values) {
-      commentPaging.merge(values[0] as PagingData<PostComment>, RefreshType.refresh);
-      favorPaging.merge(values[1] as PagingData<PostFavor>, RefreshType.refresh);
+      commentPaging.merge(
+          values[0] as PagingData<PostComment>, RefreshType.refresh);
+      favorPaging.merge(
+          values[1] as PagingData<PostFavor>, RefreshType.refresh);
       refreshController.refreshCompleted(resetFooterState: true);
       if (commentPaging.isEnd && isComment) refreshController.loadNoData();
       if (favorPaging.isEnd && !isComment) refreshController.loadNoData();
@@ -97,7 +102,9 @@ class PostDetailController extends GetxController with NetMixin {
 
   void resetRefreshFooter() {
     final paging = this.paging;
-    paging.isEnd ? refreshController.loadNoData() : refreshController.loadComplete();
+    paging.isEnd
+        ? refreshController.loadNoData()
+        : refreshController.loadComplete();
   }
 
   void toUserTimeline(int userId) {}
@@ -111,7 +118,8 @@ class PostDetailController extends GetxController with NetMixin {
   Future<PagingData<PostComment>> get commentRequest => get(
       'post/${Get.find<PostDetailController>().data.id}/comment',
       {'page': commentPaging.current.toString()},
-      (data) => PagingData.fromJson(data, (json) => PostComment.fromJson(json)));
+      (data) =>
+          PagingData.fromJson(data, (json) => PostComment.fromJson(json)));
 
   Future<PagingData<PostFavor>> get favorRequest => get(
       'post/${Get.find<PostDetailController>().data.id}/favor',
