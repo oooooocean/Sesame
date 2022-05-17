@@ -7,7 +7,10 @@
         {
             "name": "sesame_frontend",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "args": [
+                "--no-sound-null-safety"
+            ]
         }
     ]
 }
