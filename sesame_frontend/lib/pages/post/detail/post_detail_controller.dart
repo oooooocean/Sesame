@@ -10,8 +10,12 @@ import 'package:sesame_frontend/net/net_mixin.dart';
 import 'package:sesame_frontend/pages/post/detail/post_comment_edit_page.dart';
 import 'package:sesame_frontend/pages/post/views/post_handler_tile.dart';
 import 'package:sesame_frontend/route/pages.dart';
+import 'package:sesame_frontend/components/mixins/reload_mixin.dart';
 
-class PostDetailController extends GetxController with NetMixin {
+import '../list/post_list_controller.dart';
+
+class PostDetailController extends GetxController
+    with NetMixin, ReloadNotificationMixin {
   final Post data;
   late TabController tabController;
   final refreshController = RefreshController(initialRefresh: true);
@@ -33,6 +37,13 @@ class PostDetailController extends GetxController with NetMixin {
     scrollController.jumpTo(_offsets[tabController.index]);
     resetRefreshFooter();
     update();
+  }
+
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
+    // notifyReload<PostListController>();
   }
 
   void tapAction(PostHandlerType type) {
