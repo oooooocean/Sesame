@@ -2,7 +2,6 @@ import 'package:flutter/material.dart' show ScrollController, TabController;
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:sesame_frontend/components/utils/event_bust_util.dart';
 import 'package:sesame_frontend/models/paging_data.dart';
 import 'package:sesame_frontend/models/post.dart';
 import 'package:sesame_frontend/models/post_comment.dart';
@@ -11,8 +10,6 @@ import 'package:sesame_frontend/net/net_mixin.dart';
 import 'package:sesame_frontend/pages/post/detail/post_comment_edit_page.dart';
 import 'package:sesame_frontend/pages/post/views/post_handler_tile.dart';
 import 'package:sesame_frontend/route/pages.dart';
-
-import 'package:sesame_frontend/components/utils/event_bust_util.dart';
 
 class PostDetailController extends GetxController with NetMixin {
   final Post data;
@@ -70,7 +67,6 @@ class PostDetailController extends GetxController with NetMixin {
       comments.insert(0, comment);
       update();
     });
-    EventBusUtil.getInstance().fire(PageAction(true));
   }
 
   void load(RefreshType refreshType) {

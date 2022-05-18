@@ -63,8 +63,6 @@ dependencies:
   json_annotation: ^4.4.0
   # https://pub.dev/packages/date_format
   date_format: 2.0.4
-  # 事件监听
-  event_bus: ^1.1.1
 
 dev_dependencies:
   flutter_test:
