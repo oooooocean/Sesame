@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:get/get.dart';
@@ -6,21 +9,26 @@ import 'package:sesame_www/components/theme_mixin.dart';
 import 'package:sesame_www/pages/home/home_page_controller.dart';
 
 class HomePage extends GetView<HomePageController> with ThemeMixin {
-
   HomePage({Key? key}) : super(key: key);
+  StreamSubscription? _subscription;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: _appBar,
-      body: Container(
-        height: Get.height,
-        width: Get.width,
-        padding: EdgeInsets.only(top: Get.statusBarHeight + kToolbarHeight),
-        decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('/bg.jpeg'), fit: BoxFit.cover)),
-        child: DefaultTextStyle(style: const TextStyle(color: Colors.white), child: _body),
-      ),
+      body: StatefulBuilder(builder: (_, state) {
+        _subscription?.cancel();
+        _subscription = window.onResize.listen((event) => state((){}));
+        return Container(
+          height: Get.height,
+          width: Get.width,
+          color: Colors.black87,
+          padding: EdgeInsets.only(top: Get.statusBarHeight + kToolbarHeight),
+          // decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('/bg.jpeg'), fit: BoxFit.cover)),
+          child: DefaultTextStyle(style: const TextStyle(color: Colors.white), child: _body),
+        );
+      }),
     );
   }
 
@@ -109,9 +117,7 @@ class HomePage extends GetView<HomePageController> with ThemeMixin {
         TextSpan(
           text: '芝麻开门\n',
           style: TextStyle(fontSize: maxFont, fontWeight: FontWeight.w500),
-          children: [
-            TextSpan(text: '\n前后端全栈\n基于图片分享功能的演示App', style: TextStyle(fontSize: defaultFont))
-          ],
+          children: [TextSpan(text: '\n前后端全栈\n基于图片分享功能的演示App', style: TextStyle(fontSize: defaultFont))],
         ),
       );
 

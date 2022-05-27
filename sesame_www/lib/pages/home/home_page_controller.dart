@@ -1,3 +1,4 @@
+import 'dart:html';
 import 'package:get/get.dart';
 
 class HomeAction {
@@ -12,5 +13,9 @@ class HomeAction {
 }
 
 class HomePageController extends GetxController {
-  void tapAction(HomeAction action) {}
+  void tapAction(HomeAction action) {
+    if (action == HomeAction.githubAction) {
+      window.open('https://github.com/oooooocean/Sesame', 'github');
+    }
+  }
 }

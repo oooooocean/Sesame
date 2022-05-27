@@ -1,4 +1,10 @@
 # 项目配置
+## 0. 生产环境上线check list
+- 检查api文档是否需要更新
+- 检查数据库版本是否需要升级: 升级到目标版本
+- 检查当前python执行环境: 切换到venv
+- supervisorctl 重启服务
+
 ## 1. venv
 ### 1.1 windows
 [引用](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#creating-a-virtual-environment)
@@ -42,6 +48,9 @@ mysql/bin
 
 # 更改账户密码
 mysql> alert user user() identified by "自定义的密码"
+
+# 创建数据库
+CREATE DATABASE IF NOT EXISTS puppy DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_general_ci;
 ```
 
 ## 3. requirements 保存依赖包
@@ -220,9 +229,8 @@ location /api/ {
 }
 ```
 
-
 ## 9. [Supervisor] 配置
-[参考](https://www.cnblogs.com/qq419139624/p/14866148.html)
+[参考](https://blog.csdn.net/yzlaitouzi/article/details/108531326)
 [报错 Exited too quickly (process log may have details)](https://blog.csdn.net/nbcsdn/article/details/108660702)
 
 ### 9.1 venv 报错
@@ -253,82 +261,3 @@ $ logout
 ## 1. 正则匹配
 - `\w` 即 `[a-zA-Z0-9_]`
 - 汉字 `[\u4e00-\u9fa5]`
-
-## 2. SQLAlchemy
-
-### 2.1 技巧
-#### 2.1.1 可能为 None 的处理
-
-```python
-user_json['info'] = user.info.to_json() if user.info else None
-```
-
-### 2.2 Query
-#### 2.2.1 直接更新
-
-```python
-Foo.query.filter(...).update()
-
-# 多执行一次语句 
-foo = Foo.query.filter(...).first()
-...
-foo.save()
-```
-
-### 2.3 Column
-#### 2.3.1 default 
-- `default`: the default value for this column. 插入操作时有效.
-- `server_default`: **DDL DEFAULT** value for the column. 
-
-## 3. enum.Enum
-define unique sets of names and values. 
-- property
-    -  `name`
-    -  `value`
--  support iteration
--  hashable
--  if the exact value is unimportant you can use auto.
--  `__members__`: mapping of names to members.
--  members are compared by identity.
-
-```python
-# IntFlag: Int
-# can be combined using the bitwise operators without losing their IntFlag membership.
-
-# Create
-from enum import Enum
-class Color(Enum):
-    RED = 1  
-    GREEN = 2
-Color(1)  # Red
-Color['Red'] # Red
-Color.Red.name # 'Red'
-Color.Red.value # 1  
-
-# Iteration
-list(Color)
-for name, member in Color.__members__.items():
-
-# Comparisons
-Color.RED is Color.RED
-```
-
-## 4. dict KeyError 解决
-
-```python
-m_dict = {}
-
-if 'key' in m_dict:
-    pass
-
-# or
-
-m_dict.get('key', default=None)
-```
-
-## 5. override
-
-```python
-def to_json(self) -> dict:
-    json = ModelMixin.to_json(self)
-```
