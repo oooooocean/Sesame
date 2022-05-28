@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
@@ -16,7 +15,8 @@ mixin NetMixin {
 
   String? shouldRequest() => null;
 
-  Future? request<T>(Future<T> future, {ValueSetter<T>? success, ValueSetter<Error>? fail}) async {
+  Future? request<T>(Future<T> future,
+      {ValueSetter<T>? success, ValueSetter<Error>? fail}) async {
     final errorMsg = shouldRequest();
     if (errorMsg != null) {
       EasyLoading.showToast(errorMsg);
@@ -34,23 +34,32 @@ mixin NetMixin {
     });
   }
 
-  Future<T> get<T>(String uri, Map<String, dynamic> query, Decoder<T> decoder) async {
-    final res = (await net.get<NetResponse>(uri, query: query, decoder: net.defaultDecoder)).body;
+  Future<T> get<T>(
+      String uri, Map<String, dynamic> query, Decoder<T> decoder) async {
+    final res = (await net.get<NetResponse>(uri,
+            query: query, decoder: net.defaultDecoder))
+        .body;
     return _parse(res, decoder);
   }
 
-  Future<T> post<T>(String uri, Map<String, dynamic> body, Decoder<T> decoder) async {
-    final res =
-        (await net.post<NetResponse>(uri, body, contentType: 'application/json', decoder: net.defaultDecoder)).body;
+  Future<T> post<T>(
+      String uri, Map<String, dynamic> body, Decoder<T> decoder) async {
+    final res = (await net.post<NetResponse>(uri, body,
+            contentType: 'application/json', decoder: net.defaultDecoder))
+        .body;
     return _parse(res, decoder);
   }
 
-  Future<T> delete<T>(String uri, Map<String, dynamic> query, Decoder<T> decoder) async {
-    final res = (await net.delete<NetResponse>(uri, query: query, decoder: net.defaultDecoder)).body;
+  Future<T> delete<T>(
+      String uri, Map<String, dynamic> query, Decoder<T> decoder) async {
+    final res = (await net.delete<NetResponse>(uri,
+            query: query, decoder: net.defaultDecoder))
+        .body;
     return _parse(res, decoder);
   }
 
-  Future<T> postFormData<T>(String uri, Map<String, dynamic> query, List<AssetEntity> files, Decoder<T> decoder,
+  Future<T> postFormData<T>(String uri, Map<String, dynamic> query,
+      List<AssetEntity> files, Decoder<T> decoder,
       {bool originSize = false}) {
     // 构建 MultipartFile
     final filesFutures = files.map((entity) {
@@ -58,9 +67,11 @@ mixin NetMixin {
       if (originSize) {
         bytes = entity.originBytes;
       } else {
-        final size = ThumbnailSize((min(Get.width * Get.pixelRatio, entity.size.width)).toInt(),
+        final size = ThumbnailSize(
+            (min(Get.width * Get.pixelRatio, entity.size.width)).toInt(),
             (min(Get.height * Get.pixelRatio, entity.size.height).toInt()));
-        bytes = entity.thumbnailDataWithSize(size, quality: 50, format: ThumbnailFormat.jpeg);
+        bytes = entity.thumbnailDataWithSize(size,
+            quality: 50, format: ThumbnailFormat.jpeg);
       }
       return bytes.then((value) {
         if (value == null) return null;
@@ -69,10 +80,13 @@ mixin NetMixin {
     }).toList();
     // 请求
     return Future.wait(filesFutures).then((files) {
-      final validFiles = files.where((element) => element != null).map((e) => e!).toList();
+      final validFiles =
+          files.where((element) => element != null).map((e) => e!).toList();
 
       return net.post(uri, FormData({'images': validFiles}),
-          query: query, contentType: 'multipart/form-data', decoder: net.defaultDecoder);
+          query: query,
+          contentType: 'multipart/form-data',
+          decoder: net.defaultDecoder);
     }).then((res) => _parse(res.body, decoder));
 
     // List<MultipartFile> list = [];
