@@ -23,11 +23,16 @@ import 'package:sesame_frontend/pages/scaffold/scaffold_controller.dart';
 import 'package:sesame_frontend/pages/scaffold/scaffold_page.dart';
 import 'package:sesame_frontend/pages/user/user_info_controller.dart';
 import 'package:sesame_frontend/pages/user/user_info_set_page.dart';
+import 'package:sesame_frontend/pages/pet/pet_info_page.dart';
 import 'package:sesame_frontend/services/launch_service.dart';
 
 part 'routes.dart';
 
 final appRoutes = [
+  GetPage(
+      name: AppRoutes.petInfo,
+      page: () => PetInfoPage(),
+      binding: BindingsBuilder(() => Get.lazyPut(() => PetInfoController()))),
   GetPage(
       name: AppRoutes.login,
       page: () => const LoginPage(),
@@ -35,7 +40,8 @@ final appRoutes = [
   GetPage(
       name: AppRoutes.albumCreate,
       page: () => AlbumCreatePage(),
-      binding: BindingsBuilder(() => Get.lazyPut(() => AlbumCreateController()))),
+      binding:
+          BindingsBuilder(() => Get.lazyPut(() => AlbumCreateController()))),
   GetPage(
       name: AppRoutes.albumList,
       page: () => const AlbumListPage(),
@@ -46,8 +52,8 @@ final appRoutes = [
   GetPage(
       name: AppRoutes.userInfoSet,
       page: () => UserInfoSetPage(),
-      binding: BindingsBuilder(() =>
-          Get.lazyPut(() => UserInfoSetController(userInfo: Get.arguments ?? Get.find<LaunchService>().user!.info)))),
+      binding: BindingsBuilder(() => Get.lazyPut(() => UserInfoSetController(
+          userInfo: Get.arguments ?? Get.find<LaunchService>().user!.info)))),
   GetPage(
       name: AppRoutes.photoList,
       page: () => const PhotoListPage(),
@@ -58,16 +64,19 @@ final appRoutes = [
       showCupertinoParallax: false,
       name: AppRoutes.photoBrowser,
       page: () => const PhotoBrowserPage(),
-      binding: BindingsBuilder(() => Get.lazyPut(() => PhotoBrowserController()))),
+      binding:
+          BindingsBuilder(() => Get.lazyPut(() => PhotoBrowserController()))),
   GetPage<List<Photo>>(
       name: AppRoutes.photoSelect,
       page: () => PhotoSelectPage(),
       fullscreenDialog: true,
-      binding: BindingsBuilder(() => Get.lazyPut(() => PhotoSelectController()))),
+      binding:
+          BindingsBuilder(() => Get.lazyPut(() => PhotoSelectController()))),
   GetPage(
       name: AppRoutes.postCreate,
       page: () => PostCreatePage(),
-      binding: BindingsBuilder(() => Get.lazyPut(() => PostCreateController()))),
+      binding:
+          BindingsBuilder(() => Get.lazyPut(() => PostCreateController()))),
   GetPage(
       name: AppRoutes.postList,
       page: () => const PostListPage(),

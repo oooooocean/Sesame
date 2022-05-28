@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
@@ -8,7 +7,8 @@ import 'package:sesame_frontend/components/mixins/theme_mixin.dart';
 import 'package:sesame_frontend/pages/album/create/album_create_controller.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
-class AlbumCreatePage extends GetView<AlbumCreateController> with KeyboardAllocator, ThemeMixin {
+class AlbumCreatePage extends GetView<AlbumCreateController>
+    with KeyboardAllocator, ThemeMixin {
   final titleNode = FocusNode();
   final descriptionNode = FocusNode();
 
@@ -21,23 +21,26 @@ class AlbumCreatePage extends GetView<AlbumCreateController> with KeyboardAlloca
           child: KeyboardActions(
             config: doneKeyboardConfig([titleNode, descriptionNode]),
             child: SizedBox(
-                height: Get.height - Get.statusBarHeight - kToolbarHeight,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 25.0, horizontal: 15.0),
-                  child: Column(
-                    children: [
-                      _imageItem,
-                      Column(mainAxisSize: MainAxisSize.min, children: [
-                        Padding(padding: const EdgeInsets.symmetric(vertical: 10.0), child: _albumTitleItem),
-                        _albumDescriptionItem,
-                      ]),
-                      const Spacer(),
-                      _nextItem
-                    ],
-                  ),
+              height: Get.height - Get.statusBarHeight - kToolbarHeight,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 25.0, horizontal: 15.0),
+                child: Column(
+                  children: [
+                    _imageItem,
+                    Column(mainAxisSize: MainAxisSize.min, children: [
+                      Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10.0),
+                          child: _albumTitleItem),
+                      _albumDescriptionItem,
+                    ]),
+                    const Spacer(),
+                    _nextItem
+                  ],
                 ),
               ),
             ),
+          ),
         ),
       );
 
@@ -45,7 +48,10 @@ class AlbumCreatePage extends GetView<AlbumCreateController> with KeyboardAlloca
         child: GetBuilder<AlbumCreateController>(
             id: 'cover',
             builder: (_) => controller.cover != null
-                ? Image(image: AssetEntityImageProvider(controller.cover!), width: Get.width, fit: BoxFit.cover)
+                ? Image(
+                    image: AssetEntityImageProvider(controller.cover!),
+                    width: Get.width,
+                    fit: BoxFit.cover)
                 : Icon(Icons.add_a_photo_outlined, size: 40, color: greyColor)),
         onPressed: controller.choseCover,
         style: ButtonStyle(
@@ -60,11 +66,15 @@ class AlbumCreatePage extends GetView<AlbumCreateController> with KeyboardAlloca
         controller: controller.titleController,
         maxLength: 10,
         onChanged: (_) => controller.update(['next']),
-        inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[\w\u4e00-\u9fa5_]'))],
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp(r'[\w\u4e00-\u9fa5_]'))
+        ],
         decoration: InputDecoration(
             hintText: 'Enter album\'s title',
-            enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: borderColor, width: 1)),
-            focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: greyColor, width: 1))),
+            enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: borderColor, width: 1)),
+            focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: greyColor, width: 1))),
       );
 
   Widget get _albumDescriptionItem => TextField(
@@ -75,8 +85,10 @@ class AlbumCreatePage extends GetView<AlbumCreateController> with KeyboardAlloca
         onChanged: (_) => controller.update(['next']),
         decoration: InputDecoration(
             hintText: 'Enter album\'s description',
-            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: borderColor, width: 1)),
-            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: greyColor, width: 1))),
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: borderColor, width: 1)),
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: greyColor, width: 1))),
       );
 
   Widget get _nextItem => GetBuilder<AlbumCreateController>(
@@ -87,7 +99,8 @@ class AlbumCreatePage extends GetView<AlbumCreateController> with KeyboardAlloca
         return TextButton(
           onPressed: enable ? controller.create : null,
           child: Text('CREATE NOW', style: TextStyle(color: color)),
-          style: ButtonStyle(side: MaterialStateProperty.all(BorderSide(color: color))),
+          style: ButtonStyle(
+              side: MaterialStateProperty.all(BorderSide(color: color))),
         );
       });
 }

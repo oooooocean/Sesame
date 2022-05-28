@@ -24,7 +24,6 @@ class PostListController extends GetxController
 
   @override
   void onReady() {
-    // TODO: implement onReady
     reload();
   }
 

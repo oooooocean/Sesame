@@ -1,6 +1,8 @@
 part of 'pages.dart';
 
 abstract class AppRoutes {
+  static const petInfo = '/pet';
+
   static const login = '/login';
 
   static const scaffold = '/scaffold';

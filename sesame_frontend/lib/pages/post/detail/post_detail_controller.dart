@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart' show ScrollController, TabController;
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sesame_frontend/models/paging_data.dart';
@@ -7,12 +6,9 @@ import 'package:sesame_frontend/models/post.dart';
 import 'package:sesame_frontend/models/post_comment.dart';
 import 'package:sesame_frontend/models/post_favor.dart';
 import 'package:sesame_frontend/net/net_mixin.dart';
-import 'package:sesame_frontend/pages/post/detail/post_comment_edit_page.dart';
 import 'package:sesame_frontend/pages/post/views/post_handler_tile.dart';
 import 'package:sesame_frontend/route/pages.dart';
 import 'package:sesame_frontend/components/mixins/reload_mixin.dart';
-
-import '../list/post_list_controller.dart';
 
 class PostDetailController extends GetxController
     with NetMixin, ReloadNotificationMixin {
@@ -39,13 +35,6 @@ class PostDetailController extends GetxController
     update();
   }
 
-  @override
-  void onClose() {
-    // TODO: implement onClose
-    super.onClose();
-    // notifyReload<PostListController>();
-  }
-
   void tapAction(PostHandlerType type) {
     switch (type) {
       case PostHandlerType.comment:
@@ -53,6 +42,8 @@ class PostDetailController extends GetxController
         break;
       case PostHandlerType.favor:
         _favor();
+        break;
+      case PostHandlerType.share:
         break;
     }
   }
