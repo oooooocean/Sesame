@@ -1,7 +1,8 @@
 import 'dart:convert';
-import 'dart:ffi';
 
+import 'package:get/get.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:sesame_frontend/components/mixins/load_image_mixin.dart';
 import 'package:sesame_frontend/services/store.dart';
 
 part 'user.g.dart';
@@ -18,7 +19,7 @@ extension GenderExtension on Gender {
 }
 
 @JsonSerializable()
-class User {
+class User with LoadImageMixin {
   String phone;
   int id;
   UserInfo? info;
@@ -36,6 +37,8 @@ class User {
 
   static Future<User?> cached() =>
       Store.get('user', decoder: (data) => User.fromJson(const JsonDecoder().convert(data)));
+
+  String get thumbnailUrl => buildNetImageUrl(info?.avatar ?? '', width: Get.width / 4, userId: id);
 }
 
 @JsonSerializable()

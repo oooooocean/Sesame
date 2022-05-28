@@ -17,6 +17,10 @@
 source ./venv/bin/activate
 ```
 
+### 1.3 更新python到3.10
+1. 重新执行 `python -m venv venv`
+2. 重新设置执行环境的python解释器版本
+
 ## 2. [Windows] 安装 mysql
 
 ```shell
@@ -78,9 +82,62 @@ import pymysql
 pymysql.install_as_MySQLdb()
 ```
 
-## 5. [CenterOS] 安装 Mysql
+## 5. Mysql
+### 5.1 [CenterOS] 安装 
 [参考](https://blog.csdn.net/weixin_44244088/article/details/122286105)
 [mysql_config报错参考](https://blog.csdn.net/hknaruto/article/details/82852308)
+
+### 5.2 操作
+- 清空数据库
+
+```sql
+# 删除外键约束
+SET foreign_key_checks = 0;
+# 生成截断语句
+select CONCAT('TRUNCATE TABLE ',table_name,';') from information_schema.tables where TABLE_SCHEMA = 'sesame';
+# 启动外键约束
+SET foreign_key_checks = 1;
+```
+
+- 重启
+
+```shell
+# liunx
+service mysqld restart
+```
+
+### 5.3 修改字符集
+
+```shell
+# 查找配置文件可能的位置
+$ mysql --help --verbose | grep my.cnf
+
+# 如果配置文件不存在
+$ sudo touch /etc/my.cnf
+$ sudo chmod 664 /etc/my.cnf
+$ sudo vim /etc/my.cnf
+# 添加如下内容
+[client]
+default-character-set = utf8mb4
+
+[mysql]
+default-character-set = utf8mb4
+
+[mysqld]
+character-set-client-handshake = FALSE
+character-set-server = utf8mb4
+collation-server = utf8mb4_unicode_ci
+init_connect='SET NAMES utf8mb4'
+
+# 检查变量是否修改成功
+mysql > SHOW VARIABLES WHERE Variable_name LIKE 'character_set_%' OR Variable_name LIKE 'collation%';
+
+# 修改数据库编码
+mysql > ALTER DATABASE sesame CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+# 修改表编码
+mysql > ALTER TABLE user_info CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci; 
+```
 
 ## 6. [CenterOS] 安装Python3
 [参考](https://blog.csdn.net/qq_36750158/article/details/80609857)
@@ -153,9 +210,44 @@ scriptTag.src = 'main.dart.js?v=1';
 scriptTag.src = 'main.dart.js?1;
 ```
 
+### 8.5 配置
+
+```text
+# 路径重写
+location /api/ {
+  rewrite ^/api/(.*) /$1 break;
+  proxy_pass http://forontends;
+}
+```
+
+
 ## 9. [Supervisor] 配置
 [参考](https://www.cnblogs.com/qq419139624/p/14866148.html)
 [报错 Exited too quickly (process log may have details)](https://blog.csdn.net/nbcsdn/article/details/108660702)
+
+### 9.1 venv 报错
+
+```text
+[group:sesames]
+programs=sesame-0,sesame-1
+
+[program:sesame-0]
+# 重点: 执行环境设置为venv
+command=/projects/sesame/sesame-backend/venv/bin/python3 /projects/sesame/sesame-backend/main.py --port=8000
+directory=/projects/sesame/sesame-backend/
+...
+```
+
+## 10. ssh
+### 10.1 登录后台
+
+```shell
+# 登录
+$ ssh root@ip
+
+# 登出
+$ logout
+```
 
 # 技术点
 ## 1. 正则匹配
@@ -164,10 +256,29 @@ scriptTag.src = 'main.dart.js?1;
 
 ## 2. SQLAlchemy
 
+### 2.1 技巧
+#### 2.1.1 可能为 None 的处理
+
 ```python
-# 1. info 可能为 None 的处理
 user_json['info'] = user.info.to_json() if user.info else None
 ```
+
+### 2.2 Query
+#### 2.2.1 直接更新
+
+```python
+Foo.query.filter(...).update()
+
+# 多执行一次语句 
+foo = Foo.query.filter(...).first()
+...
+foo.save()
+```
+
+### 2.3 Column
+#### 2.3.1 default 
+- `default`: the default value for this column. 插入操作时有效.
+- `server_default`: **DDL DEFAULT** value for the column. 
 
 ## 3. enum.Enum
 define unique sets of names and values. 

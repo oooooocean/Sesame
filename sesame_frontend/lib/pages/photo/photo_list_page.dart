@@ -10,11 +10,8 @@ class PhotoListPage extends GetView<PhotoListController> {
   final crossAxisCount = 4;
   final space = 4.0;
   final pattern = const [QuiltedGridTile(2, 2), QuiltedGridTile(1, 1), QuiltedGridTile(1, 1), QuiltedGridTile(1, 2)];
-  final double itemMaxWidth;
 
-  PhotoListPage({Key? key})
-      : itemMaxWidth = Get.width / 2.0,
-        super(key: key);
+  const PhotoListPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +35,8 @@ class PhotoListPage extends GetView<PhotoListController> {
                 repeatPattern: QuiltedGridRepeatPattern.inverted,
                 pattern: pattern),
             childrenDelegate: SliverChildBuilderDelegate(
-                (context, index) => PhotoThumbnailTile(
-                    photo: controller.items[index],
-                    onTap: () => controller.onTap(index),
-                    width: itemMaxWidth,
-                    height: itemMaxWidth),
+                (context, index) =>
+                    PhotoThumbnailTile(photo: controller.items[index], onTap: () => controller.onTap(index)),
                 childCount: controller.items.length),
           ),
         ),

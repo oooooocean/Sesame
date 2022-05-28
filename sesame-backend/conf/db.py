@@ -4,12 +4,9 @@ from sqlalchemy.orm import scoped_session, sessionmaker, registry
 import os
 from importlib import import_module
 import pymysql
+from conf.base import DB_URL
 
 pymysql.install_as_MySQLdb()
-
-DB_PASSWORD = 'bei1202jing'  # 'BEI1202jing_'
-
-DB_URL = 'mysql+mysqldb://root:%s@127.0.0.1:3306/sesame' % DB_PASSWORD
 
 db_engine = create_engine(DB_URL, encoding='utf8', echo=False, future=True)
 

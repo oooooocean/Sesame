@@ -43,9 +43,9 @@ def validate_str(crude: str, label: str, max_len: int, min_len: int = 1, nullabl
     if not crude:
         return False, '%r不能为空' % label if not nullable else True, None
 
-    pattern = '[\\w\\u4e00-\\u9fa5]{%d,%d}' % (min_len, max_len)
+    pattern = r'^[^\|/|:|*|?|<|>|||\'|%]' + '{%d,%d}$' % (min_len, max_len)
     if not re.match(pattern, crude):
-        return False, '%r不能包含特殊字符, 且不超过%d个字符' % (label, max_len)
+        return False, '%s不能包含特殊字符, 且不超过%d个字符' % (label, max_len)
     return True, None
 
 
@@ -74,3 +74,12 @@ def validate_user_nickname(name: str) -> tuple:
     :return:
     """
     return validate_str(name, '昵称', COMMON_CONFIGS['nick_name_limit'])
+
+
+def validate_post_description(description: str) -> tuple:
+    """
+    帖子描述
+    :param description:
+    :return:
+    """
+    return validate_str(description, '内容', COMMON_CONFIGS['post_description_limit'])

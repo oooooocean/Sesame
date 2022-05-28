@@ -8,10 +8,10 @@ class PhotoBrowserPage extends GetView<PhotoBrowserController> with LoadImageMix
   const PhotoBrowserPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) =>
-      ExtendedImageSlidePage(
-        child: Scaffold(
-          body: ExtendedImageGesturePageView.builder(
+  Widget build(BuildContext context) => ExtendedImageSlidePage(
+          child: Scaffold(
+        backgroundColor: Colors.black,
+        body: ExtendedImageGesturePageView.builder(
           itemBuilder: _itemBuilder,
           itemCount: controller.images.length,
           onPageChanged: (index) {
@@ -20,14 +20,13 @@ class PhotoBrowserPage extends GetView<PhotoBrowserController> with LoadImageMix
           },
           controller: ExtendedPageController(initialPage: controller.initIndex),
         ),
-      )
-  );
+      ));
 
   Widget _itemBuilder(BuildContext context, int index) {
     final photo = controller.images[index];
     final image = Padding(
       padding: const EdgeInsets.all(5),
-      child: ExtendedImage.network(buildNetImageUrl(photo.name, width: Get.width, height: Get.height),
+      child: ExtendedImage.network(photo.url,
           fit: BoxFit.contain,
           mode: ExtendedImageMode.gesture,
           initGestureConfigHandler: (_) => GestureConfig(inPageView: true),
@@ -35,6 +34,7 @@ class PhotoBrowserPage extends GetView<PhotoBrowserController> with LoadImageMix
     );
     return GetBuilder<PhotoBrowserController>(
         id: index.toString(),
-        builder: (_) => controller.initIndex == index ? Hero(tag: photo.name, child: image) : image);
+        builder: (_) =>
+            controller.initIndex == index ? Hero(tag: controller.heroTagGetter(photo), child: image) : image);
   }
 }

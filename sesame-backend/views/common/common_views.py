@@ -27,4 +27,22 @@ class FeedbackHandler(BaseHandler):
 
 class AppConfigHandler(BaseHandler):
     def get(self):
+        """
+        @api {get} /config/ App configuration
+        @apiVersion 0.0.1
+        @apiName Configuration
+        @apiGroup Common
+        @apiDescription App configuration
+
+        @apiSuccessExample {json} Success-Response:
+            {
+                "pageDefaultLimit": 10, # 默认每页数据
+                "nickNameLimit": 20, # 昵称最大长度
+                "albumDescriptionLimit": 100, # 相册描述最大长度
+                "albumNameLimit": 10, # 相册名称最大长度
+                "passwordMinLimit": 8, # 密码最小长度
+                "postDescriptionLimit": 200, # 帖子描述最大长度
+                "postPhotoLimit": 9 # 帖子最多照片数量
+            }
+        """
         return self.success({camel_case(key): value for key, value in COMMON_CONFIGS.items()})

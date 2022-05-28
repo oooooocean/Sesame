@@ -28,6 +28,6 @@ def paginate(request: RequestHandler, model_cls, *criterion, **kwargs) -> tuple:
     return model_cls.paginate(offset, limit, *criterion, **kwargs)
 
 
-def paginate_json(request: RequestHandler, model_cls, *criterion) -> dict:
-    count, results = paginate(request, model_cls, *criterion)
+def paginate_json(request: RequestHandler, model_cls, *criterion, **kwargs) -> dict:
+    count, results = paginate(request, model_cls, *criterion, **kwargs)
     return {'count': count, 'results': [item.to_json() for item in results]}

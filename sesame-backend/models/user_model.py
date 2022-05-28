@@ -26,6 +26,10 @@ class User(BaseDB, ModelMixin):
 
     info = relationship('UserInfo', back_populates='user', uselist=False)
     albums = relationship('Album', back_populates='user')
+    posts = relationship('Post', back_populates='owner')
+    favors = relationship('PostFavor', back_populates='favor_user')
+    comments = relationship('PostComment', back_populates='comment_user')
+    shares = relationship('PostShare', back_populates='share_user')
 
     def json_exclude_columns(self):
         return ModelMixin.json_exclude_columns(self) + ['password']

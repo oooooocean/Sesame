@@ -1,11 +1,15 @@
-/Sesame-backend/venv/
+/sesame-backend/venv/
 
 .DS_Store
 
-/Sesame-backend/.idea/
+/sesame-backend/.idea/
+
+/sesame-backend/log/*
 
 /.idea/
 
 *.py[cod]
 
 build
+
+__pychache__

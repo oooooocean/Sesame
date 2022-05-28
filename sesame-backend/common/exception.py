@@ -2,20 +2,23 @@ import http.client as ht
 
 
 class SaoException(Exception):
-    codeMapper = {
-        0: ht.OK,  # 200
-        1000: ht.UNAUTHORIZED,  # 401
-        1008: ht.INTERNAL_SERVER_ERROR,
-        1001: ht.UNAUTHORIZED,
-    }
-
     def __init__(self, msg, code, detail=None):
         self.code = code
         self.msg = msg
         self.detail = detail
 
-    def getHttpStatus(self):
-        return self.codeMapper.get(self.code, None) or ht.BAD_REQUEST
+    def get_http_status(self):
+        match self.code:
+            case 0:
+                return ht.OK
+            case 1000:
+                return ht.UNAUTHORIZED
+            case 1008:
+                return ht.INTERNAL_SERVER_ERROR
+            case 1001:
+                return ht.UNAUTHORIZED
+            case _:
+                return ht.BAD_REQUEST
 
 
 ERROR_CODE_0 = SaoException('ok', 0)

@@ -34,7 +34,7 @@ class LoginController extends GetxController with SmsCodeMixin, NetMixin {
       final launch = Get.find<LaunchService>();
       launch.setRegisterFlows();
       final registerFlows = launch.registerFlows;
-      Get.offAllNamed(registerFlows.isNotEmpty ? registerFlows.first : AppRoutes.albumList);
+      Get.offAllNamed(registerFlows.isNotEmpty ? registerFlows.first : AppRoutes.scaffold);
     });
   }
 
