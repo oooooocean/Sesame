@@ -10,7 +10,9 @@ class AlbumListController extends GetxController
   List<Album> get albums => state!;
 
   void selected(Album album) {
-    Get.toNamed(AppRoutes.photoList, arguments: album);
+    // TODO: 调试用，跳转宠物信息设置页面
+    Get.toNamed(AppRoutes.petInfo);
+    // Get.toNamed(AppRoutes.photoList, arguments: album);
   }
 
   @override
