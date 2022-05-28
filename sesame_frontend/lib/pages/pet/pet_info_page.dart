@@ -141,6 +141,7 @@ class PetInfoPage extends GetView<PetInfoController>
                                   fontWeight: FontWeight.w200)),
                           Expanded(
                               child: TextField(
+                                  textInputAction: TextInputAction.done,
                                   focusNode: nickNameNode,
                                   controller: controller.nicknameController,
                                   maxLength: 20,
@@ -307,6 +308,7 @@ class PetInfoPage extends GetView<PetInfoController>
                           ),
                           Expanded(
                               child: TextField(
+                                  textInputAction: TextInputAction.done,
                                   focusNode: signatureNode,
                                   controller: controller.signatureController,
                                   maxLines: 4,
